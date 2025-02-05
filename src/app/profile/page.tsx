@@ -1,21 +1,24 @@
 "use client";
 
+import { getUserDetails } from "@/helpers/getUserDetails";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-export default function ProfilePage() {
+export default function ProfilePage({params} : any) {
+    console.log("params in profile page", params);
     const router = useRouter();
     const logout = async () => {
         try {
             await axios.get("/api/users/logout");
             toast.success('Logout successful');
-            router.push("/");
+            router.push("/login");
         } catch (error: any) {
             console.log(error.message);
             toast.error(error.message);
         }
     }
+    
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
             <h1>Profile</h1>
@@ -28,6 +31,9 @@ export default function ProfilePage() {
             >
                 Logout
             </button>
+            <button
+                // onClick={getUserDetails()}
+            ></button>
         </div>
     )
 }
