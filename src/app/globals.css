@@ -2,20 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+body {
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Navbar Container */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.505);
+  padding: 1.5em; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(1px);
+  z-index: 1000;
+  color: white;
+}
+.navbar_div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+}
+.logo_navbar {
+  height: 5em;
+}
+.navbar_options {
+  display: flex;
+  gap: 2em;
+}
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+@media (max-width: 740px) {
+  .navbar_div {
+    padding: 0;
+  }
+  .logo_navbar {
+    height: 4em;
+  }
+  .navbar_options {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    /* background: white; */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1em;
+    text-align: center;
+  }
+  .navbar_options.open {
+    display: flex;
+  }
+  .hamburger {
+    display: block;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+/* Landing Page */
+.landing_page {
+  background-image: url('/images/bg_main.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0.779);
+  height: 100vh;
+  padding-top: 9em; 
 }
