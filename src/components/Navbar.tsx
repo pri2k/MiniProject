@@ -11,6 +11,7 @@ export default function Navbar() {
   const router = useRouter();
 
   useEffect(() => {
+    if (!user) return;
     const getUserDetails = async () => {
       const res = await axios.get("/api/users/me");
       console.log("res.data", res.data.data.username);
