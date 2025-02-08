@@ -3,7 +3,7 @@ import FeatureItem from "./FeatureItem";
 export default function HowToUse() {
   return (
     <div className="howToUseContainer">
-      <h2 className="howToUseHeading">Little step to feeling whole again <span className="HowToUseLogo"></span>  </h2>
+      <h2 className="faq-header">Little step to feeling whole again <span className="HowToUseLogo"></span>  </h2>
       <div className="howToUseFeatures">
         <FeatureItem 
           icon="/images/chatwithChatbot.jpg"

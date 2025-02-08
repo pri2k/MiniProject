@@ -3,7 +3,7 @@ import { useState, useRef } from 'react';
 
 const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const contentRef = useRef(null); // Ref to the content div
+  const contentRef = useRef(null);
 
   const toggleAccordion = () => {
     setIsOpen(!isOpen);

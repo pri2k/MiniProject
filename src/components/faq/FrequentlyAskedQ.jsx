@@ -1,49 +1,38 @@
 'use client';
 import { useState } from 'react';
+import FAQItem from './FAQItem';
 
 const FrequentlyAskedQ = () => {
   const [showAll, setShowAll] = useState(false);
 
   const faqs = [
     {
-      question: 'What is vehicle scrappage policy?',
-      answer: 'The Vehicle Scrappage Policy was notified by MORTH (Ministry of Road, Transport and Highways) in Sept. 2021, aiming to replace old vehicles with modern & new vehicles on Indian roads. According to the new policy, commercial vehicles aged >15 years and passenger vehicles aged >20 years will have to mandatorily go for fitness test and if it fails, then to be treated as End-of-Life vehicle which will have to be scrapped through a RVSF (Registered Vehicle Scrappage Facility). Further, this policy also draws several incentives and dis-incentives for scrapping or continuingwith the older vehicles'
+      question: "What is Brighter Beyond?",
+      answer: "Brighter Beyond is a safe and supportive space where you can share your thoughts without fear or judgment. Whether you're feeling lost, overwhelmed, or just need someone to listen, we're here for you. Connect with compassionate listeners who truly understand—because sometimes, a conversation can be the first step toward healing. You are not alone, and your feelings matter. 💙"
     },
     {
-      question: 'How REVALUE-RVSF Scrapping Policy Works?',
-      answer: 'REVALUE is owned under B V MOTORS PVT LTD, govt authorized registered vehicle scrapping facility located in Pune, Maharashtra, with upcoming multiple branches across Pune and in Maharashtra. We don\'t have any franchise partners across India. REVALUE has trained and authorised facilities as per NSF guidelines by Government of India. REVALUE would buy & own the old vehicle and dismantle it as per MISF policy guidelines and enable getting certificate of deposit & scrappage certificate for the vehicle owner.'
+      question: "Who is Brighter Beyond for?",
+      answer: "Brighter Beyond is here for anyone experiencing mild emotional distress, feeling overwhelmed, or simply needing a safe space to talk. Research shows that compassionate conversations can be just as effective as traditional therapy for those seeking support and understanding.However, if you're looking for structured counseling, therapy may be a better option. If you are in severe distress or facing a crisis, please seek immediate help from professional resources. You are not alone, and there is always support available for you. 💙"
     },
     {
-      question: 'How REVALUE works?',
-      answer: `Just give us a few details about your two wheeler, car/truck to get an instant online valuation in less than 10 seconds. To get an accurate in-hand offer, schedule a free doorstep evaluation of your two wheeler, car/truck at a date & time of your convenience by calling to below mentioned number. Post evaluation and agreement on pricing, de-registration process would start and after deregistration, payment and pick-up of the vehicle by REVALUE would take place.`
+      question: "What Brighter Beyond is Not?",
+      answer: "Brighter Beyond is not a substitute for professional therapy. While our platform provides a safe space for emotional support and understanding, it is not a replacement for structured counseling. If you're considering therapy, we encourage you to explore professional options that may better suit your needs. 💙"
     },
     {
-      question: 'Why should I scrap vehicles with REVALUE?',
-      answer: 'REVALUE provides a respectful experience from the best price free pick-up, deregistration of vehicles to dismantle the vehicle as per government guidelines. Further, we help getting Certificate of Deposit and Scrappage Certificate. These documents can be used to avail incentives while buying a new vehicle. Such an experience and incentives could be only given by REVALUE. REVALUE and it\'s branches are RVSF license holders and comply all norms of vehicle scrappage policy.'
+      question: "Peer Support or Therapy - Which One is Right for You?",
+      answer: "If you're dealing with deep-rooted mental health concerns, therapy is the best choice. A licensed therapist can provide structured, long-term support tailored to your needs. Therapy can take weeks, months, or even years, depending on your journey. Peer support, on the other hand, is ideal for immediate emotional distress—when you just need someone to listen. It's instant, anonymous, and always available to help you process your thoughts in the moment. 💙"
     },
     {
-      question: 'What are the benefits of scrapping a vehicle?',
-      answer: 'Multiple benefits are announced by government of India for scrapping old vehicles and buying new ones are as follows: Owners can receive scrap value equivalent of 4-6% of ex-showroom price of new vehicles* States can give up to 25% and 15% rebate on road tax for personal and commercialvehicles, respectively all kind of incentives are to be given to seller who has certificate of deposit and scrappage certificates(These certificates can be given by only RVSF license holders).'
+      question: "Do We Provide Therapy?",
+      answer: "Yes! While we currently focus on peer support, we are planning to add therapy services in the future to provide even more comprehensive mental health support. Stay tuned! 💙"
     },
     {
-      question: 'How deregistration of commercial and passenger vehicles will take place?',
-      answer: 'All 15 year old vehicles would go for mandatory fitness test in coming years. Unfit vehicles and ELV (End of Life of Vehicle) will have the option for a limited period to produce fitness certificate. But if the vehicle owner is failed to do so, then vehicle would be treated as End-Of-Life vehicle and should be deregistered on Vahan Portal with help of RVSF Authorized Dealer.'
+      question: "Can I Become a Listener?",
+      answer: "Yes! We welcome compassionate individuals who want to support others in times of need. As a volunteer listener, you'll play a vital role in providing emotional support while gaining invaluable communication and active listening skills. We also offer free industry-vetted training to help you along the way.If you feel called to be a part of this, click here to learn more about your next steps. 💙"
     },
     {
-      question: 'What documents are needed to sell my vehicle for scrapping?',
-      answer: '1. Original registration certificate \n2. PAN card of registered owner \n3. KYC of registered owner (Aadhar card OR Passport OR Voter ID of registered owner)* \n4. Address Proof* \n5. Vehicle Ownership proof Cancelled cheque of owner/Bank details with IMPS facility registered* \n6. Loan closure certificate or NOC'
-    },
-    {
-      question: 'How should I dispose or scrap my old vehicle?',
-      answer: 'Check price online and request for a call back to book an appointment. REWIRE Sales executive/evaluator would visit from the nearest franchise for vehicle evaluation and help you with assessment, sell, deregister and other paperwork. You could also walk-in to our nearest franchise to sell your old car/truck directly.'
-    },
-    {
-      question: 'How will I get Certificate of Deposit and Scrappage Certificate?',
-      answer: 'After successful deregistration of the vehicle on Vahan Portal, certificate of deposit would be generated and given to the vehicle owner. Vehicle scrappage certificate to be provided to the vehicle owner after complete dismantling and disposal of the vehicle.'
-    },
-    {
-      question: 'Does REWIRE provides home evaluation? Is there a cost of evaluation',
-      answer: 'The evaluation is free of cost at your doorstep. You can check the scrap car/truck price online and request for a call back. The evaluator will call back and will visit as per your convenience for detail assessment of the vehicle.'
+      question: "How Can I Support?",
+      answer: "We deeply appreciate your willingness to contribute! BuddyHelp is entirely volunteer-run, built on kindness and the desire to support those in need. Your donation helps us expand our reach and continue making a difference.Click here to learn more about how you can support us. 💙"
     },
   ];
 
@@ -51,10 +40,10 @@ const FrequentlyAskedQ = () => {
 
   return (
     <div id='faqs' className='wrapper'>
-      <div className="faq-container">
         <div className="faq-header">
-          <h2>Frequently Asked Questions</h2>
+            <h2>Frequently Asked Questions</h2>
         </div>
+        <div className="faq-container">
         {displayedFaqs.map((faq, index) => (
           <FAQItem key={index} question={faq.question} answer={faq.answer} />
         ))}
