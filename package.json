@@ -8,18 +8,22 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "type": "module",
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.3",
     "axios": "^1.7.9",
     "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.7",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.13.0",
-    "mongoose": "^8.9.6",
+    "mongoose": "^8.12.1",
     "next": "^15.1.6",
+    "node-fetch": "^3.3.2",
     "nodemailer": "^6.10.0",
     "nodemon": "^3.1.9",
+    "pdf-parse": "^1.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hot-toast": "^2.5.1"
