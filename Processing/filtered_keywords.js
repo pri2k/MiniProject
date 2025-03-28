@@ -25,13 +25,11 @@ async function filterKeywords() {
         const data = await readFile('/Users/priyakeshri/Desktop/Sem 6/Mini Project/miniProjectfinal/MiniProject/Processing/Trial 2/results/processed_text.txt', 'utf8');
         let jsonData = JSON.parse(data);
         
-        // Check if jsonData is an array
         if (Array.isArray(jsonData)) {
             jsonData.forEach((item, index) => {
                 if (Array.isArray(item.keywords_found)) {
                     const originalCount = item.keywords_found.length;
                     item.keywords_found = item.keywords_found.filter(word => {
-                        // Trim and compare in lowercase
                         return !stopwords.has(word.trim().toLowerCase());
                     });
                     console.log(`Entry ${index}: Filtered out ${originalCount - item.keywords_found.length} stopwords.`);
@@ -40,7 +38,6 @@ async function filterKeywords() {
                 }
             });
         } else if (jsonData && Array.isArray(jsonData.keywords_found)) {
-            // Fallback if JSON is a single object with keywords_found array
             const originalCount = jsonData.keywords_found.length;
             jsonData.keywords_found = jsonData.keywords_found.filter(word => !stopwords.has(word.trim().toLowerCase()));
             console.log(`Filtered out ${originalCount - jsonData.keywords_found.length} stopwords.`);
