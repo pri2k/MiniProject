@@ -11,7 +11,6 @@ body {
   font-style: normal;
 }
 
-
 /* Navbar Container */
 .navbar {
   position: fixed;
@@ -85,6 +84,7 @@ body {
   text-align: center;
   overflow: hidden;
 }
+
 .landing_page::before {
   content: "";
   position: absolute;
@@ -95,6 +95,7 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
+
 .landing_page_bg {
   position: relative;
   z-index: 2;
@@ -109,72 +110,67 @@ body {
   height: 100%;
   padding-top: 9em;
 }
+
 .landing_page_heading {
   font-size: 10vmin;
   font-weight: bold;
 }
+
 .image_container {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20rem;
+  gap: 3rem;
   width: 100%;
   flex-wrap: wrap;
-  padding-top: 1em;
+  padding-top: .1em;
 }
-.people,
-.robot {
-  display: flex;
-  align-items: center;
+
+.talk_option {
+  background-color: white;
+  color: black;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 1rem 2rem;
+  border-radius: 8px;
   text-decoration: none;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, background-color 0.3s;
+  text-align: center;
 }
-.people:hover,
-.robot:hover {
+
+.talk_option:hover {
   transform: scale(1.05);
+  background-color: #f3f3f3;
 }
-.listener-video {
-  width: 250px;
-  height: auto;
-  border-radius: 10px;
-}
-.talk img {
-  width: 100%;
-  height: auto;
-  max-width: 180px;
-}
-.robot video {
-  position: relative;
-  bottom: -60px;
-}
+
 @media (max-width: 768px) {
   .image_container {
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 1.5rem;
   }
-  .people,
-  .robot {
-    max-width: 45%;
+  .talk_option {
+    width: 80%;
+    text-align: center;
+  }
+  .landing_page_bg {
+    padding-top: 15rem;
   }
 }
+
 @media (max-width: 480px) {
-  .image_container {
-    flex-direction: row;
-    gap: 1rem;
-  }
-  .people,
-  .robot {
-    max-width: 48%;
+  .talk_option {
+    font-size: 1.2rem;
+    padding: 0.8rem 1.5rem;
+    width: 90%;
   }
 }
-
-
-
 
 /* How To Use */
 .howToUseContainer {
-  padding: 60px 20px;
+  padding: 20px;
   text-align: center;
-  margin-top: 2em;
+  margin-top: 10em;
+  background-color: rgb(215, 165, 41);
 }
 .howToUseLogo {
   font-weight: bolder;
@@ -202,7 +198,6 @@ body {
 .feature_img {
   border: 5px solid rgb(232, 199, 199);
   border-radius: 50%;
-
 }
 
 
@@ -263,4 +258,90 @@ body {
 }
 .toggle-questions-btn button:hover {
   opacity: 1;
+}
+
+/* people */
+.centered-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: black;
+  margin-top: 10rem; 
+}
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+.group-card {
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+.group-card:hover {
+  transform: scale(1.05);
+}
+
+/* group */
+.groups-container {
+  padding: 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 2400px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.groups-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .groups-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .groups-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.group-card {
+  padding: 24px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+  text-decoration: none;
+  color: inherit;
+}
+
+.group-card:hover {
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.group-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.group-description {
+  color: #666;
+  margin-top: 8px;
+}
+
+.group-start {
+  font-weight: bold;
+  margin-top: 16px;
 }

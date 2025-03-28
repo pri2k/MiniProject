@@ -5,27 +5,15 @@ export default function LandingPage() {
       <div className="landing_page">
         <div className="landing_page_bg">
           <div className="landing_page_heading">Hope begins with a conversation</div>
-          {/* for small screens remove the videos just add two boxes saying talk to this and that */}
           <div className="image_container">
-            <Link href="/talkToPerson" className="people">
-              <video autoPlay loop muted playsInline className="listener-video">
-                  <source src="/videos/hiPerson.webm" type="video/mp4" />
-              </video> 
-              <div className="talk">
-                <img src="/images/talktoPeople.png" alt="" />
-              </div>
+            <Link href="/talkToPerson" className="talk_option">
+              <div className="talk_text">Talk to Volunteers</div>
             </Link>
-            <Link href="/talkToChatbot" className="robot">
-            <div className="talk">
-                <img src="/images/talktoChatbot.png" alt="" />
-              </div>
-              <video autoPlay loop muted playsInline className="listener-video">
-                <source src="/videos/hiChatbot.webm" type="video/mp4" />
-              </video>            
+            <Link href="/talkToChatbot" className="talk_option">
+              <div className="talk_text">Talk to Brighter Beyond Bot</div>
             </Link>
           </div>
         </div>
       </div>
     );
-  }
-  
+}
