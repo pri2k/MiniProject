@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const QuestionSchema = new mongoose.Schema({
     category: { type: String, required: true },  // e.g., "Relationships", "Work Stress"
