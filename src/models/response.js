@@ -1,6 +1,6 @@
 // writing the schema of our model
 
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const ResponseSchema = new mongoose.Schema({
   userId: String,
