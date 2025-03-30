@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --main-color: #D7A529;
+}
+
 body {
   color: black;
   font-family: "Quicksand", serif;
@@ -12,7 +16,7 @@ body {
 }
 
 /* Navbar Container */
-.navbar {
+/* .navbar {
   position: fixed;
   top: 0;
   left: 0;
@@ -23,12 +27,28 @@ body {
   backdrop-filter: blur(1px);
   z-index: 1000;
   color: white;
+} */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--main-color);
+  padding: 1em; 
+  box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.142);
+  backdrop-filter: blur(1px);
+  z-index: 1000;
+  color: rgb(3, 3, 3);
+  font-weight: bold;
+  font-size: 1.1em;
 }
+
 .navbar_div {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 5%;
+  padding: 0 2%;
 }
 .logo_navbar {
   height: 5em;
@@ -140,7 +160,7 @@ body {
 
 .talk_option:hover {
   transform: scale(1.05);
-  background-color: #f3f3f3;
+  background-color: var(--main-color);
 }
 
 @media (max-width: 768px) {
@@ -167,7 +187,6 @@ body {
 
 /* How To Use */
 .howToUseContainer {
-  padding: 20px;
   text-align: center;
   margin-top: 10em;
   background-color: rgb(215, 165, 41);
@@ -181,12 +200,20 @@ body {
 .howToUseFeatures {
   display: flex;
   justify-content: center;
-  gap: 8em;
+  gap: 6em;
   flex-wrap: wrap;
 }
+@media (max-width: 1300px) {
+  .howToUseFeatures {
+    gap: 3em
+  }
+}
 .featureItemBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   max-width: 300px;
-  padding: 20px;
+  padding-bottom: 1.5%;
 }
 .featureItemTitle {
   font-size: 1.3rem;
@@ -196,8 +223,10 @@ body {
   font-size: .9rem;
 }
 .feature_img {
-  border: 5px solid rgb(232, 199, 199);
-  border-radius: 50%;
+  /* border: 5px solid rgb(232, 199, 199); */
+  border-radius: 10%;
+  height: 25vmin;
+  width: 25vmin;
 }
 
 
@@ -211,11 +240,11 @@ body {
   align-items: center;
 }
 .faq-header {
-  padding-top: 50px;
+  padding-top: 20px;
   text-align: center;
   border-radius: 8px;
   margin-bottom: 30px;
-  font-size: 8vmin;
+  font-size: 6vmin;
 }
 
 /* FAQ Item Styling */

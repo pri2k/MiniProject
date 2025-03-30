@@ -14,18 +14,18 @@ const problemCategories = [
       image: "https://i.pinimg.com/736x/0d/d4/78/0dd478ff35772d039dd2854cadd0020b.jpg"
     },
     {
-      title: "Relationship Struggles",
-      description: "Talk to individuals who have gone through breakups, toxic relationships, or commitment issues and gain perspective.",
-      link: "/problems/relationship-struggles",
-      slug: "relationship-struggles",
-      image: "https://i.pinimg.com/736x/ad/44/0c/ad440c5ee8a568f98096146d84942cbf.jpg"
-    },
-    {
       title: "Social Anxiety & Loneliness",
       description: "Connect with people who have experienced social anxiety, isolation, or difficulty making connections.",
       link: "/problems/social-anxiety-loneliness",
       slug: "social-anxiety-loneliness",
       image: "https://i.pinimg.com/736x/21/53/05/215305999446dc06f65f236c4f9609b2.jpg"
+    },
+    {
+      title: "Relationship Struggles",
+      description: "Talk to individuals who have gone through breakups, toxic relationships, or commitment issues and gain perspective.",
+      link: "/problems/relationship-struggles",
+      slug: "relationship-struggles",
+      image: "https://i.pinimg.com/736x/ad/44/0c/ad440c5ee8a568f98096146d84942cbf.jpg"
     },
     {
       title: "Education & Career Challenges",
@@ -42,13 +42,6 @@ const problemCategories = [
       image: "https://i.pinimg.com/736x/8c/91/72/8c9172fd965ad002ab74a64f55664511.jpg"
     },
     {
-      title: "Parenting Difficulties",
-      description: "Connect with parents who have faced challenges in raising children, co-parenting, or dealing with teen issues.",
-      link: "/problems/parenting-difficulties",
-      slug: "parenting-difficulties",
-      image: "https://i.pinimg.com/736x/67/1b/75/671b7543b9c06acff08dc43c65efa7ec.jpg"
-    },
-    {
       title: "Divorce & Separation",
       description: "Talk to those who have been through divorce or separation and learn how they navigated emotional and practical aspects.",
       link: "/problems/divorce-separation",
@@ -61,6 +54,13 @@ const problemCategories = [
       link: "/problems/chronic-illness",
       slug: "chronic-illness",
       image: "https://i.pinimg.com/736x/d0/7f/bd/d07fbd3d7096a80755fdeef0d4cc4a59.jpg"
+    },
+    {
+      title: "Parenting Difficulties",
+      description: "Connect with parents who have faced challenges in raising children, co-parenting, or dealing with teen issues.",
+      link: "/problems/parenting-difficulties",
+      slug: "parenting-difficulties",
+      image: "https://i.pinimg.com/736x/67/1b/75/671b7543b9c06acff08dc43c65efa7ec.jpg"
     },
     {
       title: "Grief & Loss",
@@ -103,6 +103,13 @@ const problemCategories = [
       link: "/problems/legal-housing",
       slug: "legal-housing",
       image: "https://i.pinimg.com/736x/15/04/04/1504046667610baec1c581bf08a65fdb.jpg"
+    },
+    {
+      title: "Technology & Digital Wellbeing",
+      description: "Discuss screen addiction, online privacy, and maintaining a healthy digital lifestyle.",
+      link: "/problems/technology-digital-wellbeing",
+      slug: "technology-digital-wellbeing",
+      image: "https://i.pinimg.com/736x/eb/8f/eb/eb8febf3fa68cbf99ff24c5b3d18e653.jpg"
     }
 ];
   

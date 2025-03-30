@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import MenuIcon from "@mui/icons-material/Menu"; // Import Material UI Icon
+import MenuIcon from "@mui/icons-material/Menu";
 
 export default function Navbar() {
   const [user, setUser] = useState<string | null>(null);
-  const [menuOpen, setMenuOpen] = useState(false); // State for mobile menu
+  const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -37,7 +37,8 @@ export default function Navbar() {
         <div className={`navbar_options ${menuOpen ? "open" : ""}`}>
           <Link href="/" onClick={() => handleLinkClick("/")}>Home</Link>
           <Link href="/about" onClick={() => handleLinkClick("/about")}>About</Link>
-
+          <Link href="/talkToPerson">Groups</Link>
+          <Link href="/talkToChatbot">Bot</Link>
           {user ? (
             <div className="profile">
               <Link href="/profile" onClick={() => handleLinkClick("/profile")}>
