@@ -16,6 +16,7 @@
     "axios": "^1.7.9",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.7",
+    "framer-motion": "^12.6.2",
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
     "mini_project": "file:",
