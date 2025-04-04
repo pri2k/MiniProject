@@ -12,4 +12,4 @@ const ResponseSchema = new mongoose.Schema({
 
 const Response = mongoose.model("Response", ResponseSchema);
 
-module.exports = Response;
+export default Response;

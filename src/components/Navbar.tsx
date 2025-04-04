@@ -39,6 +39,8 @@ export default function Navbar() {
           <Link href="/about" onClick={() => handleLinkClick("/about")}>About</Link>
           <Link href="/talkToPerson">Groups</Link>
           <Link href="/talkToChatbot">Bot</Link>
+          <Link href="/illusionpg">Illusion</Link>
+
           {user ? (
             <div className="profile">
               <Link href="/profile" onClick={() => handleLinkClick("/profile")}>
