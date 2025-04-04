@@ -27,25 +27,6 @@ const images = [
   { filename: "illusions9.jpg", question: "What do you see first?", options: { "Dog": 6, "Cat": 3 } },
 ];
 
-// here change the filename by writing the full path
-// const uploadImages = async () => {
-//   try {
-//     // await connectDB(); // Connect to MongoDB
-//     for (const image of images) {
-//         await Illusion.updateOne(
-//           { filename: image.filename }, // Find by filename
-//           { $set: image }, // Update the existing record
-//           { upsert: true } // Insert if not found
-//         );
-        
-//     }
-//     console.log(` Inserted/Updated successfully`);
-//   } catch (err) {
-//     console.error(" Error uploading images:", err);
-//   } finally {
-//     mongoose.connection.close();
-//   }
-// };
 
 const uploadImages = async () => {
   try {
@@ -77,3 +58,24 @@ const uploadImages = async () => {
 
 
 uploadImages();
+
+
+// here change the filename by writing the full path
+// const uploadImages = async () => {
+//   try {
+//     // await connectDB(); // Connect to MongoDB
+//     for (const image of images) {
+//         await Illusion.updateOne(
+//           { filename: image.filename }, // Find by filename
+//           { $set: image }, // Update the existing record
+//           { upsert: true } // Insert if not found
+//         );
+        
+//     }
+//     console.log(` Inserted/Updated successfully`);
+//   } catch (err) {
+//     console.error(" Error uploading images:", err);
+//   } finally {
+//     mongoose.connection.close();
+//   }
+// };
