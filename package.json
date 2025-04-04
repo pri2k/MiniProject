@@ -19,6 +19,7 @@
     "framer-motion": "^12.6.2",
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.487.0",
     "mini_project": "file:",
     "mongodb": "^6.13.0",
     "mongoose": "^8.13.0",
