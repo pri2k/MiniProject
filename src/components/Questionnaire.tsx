@@ -8,7 +8,7 @@ export default function Questionnaire() {
       <div className="bg-yellow-100 p-9 rounded-2xl shadow-xl max-w-md text-center">
         <h2 className="text-2xl font-bold text-yellow-800 mb-3">Ready to Explore Your Mind?</h2>
         <Link href="/Questionnaire">
-          <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-6 rounded-full transition">
+          <button className="bg-[#D7A529] hover:bg-yellow-600 text-white font-semibold py-2 px-6 rounded-full transition">
             Take the Questionnaire
           </button>
         </Link>
