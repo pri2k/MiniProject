@@ -47,11 +47,22 @@ export async function POST(req: Request) {
     const grResult = await grClient.predict("/predict", { text: message });
     console.log("📦 Gradio result:", grResult.data);
 
-    // Check the returned data type
-    const embedding: number[] =
-      typeof grResult.data === 'string'
-        ? grResult.data.split(',').map((val: string) => parseFloat(val.trim()))
-        : grResult.data;
+    // // Check the returned data type
+    // const embedding: number[] =
+    //   typeof grResult.data === 'string'
+    //     ? grResult.data.split(',').map((val: string) => parseFloat(val.trim()))
+    //     : grResult.data;
+
+    let embedding: number[] = [];
+
+    if (typeof grResult.data === 'string') {
+      embedding = grResult.data.split(',').map((val) => parseFloat(val.trim()));
+    } else if (Array.isArray(grResult.data) && grResult.data.every((val) => typeof val === 'number')) {
+      embedding = grResult.data as number[];
+    } else {
+      throw new Error("Unexpected embedding format returned from Gradio.");
+    }
+
 
     console.log("🧠 Got Embedding:", embedding);
 
