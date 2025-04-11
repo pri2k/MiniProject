@@ -20,34 +20,35 @@ export default function TalkToChatbot() {
 
   const sendMessage = async () => {
     if (!input.trim()) return;
-
+  
     const userMsg = { sender: 'user', text: input };
     setMessages((prev) => [...prev, userMsg]);
     setInput('');
     setIsTyping(true);
     scrollToBottom();
-
+  
     try {
-      //  Replace this URL with your actual RAG model endpoint
       const res = await fetch('/api/chatbot', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify({
+          message: input,
+          history: [...messages, userMsg], 
+        }),
       });
-
+  
       const data = await res.json();
       const botReply = data.reply || "I'm here for you 💛";
-
-      const estimatedTime = Math.min(Math.max(botReply.length * 10, 500), 4000); 
-      // → 20ms per character (tweakable), capped between 0.5s and 4s
+  
+      const estimatedTime = Math.min(Math.max(botReply.length * 10, 500), 4000);
   
       setIsTyping(true);
-
+  
       setTimeout(() => {
         setMessages((prev) => [...prev, { sender: 'bot', text: botReply }]);
         setIsTyping(false);
         scrollToBottom();
-      }, estimatedTime); // Optional delay for realism
+      }, estimatedTime);
     } catch (error) {
       setMessages((prev) => [
         ...prev,
@@ -56,6 +57,7 @@ export default function TalkToChatbot() {
       setIsTyping(false);
     }
   };
+  
 
   useEffect(() => {
     scrollToBottom();
