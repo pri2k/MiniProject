@@ -1,13 +1,18 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
-export default function ProblemSelect() {
-    const problemOptions = ["Depression", "Anxiety", "Stress", "Loneliness", "Self-esteem Issues", "Relationship Problems", "Grief", "Career Stress", "Other"];
-    
-    const [volunteer, setVolunteer] = useState({ problem: [] });
+export default function ProblemSelect({ volunteer, setVolunteer }) {
+    const problemOptions = [
+        "Financial Issues", "Family & Friends", "Social Anxiety & Loneliness", 
+        "Relationship Struggles", "Education & Career Challenges", "Mental Health Struggles",
+        "Divorce & Separation", "Chronic Illness & Health Issues", "Parenting Difficulties",
+        "Grief & Loss", "Substance Abuse & Recovery", "Bullying & Harassment", 
+        "Identity & Self-Acceptance", "Work-Life Balance", "Legal & Housing Issues", 
+        "Technology & Digital Wellbeing"
+    ];
+
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
 
-    // Close dropdown when clicking outside
     useEffect(() => {
         function handleClickOutside(event) {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -16,9 +21,7 @@ export default function ProblemSelect() {
         }
 
         document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
+        return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
     const handleSelectProblem = (problem) => {
@@ -38,7 +41,6 @@ export default function ProblemSelect() {
         <div className="w-full relative" ref={dropdownRef}>
             <label htmlFor="problem" className="block font-semibold mb-1">Problem Expertise</label>
             
-            {/* Display selected items as tags */}
             <div 
                 className="w-full p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 cursor-pointer"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -65,9 +67,8 @@ export default function ProblemSelect() {
                 )}
             </div>
 
-            {/* Dropdown for selecting problems */}
             {dropdownOpen && (
-                <div className="absolute w-full bg-white border border-gray-300 rounded-lg shadow-md mt-1 z-10">
+                <div className="absolute w-full bg-white border border-gray-300 rounded-lg shadow-md mt-1 z-10 max-h-60 overflow-auto">
                     {problemOptions.map((problem) => (
                         <div 
                             key={problem} 

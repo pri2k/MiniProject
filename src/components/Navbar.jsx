@@ -1,0 +1,114 @@
+"use client";
+import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import MenuIcon from "@mui/icons-material/Menu";
+import { useContext } from "react";
+import { UserContext } from "@/context/UserContext";
+
+export default function Navbar() {
+  const { user, setUser } = useContext(UserContext);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+    } else {
+      const fetchUser = async () => {
+        try {
+          const res = await fetch("/api/users/me");
+          const data = await res.json();
+          if (data?.data) {
+            localStorage.setItem("user", JSON.stringify(data.data));
+            setUser(data.data);
+          }
+        } catch (error) {
+          console.error("Failed to fetch user", error);
+        }
+      };
+      fetchUser();
+    }
+  }, []);
+
+  console.log("user from navbar", user);
+  
+
+  const handleLogout = async () => {
+    try {
+      await axios.get("/api/users/logout");
+      localStorage.removeItem("user");
+      setUser(null);
+      router.push("/");
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
+  };
+
+  const handleLinkClick = (href) => {
+    setMenuOpen(false);
+    router.push(href);
+  };
+
+
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  return (
+    <nav className="navbar">
+      <div className="navbar_div">
+        <img src="/images/logo.png" className="logo_navbar" alt="logo" />
+
+        <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+          <MenuIcon />
+        </div>
+
+        <div className={`navbar_options ${menuOpen ? "open" : ""}`}>
+          <Link href="/" onClick={() => handleLinkClick("/")}>Home</Link>
+          <Link href="/about" onClick={() => handleLinkClick("/about")}>About</Link>
+          <Link href="/talkToVolunteers" onClick={() => handleLinkClick("/talkToVolunteers")}>Groups</Link>
+          <Link href="/talkToChatbot" onClick={() => handleLinkClick("/talkToChatbot")}>Bot</Link>
+          <Link href="/illusionpg" onClick={() => handleLinkClick("/illusionpg")}>Illusion</Link>
+
+          {user ? (
+            <div className="relative" ref={dropdownRef}>
+              <img
+                src={user.image || "/default-profile.png"}
+                alt="Profile"
+                className="w-10 h-10 rounded-full cursor-pointer"
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+              />
+              {dropdownOpen && (
+                <div className="absolute right-0 mt-2 w-40 bg-white border rounded shadow-md z-50">
+                  <button
+                    onClick={handleLogout}
+                    className="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <Link href="/login" className="login" onClick={() => handleLinkClick("/login")}>
+              Login
+            </Link>
+          )}
+        </div>
+      </div>
+    </nav>
+  );
+}

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import problemCategories from "@/data/groups";
 
-export default function TalkToPerson() {
+export default function TalkToVolunteer() {
     return (
         <div className="p-20 mt-20 pt-20">
           <h1 className="text-3xl font-bold mb-6 text-center">Support Groups</h1>

@@ -1,7 +1,7 @@
 import { Schema, models, model } from "mongoose";
 
 const userSchema = new Schema({
-    name: { 
+    username: { 
         type: String, 
         required: true 
     },
@@ -10,8 +10,12 @@ const userSchema = new Schema({
         required: true, 
         unique: true 
     },
+    password: { 
+        type: String, 
+        required: true 
+    },
     image: { 
-        type: String 
+        type: String  
     },
 }, { timestamps: true });
 

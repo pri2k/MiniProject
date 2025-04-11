@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import ProblemSelect from "@/components/ProblemSelect"
+import ImageUpload from "@/components/ImageUpload"
+import axios from "axios";
 
 export default function VolunteerForm() {
     const [volunteer, setVolunteer] = useState({
@@ -13,9 +15,14 @@ export default function VolunteerForm() {
         problem: "",
     });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Volunteer Data:", volunteer);
+        try {
+            const response = await axios.post("/api/volunteer/register", volunteer);
+            console.log("Volunteer Registered:", response.data);
+        } catch (error) {
+            console.error("Error registering volunteer: ", error.response?.data || error.message);
+        }
     };
 
     return (
@@ -82,53 +89,9 @@ export default function VolunteerForm() {
                 />
             </div>
 
-            <div className="w-full">
-                <label htmlFor="imageUpload" className="block font-semibold mb-1">Upload Profile Image</label>
-                <div 
-                    className="w-full p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 flex items-center justify-center cursor-pointer bg-gray-100 hover:bg-gray-200"
-                    onClick={() => document.getElementById("imageUpload").click()}
-                >
-                    {volunteer.image ? (
-                        <img 
-                            src={volunteer.image} 
-                            alt="Uploaded Preview" 
-                            className="h-24 w-24 object-cover rounded-full"
-                        />
-                    ) : (
-                        <p className="text-gray-600">Click to upload an image</p>
-                    )}
-                </div>
-                <input
-                    id="imageUpload"
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
-                    onChange={(e) => {
-                        const file = e.target.files[0];
-                        if (file) {
-                            const reader = new FileReader();
-                            reader.onloadend = () => {
-                                setVolunteer({ ...volunteer, image: reader.result });
-                            };
-                            reader.readAsDataURL(file);
-                        }
-                    }}
-                />
-            </div>
+            <ImageUpload data={volunteer} setData={setVolunteer} />
 
-            <ProblemSelect/>
-
-            {/* <div className="w-full">
-                <label htmlFor="problem" className="block font-semibold mb-1">Problem Expertise</label>
-                <input
-                    id="problem"
-                    type="text"
-                    value={volunteer.problem}
-                    onChange={(e) => setVolunteer({ ...volunteer, problem: e.target.value })}
-                    placeholder="e.g., Depression, Anxiety"
-                    className="w-full p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
-                />
-            </div> */}
+            <ProblemSelect volunteer={volunteer} setVolunteer={setVolunteer} />
 
             <button
                 className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none transition-transform duration-300 bg-yellow-500 text-white font-semibold hover:bg-yellow-600 hover:-translate-y-1 shadow-md hover:shadow-lg"
