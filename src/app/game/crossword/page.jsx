@@ -1,26 +1,25 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-
-const positiveWords = [
-  "HOPE", "PEACE", "LOVE", "HAPPY", "SMILE", "FAITH", "BRAVE", "SHINE", "KIND", "GRACE",
-  "TRUST", "HEART", "LUCK", "DREAM", "LIGHT", "CALM", "GLOW", "ENERGY", "BLOOM", "JOLLY"
-];
-
-const directions = [
-  { dr: 0, dc: 1 },    // right
-  { dr: 1, dc: 0 },    // down
-  { dr: 1, dc: 1 },    // diagonal down right
-  { dr: -1, dc: 1 },   // diagonal up right
-];
+import { getRandomWords } from "@/utils/words";
+import CrosswordGrid from "@/components/crossword/CrosswordGrid";
+import WordList from "@/components/crossword/WordList";
+import GameControls from "@/components/crossword/GameControls";
 
 const GRID_SIZE = 12;
 
-function generateGrid() {
+const directions = [
+    { dr: 0, dc: 1 },
+    { dr: 1, dc: 0 },
+    { dr: 1, dc: 1 },
+    { dr: -1, dc: 1 }
+];
+
+function generateGrid(words) {
     const grid = Array(GRID_SIZE).fill(null).map(() => Array(GRID_SIZE).fill(""));
     const placedWords = [];
 
-    for (const word of positiveWords) {
+    for (const word of words) {
         let placed = false;
         let attempts = 0;
 
@@ -55,7 +54,6 @@ function generateGrid() {
         }
     }
 
-    // Fill empty spaces
     for (let r = 0; r < GRID_SIZE; r++) {
         for (let c = 0; c < GRID_SIZE; c++) {
         if (!grid[r][c]) {
@@ -65,17 +63,18 @@ function generateGrid() {
     }
 
     return { grid, placedWords };
-    }
+}
 
-    export default function CrosswordGame() {
-    const [{ grid, placedWords }, setGridData] = useState(generateGrid());
+export default function CrosswordGame() {
+    const [words, setWords] = useState(getRandomWords());
+    const [{ grid, placedWords }, setGridData] = useState(generateGrid(words));
     const [selectedCells, setSelectedCells] = useState([]);
     const [foundWords, setFoundWords] = useState([]);
     const [mouseDown, setMouseDown] = useState(false);
     const [score, setScore] = useState(0);
-    const timerRef = useRef(null);
     const [secondsLeft, setSecondsLeft] = useState(60);
     const [gameOver, setGameOver] = useState(false);
+    const timerRef = useRef(null);
 
     useEffect(() => {
         timerRef.current = setInterval(() => {
@@ -88,7 +87,6 @@ function generateGrid() {
             return prev - 1;
         });
         }, 1000);
-
         return () => clearInterval(timerRef.current);
     }, []);
 
@@ -99,15 +97,12 @@ function generateGrid() {
     };
 
     const handleMouseEnter = (r, c) => {
-        if (mouseDown) {
-        setSelectedCells(prev => [...prev, { row: r, col: c }]);
-        }
+        if (mouseDown) setSelectedCells(prev => [...prev, { row: r, col: c }]);
     };
 
     const handleMouseUp = () => {
         setMouseDown(false);
         const selectedWord = selectedCells.map(({ row, col }) => grid[row][col]).join("");
-
         const match = placedWords.find(({ word }) => word === selectedWord && !foundWords.includes(word));
         if (match) {
         setFoundWords(prev => [...prev, match.word]);
@@ -129,62 +124,63 @@ function generateGrid() {
         });
     };
 
+    const restartGame = () => {
+        const newWords = getRandomWords();
+        setWords(newWords);
+        setGridData(generateGrid(newWords));
+        setFoundWords([]);
+        setSelectedCells([]);
+        setScore(0);
+        setSecondsLeft(120);
+        setGameOver(false);
+        clearInterval(timerRef.current);
+        timerRef.current = setInterval(() => {
+        setSecondsLeft(prev => {
+            if (prev <= 1) {
+            clearInterval(timerRef.current);
+            setGameOver(true);
+            return 0;
+            }
+            return prev - 1;
+        });
+        }, 1000);
+    };
+
+    const stopGame = () => {
+        clearInterval(timerRef.current);
+        setGameOver(true);
+    };
+
     return (
-        <div className="pt-[7em]">
-        <div className="w-full min-h-screen bg-blue-50 py-10 px-6 flex flex-col items-center">
-        <h1 className="text-3xl font-bold mb-4">Crossword Puzzle</h1>
-        <div className="text-xl mb-2">Time Left: {secondsLeft}s</div>
-        <div className="mb-2 text-lg">Score: {score} / {positiveWords.length * 5}</div>
-
-        <div className="overflow-auto max-w-full mt-4">
-            <table className="border border-black mx-auto select-none"
-            onMouseLeave={() => setMouseDown(false)}
-            >
-            <tbody>
-                {grid.map((row, rIdx) => (
-                <tr key={rIdx}>
-                    {row.map((letter, cIdx) => (
-                    <td
-                        key={cIdx}
-                        className={`w-8 h-8 border text-center font-bold text-lg
-                        ${isSelected(rIdx, cIdx) ? "bg-yellow-300" : ""}
-                        ${isFound(rIdx, cIdx) ? "bg-green-400 text-white" : ""}
-                        `}
-                        onMouseDown={() => handleMouseDown(rIdx, cIdx)}
-                        onMouseEnter={() => handleMouseEnter(rIdx, cIdx)}
-                        onMouseUp={handleMouseUp}
-                    >
-                        {letter}
-                    </td>
-                    ))}
-                </tr>
-                ))}
-            </tbody>
-            </table>
+        <div className="pt-[11em] w-full min-h-screen py-10 px-6 flex flex-col lg:flex-row justify-center gap-20">
+        <div className="">
+            <h1 className="text-3xl font-bold mb-4 text-center ">Crossword Puzzle</h1>
+            <CrosswordGrid
+                grid={grid}
+                isSelected={isSelected}
+                isFound={isFound}
+                onMouseDown={handleMouseDown}
+                onMouseEnter={handleMouseEnter}
+                onMouseUp={handleMouseUp}
+                gameOver={gameOver}
+            />
+            <GameControls 
+                onRestart={restartGame} 
+                onStop={stopGame} 
+                gameOver={gameOver} 
+            />
+            {gameOver && (
+                <div className="mt-6 text-2xl text-red-600 font-semibold text-center lg:text-left">
+                    Game Over! Final Score: {score}
+                </div>
+            )}
         </div>
-
-        <div className="mt-6 text-center">
-            <h2 className="text-xl font-semibold mb-2">Words to Find</h2>
-            <div className="flex flex-wrap gap-3 justify-center max-w-xl">
-            {positiveWords.map((word, i) => (
-                <span
-                key={i}
-                className={`px-2 py-1 rounded-full border ${
-                    foundWords.includes(word) ? "bg-green-300 line-through" : "bg-white"
-                }`}
-                >
-                {word}
-                </span>
-            ))}
-            </div>
-        </div>
-
-        {gameOver && (
-            <div className="mt-6 text-2xl text-red-600 font-semibold">
-            Game Over! Final Score: {score}
-            </div>
-        )}
-        </div>
+        <WordList 
+            words={words} 
+            foundWords={foundWords} 
+            score={score} 
+            timeLeft={secondsLeft} 
+        />
         </div>
     );
 }
