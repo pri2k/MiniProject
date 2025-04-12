@@ -33,7 +33,7 @@ export default function Navbar() {
     }
   }, []);
 
-  console.log("user from navbar", user);
+  // console.log("user from navbar", user);
 
 
   const handleLogout = async () => {
