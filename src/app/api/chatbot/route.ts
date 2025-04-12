@@ -45,30 +45,30 @@ export async function POST(req: Request) {
     const grClient = await GradioClient.connect("priya2k/mentalbertEmbedder");
     // Call the predict endpoint (typically '/predict') with the message
     const grResult = await grClient.predict("/predict", { text: message });
-    console.log("📦 Gradio result:", grResult.data);
+    // console.log("📦 Gradio result:", grResult.data);
 
     // // Check the returned data type
-    // const embedding: number[] =
+    // const embedding: number[] = 
     //   typeof grResult.data === 'string'
     //     ? grResult.data.split(',').map((val: string) => parseFloat(val.trim()))
     //     : grResult.data;
 
-    let embedding: number[] = [];
+    let embedding: number[];
 
     if (typeof grResult.data === 'string') {
-      embedding = grResult.data.split(',').map((val) => parseFloat(val.trim()));
-    } else if (Array.isArray(grResult.data) && grResult.data.every((val) => typeof val === 'number')) {
+      embedding = grResult.data.split(',').map((val: string) => parseFloat(val.trim()));
+    } else if (Array.isArray(grResult.data)) {
       embedding = grResult.data as number[];
     } else {
-      throw new Error("Unexpected embedding format returned from Gradio.");
+      throw new Error("Unexpected embedding format from Gradio.");
     }
 
 
-    console.log("🧠 Got Embedding:", embedding);
+    // console.log("🧠 Got Embedding:", embedding);
 
     // Fetch all documents from MongoDB that contain an embedding
     const allDocs = await collection.find({ embedding: { $exists: true } }).toArray();
-    console.log("📚 Total docs fetched:", allDocs.length);
+    // console.log("📚 Total docs fetched:", allDocs.length);
 
     // Compute cosine similarity for each document
     const scoredDocs: ScoredSection[] = allDocs.map((doc) => ({
@@ -88,8 +88,19 @@ export async function POST(req: Request) {
     console.log("🗣️ Formatted history ready");
 
     // Create the prompt to send to Gemini
-    const prompt = `You're a compassionate and helpful mental health assistant for Indian users. Respond empathetically in Hinglish if possible.\n\nContext:\n${context}\n\n${formattedHistory}\nUser: ${message}\nBot:`;
-    console.log("🔮 Prompt for Gemini:", prompt);
+    const prompt = `
+    You are a compassionate mental health first-aid assistant for Indian users.
+    Reply in a warm, empathetic, and calming tone using simple Hinglish.
+    Keep your replies short (2-4 sentences max) and to the point.
+    Avoid deep psychological advice. Just acknowledge the user's feelings and offer a small helpful tip or reassurance.
+    
+    Context:\n${context}
+    
+    ${formattedHistory}
+    User: ${message}
+    Bot:`;
+    
+    // console.log("🔮 Prompt for Gemini:", prompt);
 
     // Generate the reply using Gemini
     const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
