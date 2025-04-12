@@ -393,7 +393,7 @@ body {
   margin-top: 8px;
 }
 
-bot-bubble {
+.bot-bubble {
   position: relative;
 }
 .bot-bubble::after {
