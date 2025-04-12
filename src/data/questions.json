@@ -1,5 +1,5 @@
 {
-    "depression": [
+    "Depression": [
       {
         "question": "I couldn’t seem to experience any positive feeling at all",
         "options": {
@@ -65,7 +65,7 @@
       }
     ],
 
-    "anxiety": [
+    "Anxiety": [
       {
         "question": "I was aware of dryness of my mouth",
         "options": {
@@ -131,7 +131,7 @@
       }
     ],
 
-    "stress": [
+    "Stress": [
       {
         "question": "I found it hard to wind down",
         "options": {
@@ -263,7 +263,7 @@
           }
         ],
 
-            "happiness": [
+            "Happiness": [
               {
                 "question": "I am intensely interested in other people.",
                 "options": {
@@ -429,12 +429,495 @@
                   "Strongly agree": 6
                 }
               }
-            ]
+            ],
+            
+            "Social Support": [
+                  {
+                    "question": "There is a special person who is around when I am in need.",
+                    "options": {
+                      "Very Strongly Disagree": 1,
+                      "Strongly Disagree": 2,
+                      "Mildly Disagree": 3,
+                      "Neutral": 4,
+                      "Mildly Agree": 5,
+                      "Strongly Agree": 6,
+                      "Very Strongly Agree": 7
+                    }
+                  },
+                  {
+                    "question": "There is a special person with whom I can share joys and sorrows.",
+                    "options": {
+                      "Very Strongly Disagree": 1,
+                      "Strongly Disagree": 2,
+                      "Mildly Disagree": 3,
+                      "Neutral": 4,
+                      "Mildly Agree": 5,
+                      "Strongly Agree": 6,
+                      "Very Strongly Agree": 7
+                    }
+                  },
+                  {
+                    "question": "My family really tries to help me.",
+                    "options": {
+                      "Very Strongly Disagree": 1,
+                      "Strongly Disagree": 2,
+                      "Mildly Disagree": 3,
+                      "Neutral": 4,
+                      "Mildly Agree": 5,
+                      "Strongly Agree": 6,
+                      "Very Strongly Agree": 7
+                    }
+                  },
+                  {
+                    "question": "I get the emotional help and support I need from my family.",
+                    "options": {
+                      "Very Strongly Disagree": 1,
+                      "Strongly Disagree": 2,
+                      "Mildly Disagree": 3,
+                      "Neutral": 4,
+                      "Mildly Agree": 5,
+                      "Strongly Agree": 6,
+                      "Very Strongly Agree": 7
+                    }
+                  },
+                  {
+                    "question": "I have a special person who is a real source of comfort to me.",
+                    "options": {
+                      "Very Strongly Disagree": 1,
+                      "Strongly Disagree": 2,
+                      "Mildly Disagree": 3,
+                      "Neutral": 4,
+                      "Mildly Agree": 5,
+                      "Strongly Agree": 6,
+                      "Very Strongly Agree": 7
+                    }
+                  },
+                  {
+                    "question": "My friends really try to help me.",
+                    "options": {
+                      "Very Strongly Disagree": 1,
+                      "Strongly Disagree": 2,
+                      "Mildly Disagree": 3,
+                      "Neutral": 4,
+                      "Mildly Agree": 5,
+                      "Strongly Agree": 6,
+                      "Very Strongly Agree": 7
+                    }
+                  },
+                  {
+                    "question": "I can count on my friends when things go wrong.",
+                    "options": {
+                      "Very Strongly Disagree": 1,
+                      "Strongly Disagree": 2,
+                      "Mildly Disagree": 3,
+                      "Neutral": 4,
+                      "Mildly Agree": 5,
+                      "Strongly Agree": 6,
+                      "Very Strongly Agree": 7
+                    }
+                  },
+                  {
+                    "question": "I can talk about my problems with my family.",
+                    "options": {
+                      "Very Strongly Disagree": 1,
+                      "Strongly Disagree": 2,
+                      "Mildly Disagree": 3,
+                      "Neutral": 4,
+                      "Mildly Agree": 5,
+                      "Strongly Agree": 6,
+                      "Very Strongly Agree": 7
+                    }
+                  },
+                  {
+                    "question": "I have friends with whom I can share my joys and sorrows.",
+                    "options": {
+                      "Very Strongly Disagree": 1,
+                      "Strongly Disagree": 2,
+                      "Mildly Disagree": 3,
+                      "Neutral": 4,
+                      "Mildly Agree": 5,
+                      "Strongly Agree": 6,
+                      "Very Strongly Agree": 7
+                    }
+                  },
+                  {
+                    "question": "There is a special person in my life who cares about my feelings.",
+                    "options": {
+                      "Very Strongly Disagree": 1,
+                      "Strongly Disagree": 2,
+                      "Mildly Disagree": 3,
+                      "Neutral": 4,
+                      "Mildly Agree": 5,
+                      "Strongly Agree": 6,
+                      "Very Strongly Agree": 7
+                    }
+                  },
+                  {
+                    "question": "My family is willing to help me make decisions.",
+                    "options": {
+                      "Very Strongly Disagree": 1,
+                      "Strongly Disagree": 2,
+                      "Mildly Disagree": 3,
+                      "Neutral": 4,
+                      "Mildly Agree": 5,
+                      "Strongly Agree": 6,
+                      "Very Strongly Agree": 7
+                    }
+                  },
+                  {
+                    "question": "I can talk about my problems with my friends.",
+                    "options": {
+                      "Very Strongly Disagree": 1,
+                      "Strongly Disagree": 2,
+                      "Mildly Disagree": 3,
+                      "Neutral": 4,
+                      "Mildly Agree": 5,
+                      "Strongly Agree": 6,
+                      "Very Strongly Agree": 7
+                    }
+                  }
+                ],
+
+     "Resilience": [
+    {
+        "question": "I tend to bounce back quickly after hard times.",
+          "options": {
+               "Strongly disagree": 1,
+                "Disagree": 2,
+                 "Neutral": 3,
+                 "Agree": 4,
+                 "Strongly agree": 5
+            }
+        },
+       {
+        "question": "I have a hard time making it through stressful events.",
+             "options": {
+                "Strongly disagree": 5,
+                        "Disagree": 4,
+                        "Neutral": 3,
+                        "Agree": 2,
+                        "Strongly agree": 1
+                      }
+                    },
+                    {
+                      "question": "It does not take me long to recover from a stressful event.",
+                      "options": {
+                        "Strongly disagree": 1,
+                        "Disagree": 2,
+                        "Neutral": 3,
+                        "Agree": 4,
+                        "Strongly agree": 5
+                      }
+                    },
+                    {
+                      "question": "It is hard for me to snap back when something bad happens.",
+                      "options": {
+                        "Strongly disagree": 5,
+                        "Disagree": 4,
+                        "Neutral": 3,
+                        "Agree": 2,
+                        "Strongly agree": 1
+                      }
+                    },
+                    {
+                      "question": "I usually come through difficult times with little trouble.",
+                      "options": {
+                        "Strongly disagree": 1,
+                        "Disagree": 2,
+                        "Neutral": 3,
+                        "Agree": 4,
+                        "Strongly agree": 5
+                      }
+                    },
+                    {
+                      "question": "I tend to take a long time to get over set-backs in my life.",
+                      "options": {
+                        "Strongly disagree": 5,
+                        "Disagree": 4,
+                        "Neutral": 3,
+                        "Agree": 2,
+                        "Strongly agree": 1
+                      }
+                    }
+                  ],
 
 
-    
-          
-          
-      
+"Self Esteem": [
+    {
+      "question": "On the whole, I am satisfied with myself.",
+      "options": {
+        "Strongly agree": 1,
+        "Agree": 2,
+        "Disagree": 3,
+        "Strongly disagree": 4
+      }
+    },
+    {
+      "question": "At times I think I am no good at all.",
+      "options": {
+        "Strongly agree": 4,
+        "Agree": 3,
+        "Disagree": 2,
+        "Strongly disagree": 1
+      }
+    },
+    {
+      "question": "I feel that I have a number of good qualities.",
+      "options": {
+        "Strongly agree": 1,
+        "Agree": 2,
+        "Disagree": 3,
+        "Strongly disagree": 4
+      }
+    },
+    {
+      "question": "I am able to do things as well as most other people.",
+      "options": {
+        "Strongly agree": 1,
+        "Agree": 2,
+        "Disagree": 3,
+        "Strongly disagree": 4
+      }
+    },
+    {
+      "question": "I feel I do not have much to be proud of.",
+      "options": {
+        "Strongly agree": 4,
+        "Agree": 3,
+        "Disagree": 2,
+        "Strongly disagree": 1
+      }
+    },
+    {
+      "question": "I certainly feel useless at times.",
+      "options": {
+        "Strongly agree": 4,
+        "Agree": 3,
+        "Disagree": 2,
+        "Strongly disagree": 1
+      }
+    },
+    {
+      "question": "I feel that I'm a person of worth.",
+      "options": {
+        "Strongly agree": 1,
+        "Agree": 2,
+        "Disagree": 3,
+        "Strongly disagree": 4
+      }
+    },
+    {
+      "question": "I wish I could have more respect for myself.",
+      "options": {
+        "Strongly agree": 4,
+        "Agree": 3,
+        "Disagree": 2,
+        "Strongly disagree": 1
+      }
+    },
+    {
+      "question": "All in all, I am inclined to think that I am a failure.",
+      "options": {
+        "Strongly agree": 4,
+        "Agree": 3,
+        "Disagree": 2,
+        "Strongly disagree": 1
+      }
+    },
+    {
+      "question": "I take a positive attitude toward myself.",
+      "options": {
+        "Strongly agree": 1,
+        "Agree": 2,
+        "Disagree": 3,
+        "Strongly disagree": 4
+      }
+    }
+  ],
+
+
+  "Loneliness": [
+    {
+      "question": "I am unhappy doing so many things alone.",
+      "options": {
+        "Often": 3,
+        "Sometimes": 2,
+        "Rarely": 1,
+        "Never": 0
+      }
+    },
+    {
+      "question": "I have nobody to talk to.",
+      "options": {
+        "Often": 3,
+        "Sometimes": 2,
+        "Rarely": 1,
+        "Never": 0
+      }
+    },
+    {
+      "question": "I cannot tolerate being so alone.",
+      "options": {
+        "Often": 3,
+        "Sometimes": 2,
+        "Rarely": 1,
+        "Never": 0
+      }
+    },
+    {
+      "question": "I lack companionship.",
+      "options": {
+        "Often": 3,
+        "Sometimes": 2,
+        "Rarely": 1,
+        "Never": 0
+      }
+    },
+    {
+      "question": "I feel as if nobody really understands me.",
+      "options": {
+        "Often": 3,
+        "Sometimes": 2,
+        "Rarely": 1,
+        "Never": 0
+      }
+    },
+    {
+      "question": "I find myself waiting for people to call or write.",
+      "options": {
+        "Often": 3,
+        "Sometimes": 2,
+        "Rarely": 1,
+        "Never": 0
+      }
+    },
+    {
+      "question": "There is no one I can turn to.",
+      "options": {
+        "Often": 3,
+        "Sometimes": 2,
+        "Rarely": 1,
+        "Never": 0
+      }
+    },
+    {
+      "question": "I am no longer close to anyone.",
+      "options": {
+        "Often": 3,
+        "Sometimes": 2,
+        "Rarely": 1,
+        "Never": 0
+      }
+    },
+    {
+      "question": "My interests and ideas are not shared by those around me.",
+      "options": {
+        "Often": 3,
+        "Sometimes": 2,
+        "Rarely": 1,
+        "Never": 0
+      }
+    },
+    {
+      "question": "I feel left out.",
+      "options": {
+        "Often": 3,
+        "Sometimes": 2,
+        "Rarely": 1,
+        "Never": 0
+      }
+    },
+    {
+      "question": "I feel completely alone.",
+      "options": {
+        "Often": 3,
+        "Sometimes": 2,
+        "Rarely": 1,
+        "Never": 0
+      }
+    },
+    {
+      "question": "I am unable to reach out and communicate with those around me.",
+      "options": {
+        "Often": 3,
+        "Sometimes": 2,
+        "Rarely": 1,
+        "Never": 0
+      }
+    },
+    {
+      "question": "My social relationships are superficial.",
+      "options": {
+        "Often": 3,
+        "Sometimes": 2,
+        "Rarely": 1,
+        "Never": 0
+      }
+    },
+    {
+      "question": "I feel starved for company.",
+      "options": {
+        "Often": 3,
+        "Sometimes": 2,
+        "Rarely": 1,
+        "Never": 0
+      }
+    },
+    {
+      "question": "No one really knows me well.",
+      "options": {
+        "Often": 3,
+        "Sometimes": 2,
+        "Rarely": 1,
+        "Never": 0
+      }
+    },
+    {
+      "question": "I feel isolated from others.",
+      "options": {
+        "Often": 3,
+        "Sometimes": 2,
+        "Rarely": 1,
+        "Never": 0
+      }
+    },
+    {
+      "question": "I am unhappy being so withdrawn.",
+      "options": {
+        "Often": 3,
+        "Sometimes": 2,
+        "Rarely": 1,
+        "Never": 0
+      }
+    },
+    {
+      "question": "It is difficult for me to make friends.",
+      "options": {
+        "Often": 3,
+        "Sometimes": 2,
+        "Rarely": 1,
+        "Never": 0
+      }
+    },
+    {
+      "question": "I feel shut out and excluded by others.",
+      "options": {
+        "Often": 3,
+        "Sometimes": 2,
+        "Rarely": 1,
+        "Never": 0
+      }
+    },
+    {
+      "question": "People are around me but not with me.",
+      "options": {
+        "Often": 3,
+        "Sometimes": 2,
+        "Rarely": 1,
+        "Never": 0
+      }
+    }
+  ]            
+                
 }
   
