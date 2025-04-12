@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { SendHorizonal } from 'lucide-react';
 import { HeartHandshake } from 'lucide-react';
+import '../globals.css';
 
 
 export default function TalkToChatbot() {
@@ -40,7 +41,7 @@ export default function TalkToChatbot() {
       const data = await res.json();
       const botReply = data.reply || "I'm here for you 💛";
   
-      const estimatedTime = Math.min(Math.max(botReply.length * 10, 500), 4000);
+      const estimatedTime = Math.min(Math.max(botReply.length * 5, 300), 2000);
   
       setIsTyping(true);
   
@@ -69,7 +70,7 @@ export default function TalkToChatbot() {
       <div className="bg-yellow-100 px-4 py-3 flex items-center justify-between shadow-md">
         <div className="text-xl font-semibold">Chat with Brighter Beyond Bot</div>
         <div className="text-yellow-500">
-    <HeartHandshake size={44} strokeWidth={2.2} />
+    <HeartHandshake size={45} strokeWidth={2.2} />
   </div>
       </div>
 
@@ -84,7 +85,7 @@ export default function TalkToChatbot() {
             className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div
-              className={`max-w-xs px-4 py-2 rounded-2xl shadow ${
+              className={`max-w-md px-4 py-2 rounded-2xl shadow relative ${
                 msg.sender === 'user'
                   ? 'bg-yellow-200 text-right user-bubble'
                   : 'bg-gray-100 text-left bot-bubble'
@@ -115,19 +116,27 @@ export default function TalkToChatbot() {
 
         <textarea
           
-          className="w-full resize-none overflow-hidden text-sm focus:outline-none bg-transparent"
+          className="w-full resize-none overflow-hidden text-base md:text-md focus:outline-none bg-transparent"
           placeholder="Type your message..."
           value={input}
-          style={{maxHeight: '200px'}}
+          style={{maxHeight: '300px'}}
           onChange={(e) => setInput(e.target.value)}
-        //   onKeyDown={(e) => e.key === 'Enter'  && sendMessage()}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+              e.preventDefault();
+              sendMessage();
+            }
+          }}
+          
         />
         <button
-          className="bg-yellow-300 hover:bg-yellow-400 text-white p-2 rounded-full"
-          onClick={sendMessage}
-        >
-          <SendHorizonal size={28} strokeWidth={2.5}/>
-        </button>
+  className="bg-yellow-300 hover:bg-yellow-400 text-white p-3 rounded-full flex items-center justify-center"
+ 
+  onClick={sendMessage}
+>
+  <SendHorizonal size={32} strokeWidth={2.5} />
+</button>
+
       </div>
       </div>
     </div>
