@@ -25,5 +25,5 @@ export default function TalkToVolunteer() {
             ))}
           </div>
         </div>
-      );
+    );
 }

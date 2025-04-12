@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
-import ProblemSelect from "@/components/ProblemSelect"
-import ImageUpload from "@/components/ImageUpload"
+import ProblemSelect from "@/components/ProblemSelect";
+import ImageUpload from "@/components/ImageUpload";
+import GenderDropdown from "@/components/GenderDropdown";
 import axios from "axios";
 
 export default function VolunteerForm() {
@@ -10,6 +11,7 @@ export default function VolunteerForm() {
         email: "",
         password: "",
         age: "",
+        gender: "",
         description: "",
         image: "",
         problem: "",
@@ -18,10 +20,23 @@ export default function VolunteerForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("/api/volunteer/register", volunteer);
-            console.log("Volunteer Registered:", response.data);
+            const res = await axios.post("/api/volunteer/register", volunteer);
+            if (res.status === 200) {
+                alert("Volunteer registered successfully!");
+                setVolunteer({
+                    name: "",
+                    email: "",
+                    password: "",
+                    age: "",
+                    gender: "",
+                    description: "",
+                    image: "",
+                    problem: [],
+                });
+            }
         } catch (error) {
-            console.error("Error registering volunteer: ", error.response?.data || error.message);
+            console.error("Registration failed:", error);
+            alert("Error registering volunteer");
         }
     };
 
@@ -78,6 +93,9 @@ export default function VolunteerForm() {
                 />
             </div>
 
+            <GenderDropdown volunteer={volunteer} setVolunteer={setVolunteer} />
+
+
             <div className="w-full">
                 <label htmlFor="description" className="block font-semibold mb-1">Description</label>
                 <textarea
@@ -94,7 +112,7 @@ export default function VolunteerForm() {
             <ProblemSelect volunteer={volunteer} setVolunteer={setVolunteer} />
 
             <button
-                className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none transition-transform duration-300 bg-yellow-500 text-white font-semibold hover:bg-yellow-600 hover:-translate-y-1 shadow-md hover:shadow-lg"
+                className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none transition-transform duration-300 bg-[#D7A529] text-white font-semibold hover:bg-yellow-600 hover:-translate-y-1 shadow-md hover:shadow-lg"
                 onClick={handleSubmit}
             >
                 Register as Volunteer

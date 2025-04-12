@@ -33,7 +33,7 @@ export default function GameStartPage() {
             >
             <p className="text-lg">Instructions: Look at the images and type what you see first.</p>
             <button
-                onClick={() => router.push("/game/play")}
+                onClick={() => router.push("/game/crossword")}
                 className="px-6 py-2 bg-blue-600 rounded"
             >
                 Start
