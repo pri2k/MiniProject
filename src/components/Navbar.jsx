@@ -81,7 +81,7 @@ export default function Navbar() {
           <Link href="/about" onClick={() => handleLinkClick("/about")}>About</Link>
           <Link href="/talkToVolunteers" onClick={() => handleLinkClick("/talkToVolunteers")}>Groups</Link>
           <Link href="/talkToChatbot" onClick={() => handleLinkClick("/talkToChatbot")}>Bot</Link>
-          <Link href="/illusionpg" onClick={() => handleLinkClick("/illusionpg")}>Illusion</Link>
+          <Link href="/game" onClick={() => handleLinkClick("/game")}>Game</Link>
 
           {user ? (
             <div className="relative" ref={dropdownRef}>
