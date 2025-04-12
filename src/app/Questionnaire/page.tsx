@@ -39,23 +39,6 @@ export default function Page() {
     }, 300);
   };
 
-  const Wrapper = ({ children }: { children: React.ReactNode }) => (
-    <div className="relative min-h-screen w-full flex flex-col items-center justify-center px-4 text-center overflow-hidden bg-yellow-20">
-{children}
-      {/* 🌊 Bottom Wave Background */}
-      <svg
-        className="absolute bottom-0 left-0 w-full h-40"
-        viewBox="0 0 1440 320"
-        preserveAspectRatio="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          fill="#fef3c7"
-          d="M0,224L48,197.3C96,171,192,117,288,96C384,75,460,85,570,96C672,107,768,117,864,138.7C960,160,1056,192,1152,176C1248,160,1344,96,1392,64L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-        />
-      </svg>
-    </div>
-  );
 
   if (!selectedTopic) {
     return (
@@ -143,43 +126,50 @@ const matchedRange = rules?.ranges.find(
             <p className="text-lg text-gray-700 font-semibold">Calculating your result...</p>
           </div>
         ) : (
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.4 }}
-            className="bg-white p-6 rounded-2xl shadow-xl text-center"
-          >
-            <h2 className="text-2xl font-bold text-yellow-700 mb-4">Your Result</h2>
-            {/* <p className="text-lg mb-6">Total Score: <span className="font-semibold">{totalScore}</span></p> */}
-            {matchedRange ? (
-  <>
-    <h2 className="text-2xl font-bold text-yellow-700 mb-2">{matchedRange.label}</h2>
-    <p className="text-base text-gray-700 mb-6">{matchedRange.description}</p>
-  </>
-) : (
-  <p className="text-base text-gray-500 mb-6">We couldn't determine your result.</p>
-)}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href="/">
-            <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-6 rounded-full transition">
-              Go back to Home
-            </button>
-          </Link>
-          <button
-            onClick={() => {
-              // Reset everything for new quiz
-              setSelectedTopic(null);
-              setCurrentQuestion(0);
-              setAnswers([]);
-              setShowResult(false);
-            }}
-            className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-6 rounded-full transition"
-          >
-            Take Another Quiz
-          </button>
-        </div>
 
-        </motion.div>
+          <motion.div
+  initial={{ scale: 0.9, opacity: 0 }}
+  animate={{ scale: 1, opacity: 1 }}
+  transition={{ duration: 0.4 }}
+  className="relative p-1 rounded-[20px] bg-gradient-to-br from-yellow-400 via-yellow-300 to-yellow-500 shadow-lg"
+>
+  <div className="bg-white rounded-[18px] p-6 text-center relative z-10 shadow-xl">
+    <h2 className="text-2xl font-bold text-yellow-700 mb-4">Your Result</h2>
+    {matchedRange ? (
+      <>
+        <h2 className="text-2xl font-bold text-yellow-700 mb-2">
+          {matchedRange.label}
+        </h2>
+        <p className="text-base text-gray-700 mb-6">
+          {matchedRange.description}
+        </p>
+      </>
+    ) : (
+      <p className="text-base text-gray-500 mb-6">
+        We couldn't determine your result.
+      </p>
+    )}
+
+    <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
+      <Link href="/">
+        <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-6 rounded-full transition">
+          Go back to Home
+        </button>
+      </Link>
+      <button
+        onClick={() => {
+          setSelectedTopic(null);
+          setCurrentQuestion(0);
+          setAnswers([]);
+          setShowResult(false);
+        }}
+        className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-6 rounded-full transition"
+      >
+        Take Another Quiz
+      </button>
+    </div>
+  </div>
+</motion.div>
         )}
 
         {/* SVG Wave (bottom) */}
