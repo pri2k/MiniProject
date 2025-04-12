@@ -34,7 +34,7 @@ export default function Navbar() {
   }, []);
 
   console.log("user from navbar", user);
-  
+
 
   const handleLogout = async () => {
     try {
@@ -70,7 +70,7 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar_div">
-        <img src="/images/logo.png" className="logo_navbar" alt="logo" />
+        <img src="/images/logo_black.png" className="logo_navbar" alt="logo" />
 
         <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
           <MenuIcon />

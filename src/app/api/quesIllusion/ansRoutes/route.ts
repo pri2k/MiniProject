@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connect } from "@/dbConfig/dbConfig";
-import UserResponse from "@/models/UserResponse"; // Adjust the path to your model
+import { UserResponse } from "@/models/UserResponse"
 
 connect();
 

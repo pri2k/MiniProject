@@ -61,7 +61,7 @@ body {
   display: none;
   cursor: pointer;
 }
-@media (max-width: 740px) {
+@media (max-width: 860px) {
   .navbar_div {
     padding: 0;
   }

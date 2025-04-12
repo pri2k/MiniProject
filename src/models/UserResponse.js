@@ -13,4 +13,6 @@ const UserResponseSchema = new mongoose.Schema({
     totalScore: { type: Number, required: true }
 });
 
-module.exports = mongoose.model("UserResponse", UserResponseSchema);
+const UserResponse = mongoose.models.UserResponse || mongoose.model("UserResponse", UserResponseSchema);
+
+export { UserResponse };

@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Display from "@/components/ImageDisplay";
-import Link from "next/link";
 
 export default function illusionpg() {
   const [step, setStep] = useState(0);
