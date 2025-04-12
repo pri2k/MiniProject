@@ -7,7 +7,17 @@ import QuestionCard from "@/components/QuestionCard";
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 
-const topics = ['Stress', 'Sleep'];
+const topics = [
+  'Happiness',
+  'Depression',
+  'Anxiety',
+  'Stress',
+  'Relationship',
+  'Social Support',
+  'Loneliness',
+  'Self-Esteem',
+  'Resilience'  
+];
 
 export default function Page() {
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
@@ -50,7 +60,8 @@ export default function Page() {
     return (
       <div className="h-screen flex flex-col items-center justify-center bg-gray-100 backdrop-blur-md">
         <h2 className="text-2xl font-bold mb-4">Choose a topic</h2>
-        <div className="flex gap-4">
+        <div className="flex flex-wrap justify-center gap-4 max-w-2xl">
+
           {topics.map((topic) => (
             <button
               key={topic}
@@ -84,12 +95,27 @@ export default function Page() {
           >
             <h2 className="text-2xl font-bold text-yellow-700 mb-4">Your Result</h2>
             <p className="text-lg mb-6">Total Score: <span className="font-semibold">{totalScore}</span></p>
-            <Link href="/">
-              <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-6 rounded-full transition">
-                Go back to Home
-              </button>
-            </Link>
-          </motion.div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link href="/">
+            <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-6 rounded-full transition">
+              Go back to Home
+            </button>
+          </Link>
+          <button
+            onClick={() => {
+              // Reset everything for new quiz
+              setSelectedTopic(null);
+              setCurrentQuestion(0);
+              setAnswers([]);
+              setShowResult(false);
+            }}
+            className="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-6 rounded-full transition"
+          >
+            Take Another Quiz
+          </button>
+        </div>
+
+        </motion.div>
         )}
       </div>
     );
