@@ -6,18 +6,11 @@ import { useState, useEffect } from 'react';
 import QuestionCard from "@/components/QuestionCard";
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import questionData from '@/data/questions.json';
+import scoreRules from '@/data/questscore.json'
 
-const topics = [
-  'Happiness',
-  'Depression',
-  'Anxiety',
-  'Stress',
-  'Relationship',
-  'Social Support',
-  'Loneliness',
-  'Self-Esteem',
-  'Resilience'  
-];
+const topics = Object.keys(questionData); // Automatically get topics from JSON
+
 
 export default function Page() {
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
@@ -25,19 +18,9 @@ export default function Page() {
   const [answers, setAnswers] = useState<number[]>([]);
   const [showResult, setShowResult] = useState(false);
 
-  const dummyQuestions = {
-    Stress: [
-      { question: 'How often do you feel overwhelmed?', options: ['Rarely', 'Sometimes', 'Often'], points: [1, 2, 3] },
-      { question: 'Do you find it hard to relax?', options: ['No', 'Maybe', 'Yes'], points: [1, 2, 3] },
-    ],
-    Sleep: [
-      { question: 'Do you sleep at least 7 hours a night?', options: ['Always', 'Sometimes', 'Never'], points: [1, 2, 3] },
-      { question: 'Do you wake up feeling refreshed?', options: ['Yes', 'Somewhat', 'No'], points: [1, 2, 3] },
-    ]
-  };
 
   const questions = selectedTopic
-    ? dummyQuestions[selectedTopic as keyof typeof dummyQuestions]
+    ? questionData[selectedTopic as keyof typeof questionData]
     : [];
 
   useEffect(() => {
@@ -56,9 +39,28 @@ export default function Page() {
     }, 300);
   };
 
+  const Wrapper = ({ children }: { children: React.ReactNode }) => (
+    <div className="relative min-h-screen w-full flex flex-col items-center justify-center px-4 text-center overflow-hidden bg-yellow-20">
+{children}
+      {/* 🌊 Bottom Wave Background */}
+      <svg
+        className="absolute bottom-0 left-0 w-full h-40"
+        viewBox="0 0 1440 320"
+        preserveAspectRatio="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill="#fef3c7"
+          d="M0,224L48,197.3C96,171,192,117,288,96C384,75,460,85,570,96C672,107,768,117,864,138.7C960,160,1056,192,1152,176C1248,160,1344,96,1392,64L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+        />
+      </svg>
+    </div>
+  );
+
   if (!selectedTopic) {
     return (
-      <div className="h-screen flex flex-col items-center justify-center bg-gray-100 backdrop-blur-md">
+      
+       <div className="h-screen flex flex-col items-center justify-center bg-gray-10 backdrop-blur-md"> 
         <h2 className="text-2xl font-bold mb-4">Choose a topic</h2>
         <div className="flex flex-wrap justify-center gap-4 max-w-2xl">
 
@@ -72,14 +74,68 @@ export default function Page() {
             </button>
           ))}
         </div>
-      </div>
+       
+      {/* SVG Wave (bottom) */}
+    <svg
+      className="absolute bottom-0 left-0 w-full h-40"
+      viewBox="0 0 1440 320"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill="#fef3c7"
+        d="M0,224L48,197.3C96,171,192,117,288,96C384,75,460,85,570,96C672,107,768,117,864,138.7C960,160,1056,192,1152,176C1248,160,1344,96,1392,64L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+      />
+    </svg>
+    
+    </div>
     );
   }
 
-  if (questions.length > 0 && currentQuestion >= questions.length) {
-    const totalScore = answers.reduce((a, b) => a + b, 0);
+if (questions.length > 0 && currentQuestion >= questions.length) {
+  //   const totalScore = answers.reduce((a, b) => a + b, 0);
+
+const totalScore = answers.reduce((a, b) => a + b, 0);
+
+// Get the rules for the selected topic
+const rules = selectedTopic ? scoreRules[selectedTopic as keyof typeof scoreRules] as {
+  multiplier: number;
+  postProcess?: string; // <-- Add this
+  ranges: {
+    min: number;
+    max: number;
+    label: string;
+    description: string;
+  }[];
+} : null;
+
+
+let finalScore = totalScore;
+
+// Apply multiplier from JSON
+if (rules?.multiplier) {
+  finalScore *= rules.multiplier;
+}
+
+// Apply postProcess logic from JSON
+switch (rules?.postProcess) {
+  case "divideBy60":
+    finalScore /= 60;
+    break;
+  case "divideBy12":
+    finalScore /= 12;
+    break;
+    case "divideBy15":
+      finalScore /= 15;
+      break;
+}
+
+const matchedRange = rules?.ranges.find(
+  (range) => finalScore >= range.min && finalScore <= range.max
+);
 
     return (
+      
       <div className="h-screen flex flex-col items-center justify-center bg-gray-100 backdrop-blur-md px-4">
         {!showResult ? (
           <div className="flex flex-col items-center">
@@ -94,7 +150,15 @@ export default function Page() {
             className="bg-white p-6 rounded-2xl shadow-xl text-center"
           >
             <h2 className="text-2xl font-bold text-yellow-700 mb-4">Your Result</h2>
-            <p className="text-lg mb-6">Total Score: <span className="font-semibold">{totalScore}</span></p>
+            {/* <p className="text-lg mb-6">Total Score: <span className="font-semibold">{totalScore}</span></p> */}
+            {matchedRange ? (
+  <>
+    <h2 className="text-2xl font-bold text-yellow-700 mb-2">{matchedRange.label}</h2>
+    <p className="text-base text-gray-700 mb-6">{matchedRange.description}</p>
+  </>
+) : (
+  <p className="text-base text-gray-500 mb-6">We couldn't determine your result.</p>
+)}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/">
             <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-6 rounded-full transition">
@@ -109,7 +173,7 @@ export default function Page() {
               setAnswers([]);
               setShowResult(false);
             }}
-            className="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-6 rounded-full transition"
+            className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-6 rounded-full transition"
           >
             Take Another Quiz
           </button>
@@ -117,29 +181,81 @@ export default function Page() {
 
         </motion.div>
         )}
+
+        {/* SVG Wave (bottom) */}
+    <svg
+      className="absolute bottom-0 left-0 w-full h-40"
+      viewBox="0 0 1440 320"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill="#fef3c7"
+        d="M0,224L48,197.3C96,171,192,117,288,96C384,75,460,85,570,96C672,107,768,117,864,138.7C960,160,1056,192,1152,176C1248,160,1344,96,1392,64L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+      />
+    </svg>
+
       </div>
+      
     );
   }
 
   const current = questions[currentQuestion];
 
+  const totalQuestions = questions.length;
+  const progress = ((currentQuestion + 1) / totalQuestions) * 100;
+
   return (
-    <div className="h-screen flex flex-col items-center justify-center bg-gray-100 backdrop-blur-md px-4 text-center">
+     <div className="h-screen flex flex-col items-center justify-center bg-gray-100 backdrop-blur-md px-4 text-center"> 
+        {/* Progress Bar */}
+       <div
+         className="w-full h-2 bg-yellow-500 mb-4"
+         style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%`, transition: 'width 0.3s ease' }}
+       ></div>
+
+      {/* Rest of the content */}
       <AnimatePresence mode="wait">
-        <motion.div
-          key={currentQuestion}
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -40 }}
-          transition={{ duration: 0.3 }}
-        >
-          <QuestionCard
-            question={current.question}
-            options={current.options}
-            onSelect={(idx) => handleOptionClick(current.points[idx])}
-          />
-        </motion.div>
+        {showResult ? (
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            className="bg-white p-6 rounded-2xl shadow-xl text-center"
+          >
+            {/* Your Result Component */}
+          </motion.div>
+        ) : (
+          <motion.div
+            key={currentQuestion}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -40 }}
+            transition={{ duration: 0.3 }}
+          >
+            <QuestionCard
+              question={questions[currentQuestion].question}
+              options={Object.keys(questions[currentQuestion].options)}
+              onSelect={(idx) => handleOptionClick(Object.values(questions[currentQuestion].options)[idx])}
+            />
+          </motion.div>
+        )}
       </AnimatePresence>
-    </div>
+
+      {/* SVG Wave (bottom) */}
+    <svg
+      className="absolute bottom-0 left-0 w-full h-40"
+      viewBox="0 0 1440 320"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill="#fef3c7"
+        d="M0,224L48,197.3C96,171,192,117,288,96C384,75,460,85,570,96C672,107,768,117,864,138.7C960,160,1056,192,1152,176C1248,160,1344,96,1392,64L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+      />
+    </svg>
+
+
+     </div> 
+    
   );
 }
