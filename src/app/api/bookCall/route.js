@@ -1,15 +1,16 @@
 import { connect } from "@/dbConfig/dbConfig";
-import Call from "@/models/call";
+import Call from "@/models/Call";
 import { NextResponse } from "next/server";
+import { createDailyRoom } from "@/utils/createDailyRoom";
 
 export async function POST(req) {
     try {
         await connect();
         const r = await req.json();
         const { userId, volunteerId, time, duration } = r;
-        console.log(r);
         const startTime = new Date(time);
         const endTime = new Date(startTime.getTime() + duration * 60000);
+        const roomUrl = await createDailyRoom();
 
         const overlappingCall = await Call.findOne({
             volunteerId,
@@ -34,7 +35,20 @@ export async function POST(req) {
             userId,
             volunteerId,
             time: startTime,
-            duration
+            duration,
+            roomUrl,
+        });
+
+        // 👉 Trigger notification call to /api/registerCall
+        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/registerCall`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                userId,
+                volunteerId,
+                time: startTime,
+                duration
+            })
         });
 
         return NextResponse.json({ success: true, call: newCall });
