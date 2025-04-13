@@ -1,31 +1,40 @@
+import { NextResponse } from 'next/server'
 import { connect } from "@/dbConfig/dbConfig";
-import Call from "@/models/Call"; // or "@/models/Call" if that's the name
-import User from "@/models/User"; // to populate user name if needed
-import Volunteer from "@/models/Volunteer"; // to populate volunteer name
-import { NextResponse } from "next/server";
+import Call from '@/models/Call'
+import User from '@/models/User'
+import Volunteer from '@/models/Volunteer'
+
+connect();
 
 export async function GET(req) {
+    const { searchParams } = new URL(req.url)
+    const userId = searchParams.get('userId')
+
+    if (!userId) {
+        return NextResponse.json({ success: false, message: 'Missing userId' })
+    }
+
     try {
-        await connect();
-        const { searchParams } = new URL(req.url);
-        const userId = searchParams.get("userId");
-        console.log("userId", userId);
-
-        if (!userId) {
-        return NextResponse.json({ success: false, message: "Missing userId" }, { status: 400 });
-        }
-
         const calls = await Call.find({
-        $or: [{ userId }, { volunteerId: userId }]
+            $or: [
+                { userId: userId },
+                { volunteerId: userId }
+            ]
         })
-        .populate("userId", "name")
-        .populate("volunteerId", "name");
+        .populate({
+            path: 'userId',
+            model: User,
+            select: 'username image'
+        })
+        .populate({
+            path: 'volunteerId',
+            model: Volunteer,
+            select: 'name image'
+        })
 
-        console.log("calls", calls);
-
-        return NextResponse.json({ success: true, calls });
-    } catch (error) {
-        console.error(error);
-        return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+        return NextResponse.json({ success: true, calls })
+    } catch (err) {
+        console.error('Error fetching calls:', err)
+        return NextResponse.json({ success: false, message: 'Server error' })
     }
 }

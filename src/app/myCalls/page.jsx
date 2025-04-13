@@ -1,55 +1,86 @@
-'use client'
-
-import { useEffect, useState, useContext } from 'react'
-import { UserContext } from '@/context/UserContext'
+"use client";
+import { useEffect, useState, useContext } from 'react';
+import { UserContext } from '@/context/UserContext';
+import Card from '@/components/Card';
+import { useRouter } from 'next/navigation';
 
 export default function MyCallsPage() {
-    const { user } = useContext(UserContext)
-    const [calls, setCalls] = useState([])
-    
+    const { user } = useContext(UserContext);
+    const [calls, setCalls] = useState([]);
+
     useEffect(() => {
         async function fetchCalls() {
-            const res = await fetch(`/api/myCalls?userId=${user.id}`);
+            const res = await fetch(`/api/myCalls?userId=${user?.id}`);
             const data = await res.json();
-            // console.log("Calls data:", data);
             if (data.success) setCalls(data.calls);
         }
-    
+
         if (user?.id) fetchCalls();
     }, [user]);
 
-    // console.log("calls", calls);
+    const volunteerCalls = calls.filter(call => {
+        const volunteerId = call.volunteerId?._id?.toString() || call.volunteerId?.toString();
+        return volunteerId === user?.id;
+    });
 
-    function handleJoinCall(url) {
-        window.open(url, '_blank', 'width=800,height=600')
+    const userCalls = calls.filter(call => {
+        const userId = call.userId?._id?.toString() || call.userId?.toString();
+        return userId === user?.id;
+    });
+
+    // Check if the current time is within the call's time window
+    function canJoinCall(call) {
+        const callTime = new Date(call.time);
+        const now = new Date();
+        return now >= callTime && now <= new Date(callTime.getTime() + call.duration * 60000);
     }
 
-    // Separate calls into two categories: one for volunteer and one for user
-    const volunteerCalls = calls.filter(call => call.volunteerId.toString() === user.id);
-    console.log("volunteer calls", volunteerCalls);
-    const userCalls = calls.filter(call => call.userId.toString() === user.id);
-    console.log("user calls", userCalls);
+    // Fetch a new room URL if it doesn't exist
+    async function handleJoinCall(call) {
+        let roomUrl = call.roomUrl;
+        console.log("Generated Room URL:", roomUrl);
+        if (!roomUrl) {
+            const res = await fetch('/api/createRoom', { method: 'POST' });
+            const data = await res.json();
+            roomUrl = data.url;
+        }
+        window.open(roomUrl, '_blank', 'width=800,height=600');
+    }
 
     return (
         <div className="mt-[10em] px-4">
             <h1 className="text-2xl font-bold mb-6">Your Scheduled Calls</h1>
-            
+
             <div>
                 <h2 className="text-xl font-semibold mb-4">As Volunteer</h2>
                 {volunteerCalls.length === 0 ? (
                     <p>No calls where you're a volunteer.</p>
                 ) : (
-                    volunteerCalls.map(call => (
-                        <div
-                            key={call._id}
-                            className="border p-4 rounded mb-4 cursor-pointer hover:bg-gray-100"
-                            onClick={() => handleJoinCall(call.roomUrl)}
-                        >
-                            <p><strong>With:</strong> {call.user?.name || 'User'}</p>
-                            <p><strong>Time:</strong> {new Date(call.time).toLocaleString()}</p>
-                            <p><strong>Duration:</strong> {call.duration} mins</p>
-                        </div>
-                    ))
+                    volunteerCalls.map(call => {
+                        const userInfo = call.userId;
+                        return (
+                            <Card key={call._id} className="p-4 mb-4 cursor-pointer hover:bg-gray-100 flex gap-4 items-center">
+                                <img
+                                    src={userInfo.image || '/images/default.jpg'}
+                                    alt="User"
+                                    width={50}
+                                    height={50}
+                                    className="rounded-full"
+                                />
+                                <div>
+                                    <p><strong>User:</strong> {userInfo.username || 'User'}</p>
+                                    <p><strong>Time:</strong> {new Date(call.time).toLocaleString()}</p>
+                                    <p><strong>Duration:</strong> {call.duration} mins</p>
+
+                                    {canJoinCall(call) ? (
+                                        <button onClick={() => handleJoinCall(call)}>Join Call</button>
+                                    ) : (
+                                        <span>Call not started</span>
+                                    )}
+                                </div>
+                            </Card>
+                        );
+                    })
                 )}
             </div>
 
@@ -58,19 +89,33 @@ export default function MyCallsPage() {
                 {userCalls.length === 0 ? (
                     <p>No calls where you're the user.</p>
                 ) : (
-                    userCalls.map(call => (
-                        <div
-                            key={call._id}
-                            className="border p-4 rounded mb-4 cursor-pointer hover:bg-gray-100"
-                            onClick={() => handleJoinCall(call.roomUrl)}
-                        >
-                            <p><strong>With:</strong> {call.volunteer?.name || 'Volunteer'}</p>
-                            <p><strong>Time:</strong> {new Date(call.time).toLocaleString()}</p>
-                            <p><strong>Duration:</strong> {call.duration} mins</p>
-                        </div>
-                    ))
+                    userCalls.map(call => {
+                        const volunteerInfo = call.volunteerId;
+                        return (
+                            <Card key={call._id} className="p-4 mb-4 cursor-pointer hover:bg-gray-100 flex gap-4 items-center">
+                                <img
+                                    src={volunteerInfo.image || '/images/default.jpg'}
+                                    alt="Volunteer"
+                                    width={50}
+                                    height={50}
+                                    className="rounded-full"
+                                />
+                                <div>
+                                    <p><strong>Volunteer:</strong> {volunteerInfo.name || 'Volunteer'}</p>
+                                    <p><strong>Time:</strong> {new Date(call.time).toLocaleString()}</p>
+                                    <p><strong>Duration:</strong> {call.duration} mins</p>
+
+                                    {canJoinCall(call) ? (
+                                        <button onClick={() => handleJoinCall(call)}>Join Call</button>
+                                    ) : (
+                                        <span>Call not started</span>
+                                    )}
+                                </div>
+                            </Card>
+                        );
+                    })
                 )}
             </div>
         </div>
-    )
+    );
 }
