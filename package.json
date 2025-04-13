@@ -15,9 +15,12 @@
     "@google/generative-ai": "^0.24.0",
     "@gradio/client": "^1.14.1",
     "@mui/icons-material": "^6.4.3",
+    "@mui/material": "^7.0.2",
+    "@mui/x-date-pickers": "^7.28.3",
     "axios": "^1.7.9",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^2.6.0",
+    "dayjs": "^1.11.13",
     "dotenv": "^16.4.7",
     "framer-motion": "^12.6.3",
     "fs": "^0.0.1-security",
@@ -38,6 +41,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hot-toast": "^2.5.1",
+    "react-time-picker": "^7.0.0",
     "tesseract.js": "^6.0.0"
   },
   "devDependencies": {
