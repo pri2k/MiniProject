@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function VolunteerCall() {
   return (
-    <div className="flex flex-col lg:flex-row items-center justify-center p-10 bg-gray-100 mt-20">
+    <div className="flex flex-col lg:flex-row items-center justify-center p-10 bg-yellow-100 my-20">
       <div className="max-w-lg text-center lg:text-left">
             <h1 className="text-3xl font-bold text-gray-800 mb-8">
                 Become a Volunteer - Be the Light in Someone's Darkest Moments

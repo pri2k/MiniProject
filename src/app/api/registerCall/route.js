@@ -22,6 +22,7 @@ export async function POST(req) {
 
         // 🔁 Generate 100ms room URL
         const roomUrl = await createRoom();
+        console.log("room url in register", roomUrl);
 
         const newCall = await Call.create({
             userId,

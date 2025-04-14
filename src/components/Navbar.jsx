@@ -78,15 +78,16 @@ export default function Navbar() {
 
         <div className={`navbar_options ${menuOpen ? "open" : ""}`}>
           <Link href="/" onClick={() => handleLinkClick("/")}>Home</Link>
-          <Link href="/about" onClick={() => handleLinkClick("/about")}>About</Link>
+          <Link href="/myCalls" onClick={() => handleLinkClick("/myCalls")}>My Calls</Link>
           <Link href="/talkToVolunteers" onClick={() => handleLinkClick("/talkToVolunteers")}>Groups</Link>
           <Link href="/talkToChatbot" onClick={() => handleLinkClick("/talkToChatbot")}>Bot</Link>
           <Link href="/game" onClick={() => handleLinkClick("/game")}>Game</Link>
+        </div>
 
-          {user ? (
+        {user ? (
             <div className="relative" ref={dropdownRef}>
               <img
-                src={user.image || "/default-profile.png"}
+                src={user.image || "/default.jpg"}
                 alt="Profile"
                 className="w-10 h-10 rounded-full cursor-pointer"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -107,7 +108,6 @@ export default function Navbar() {
               Login
             </Link>
           )}
-        </div>
       </div>
     </nav>
   );

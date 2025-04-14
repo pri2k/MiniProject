@@ -1,7 +1,7 @@
 import { connect } from "@/dbConfig/dbConfig";
 import Call from "@/models/Call";
 import { NextResponse } from "next/server";
-import { createRoom } from "../../../utils/createHMSRoom";
+import { createRoom } from "@/utils/createHMSRoom";  // 🔁 now using 100ms
 
 export async function POST(req) {
     try {
@@ -15,6 +15,8 @@ export async function POST(req) {
 
         // Create a fixed 100ms room URL
         const roomUrl = await createRoom();
+
+        console.log("roomUrl", roomUrl);
 
         if (!roomUrl) {
             return NextResponse.json({

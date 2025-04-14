@@ -54,6 +54,8 @@ body {
   height: 5em;
 }
 .navbar_options {
+  position: absolute;
+  right: 10%;
   display: flex;
   gap: 2em;
 }
@@ -72,10 +74,10 @@ body {
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 112px;
+    top: 105px;
     left: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.5); 
+    background-color: var(--main-color); 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 1em;
     text-align: center;
@@ -86,6 +88,8 @@ body {
   }
   .hamburger {
     display: block;  
+    position: absolute;
+    right: 5em;
   }
 }
 
@@ -188,7 +192,8 @@ body {
 /* How To Use */
 .howToUseContainer {
   text-align: center;
-  margin-top: 10em;
+  margin-top: 5em;
+  margin-bottom: 5em;
   background-color: rgb(215, 165, 41);
 }
 .howToUseLogo {
