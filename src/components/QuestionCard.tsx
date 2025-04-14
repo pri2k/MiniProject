@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 
 export default function QuestionCard({ question, options, onSelect }: {
@@ -26,4 +27,5 @@ export default function QuestionCard({ question, options, onSelect }: {
       </div>
     </motion.div>
   );
+
 }
