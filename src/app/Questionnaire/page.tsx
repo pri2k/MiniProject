@@ -60,7 +60,7 @@ export default function Page() {
         
         {/* SVG Wave (bottom) */}
         <svg
-        className="absolute bottom-0 left-0 w-full h-40"
+        className="absolute -bottom-3 left-0 w-full h-40"
         viewBox="0 0 1440 320"
         preserveAspectRatio="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -72,23 +72,6 @@ export default function Page() {
         </svg>
         
         </div>
-<<<<<<< HEAD
-       
-      {/* SVG Wave (bottom) */}
-    <svg
-      className="absolute -bottom-4 left-0 w-full h-40"
-      viewBox="0 0 1440 320"
-      preserveAspectRatio="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        fill="#fef3c7"
-        d="M0,224L48,197.3C96,171,192,117,288,96C384,75,460,85,570,96C672,107,768,117,864,138.7C960,160,1056,192,1152,176C1248,160,1344,96,1392,64L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-      />
-    </svg>
-    
-    </div>
-=======
         );
     }
 
@@ -132,7 +115,6 @@ export default function Page() {
 
     const matchedRange = rules?.ranges.find(
     (range) => finalScore >= range.min && finalScore <= range.max
->>>>>>> 951e6a2d7ed80dad22e65b7bf89dff87cecb6ebd
     );
 
         return (
@@ -192,7 +174,7 @@ export default function Page() {
 
             {/* SVG Wave (bottom) */}
         <svg
-        className="absolute bottom-0 left-0 w-full h-40"
+        className="absolute -bottom-3 left-0 w-full h-40"
         viewBox="0 0 1440 320"
         preserveAspectRatio="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -251,7 +233,7 @@ export default function Page() {
 
         {/* SVG Wave (bottom) */}
         <svg
-        className="absolute bottom-0 left-0 w-full h-40"
+        className="absolute -bottom-3 left-0 w-full h-40"
         viewBox="0 0 1440 320"
         preserveAspectRatio="none"
         xmlns="http://www.w3.org/2000/svg"
