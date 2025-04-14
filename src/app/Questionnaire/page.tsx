@@ -59,7 +59,7 @@ export default function Page() {
         
         {/* SVG Wave (bottom) */}
         <svg
-        className="absolute -bottom-3 left-0 w-full h-40"
+        className="absolute bottom-0 left-0 w-full h-40"
         viewBox="0 0 1440 320"
         preserveAspectRatio="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -173,7 +173,7 @@ export default function Page() {
 
             {/* SVG Wave (bottom) */}
         <svg
-        className="absolute -bottom-3 left-0 w-full h-40"
+        className="absolute bottom-0 left-0 w-full h-40"
         viewBox="0 0 1440 320"
         preserveAspectRatio="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -232,7 +232,7 @@ export default function Page() {
 
         {/* SVG Wave (bottom) */}
         <svg
-        className="absolute -bottom-3 left-0 w-full h-40"
+        className="absolute bottom-0 left-0 w-full h-40"
         viewBox="0 0 1440 320"
         preserveAspectRatio="none"
         xmlns="http://www.w3.org/2000/svg"
