@@ -26,7 +26,7 @@ const callSchema = new Schema({
     },
     roomUrl: {
         type: String,
-        required: true,
+        required: false,
     },
 }, { timestamps: true });
 

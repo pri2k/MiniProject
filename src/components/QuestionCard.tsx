@@ -27,4 +27,5 @@ export default function QuestionCard({ question, options, onSelect }: {
       </div>
     </motion.div>
   );
+
 }
