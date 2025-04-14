@@ -380,37 +380,4 @@ body {
   margin-top: 16px;
 }
 
-/*chatbot message*/
-.user-bubble {
-  position: relative;
-}
-.user-bubble::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: -10px;
-  width: 0;
-  height: 0;
-  border: 10px solid transparent;
-  border-top-color: #fef08a; /* same as bg-yellow-200 */
-  border-top: 0;
-  border-bottom: 10px solid transparent;
-  margin-top: 8px;
-}
 
-.bot-bubble {
-  position: relative;
-}
-.bot-bubble::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: -10px;
-  width: 0;
-  height: 0;
-  border: 10px solid transparent;
-  border-bottom-color: #f3f4f6; /* same as bg-white */
-  border-bottom: 0;
-  border-top: 10px solid transparent;
-  margin-bottom: 8px;
-}

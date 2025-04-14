@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { SendHorizonal } from 'lucide-react';
 import { HeartHandshake } from 'lucide-react';
-import '../globals.css';
+
 
 
 export default function TalkToChatbot() {
@@ -41,8 +41,9 @@ export default function TalkToChatbot() {
       const data = await res.json();
       const botReply = data.reply || "I'm here for you 💛";
   
-      const estimatedTime = Math.min(Math.max(botReply.length * 5, 300), 2000);
-  
+      const estimatedTime = Math.min(Math.max(botReply.length , 300), 1800);
+      
+
       setIsTyping(true);
   
       setTimeout(() => {
@@ -85,10 +86,10 @@ export default function TalkToChatbot() {
             className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div
-              className={`max-w-md px-4 py-2 rounded-2xl shadow relative ${
+              className={`max-w-[42%] px-4 py-2 rounded-2xl shadow relative break-words ${
                 msg.sender === 'user'
-                  ? 'bg-yellow-200 text-right user-bubble'
-                  : 'bg-gray-100 text-left bot-bubble'
+                  ? 'bg-yellow-200 text-right '
+                  : 'bg-gray-100 text-left '
               }`}
             >
               {msg.text}
@@ -120,8 +121,12 @@ export default function TalkToChatbot() {
           placeholder="Type your message..."
           value={input}
           style={{maxHeight: '300px'}}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => {
+          onChange={(e) => {
+            const value = e.target.value;
+            const capitalized = value.charAt(0).toUpperCase() + value.slice(1);
+            setInput(capitalized);
+          }}
+                    onKeyDown={(e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
               e.preventDefault();
               sendMessage();
