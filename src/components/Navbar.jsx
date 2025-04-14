@@ -33,8 +33,8 @@ export default function Navbar() {
     }
   }, []);
 
-  console.log("user from navbar", user);
-  
+  // console.log("user from navbar", user);
+
 
   const handleLogout = async () => {
     try {
@@ -70,7 +70,7 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar_div">
-        <img src="/images/logo.png" className="logo_navbar" alt="logo" />
+        <img src="/images/logo_black.png" className="logo_navbar" alt="logo" />
 
         <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
           <MenuIcon />
@@ -81,7 +81,7 @@ export default function Navbar() {
           <Link href="/about" onClick={() => handleLinkClick("/about")}>About</Link>
           <Link href="/talkToVolunteers" onClick={() => handleLinkClick("/talkToVolunteers")}>Groups</Link>
           <Link href="/talkToChatbot" onClick={() => handleLinkClick("/talkToChatbot")}>Bot</Link>
-          <Link href="/illusionpg" onClick={() => handleLinkClick("/illusionpg")}>Illusion</Link>
+          <Link href="/game" onClick={() => handleLinkClick("/game")}>Game</Link>
 
           {user ? (
             <div className="relative" ref={dropdownRef}>

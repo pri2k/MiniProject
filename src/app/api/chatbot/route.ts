@@ -21,7 +21,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
 
 // Connect to MongoDB
-const client = new MongoClient(process.env.MONGO_URI!);
+const client = new MongoClient(process.env.MONGO_CHATBOT_URI!);
 const db = client.db('test');
 const collection = db.collection<Section>('sections'); // typed collection
 

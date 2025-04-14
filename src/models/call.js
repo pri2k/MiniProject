@@ -24,7 +24,14 @@ const callSchema = new Schema({
         enum: ["pending", "confirmed", "completed", "cancelled"], 
         default: "pending" 
     },
+    roomUrl: {
+        type: String,
+        required: true,
+    },
 }, { timestamps: true });
 
 const Call = models.Call || model("Call", callSchema);
 export default Call;
+
+
+// add the reason for which the call is booked

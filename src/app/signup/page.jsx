@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import ImageUpload from "@/components/ImageUpload";
+import EmailVerification from "@/components/EmailVerification";
 
 export default function SignupPage() {
     const router = useRouter();
@@ -16,17 +17,35 @@ export default function SignupPage() {
         image: ""
     });
 
+
+    const [emailVerified, setEmailVerified] = useState(false);    
+
     const onSignUp = async () => {
         try {
-            const response = await axios.post("/api/users/signup", user);
-            toast.success("Signup successful!");
-            console.log("response.data:", response.config.data);
-            router.push("/");
+          const response = await axios.post("/api/users/signup", user);
+      
+          toast.success("Signup successful!");
+      
+          // Automatically log in user by calling login API
+          const loginRes = await axios.post("/api/users/login", {
+            email: user.email,
+            password: user.password,
+          });
+      
+          const loggedInUser = loginRes.data.data;
+      
+          if (loggedInUser) {
+            localStorage.setItem("user", JSON.stringify(loggedInUser));
+          }
+      
+          // Full reload to trigger useContext + rehydration
+          window.location.href = "/";
         } catch (error) {
-            console.log("Signup failed", error.message);
-            toast.error(error.response?.data?.error || "Signup failed");
+          console.log("Signup failed", error.message);
+          toast.error(error.response?.data?.error || "Signup failed");
         }
-    }
+      };
+      
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2 w-80%">
@@ -36,27 +55,26 @@ export default function SignupPage() {
             <input 
                 id="username"
                 type="text" 
-                value={user.username}
+                value={user.username || ""}
                 onChange={(e) => setUser({...user, username: e.target.value})}
                 placeholder="username"
                 className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
             />
 
-            <label htmlFor="email">email</label>
-            <input 
-                id="email"
-                type="email" 
-                value={user.email}
-                onChange={(e) => setUser({...user, email: e.target.value})}
-                placeholder="email"
-                className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
-            />
+            <div>
+              <EmailVerification
+                  email={user.email}
+                  setEmail={(email) => setUser({ ...user, email })}
+                  onVerified={(status) => setEmailVerified(status)}
+              />
+            </div>
+
 
             <label htmlFor="password">password</label>
             <input 
                 id="password"
                 type="password" 
-                value={user.password}
+                value={user.password || ""}
                 onChange={(e) => setUser({...user, password: e.target.value})}
                 placeholder="password"
                 className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
@@ -65,10 +83,11 @@ export default function SignupPage() {
             <ImageUpload data={user} setData={setUser} />
 
             <button 
-                className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none"
-                onClick={onSignUp}
+              className={`p-2 border rounded-lg mb-4 ${emailVerified ? "" : "opacity-50 cursor-not-allowed"}`}
+              onClick={onSignUp}
+              disabled={!emailVerified}
             >
-                Sign up
+              Sign up
             </button>
             <Link href="/login" className="text-blue-800">Already have an account? Login</Link>
         </div>
