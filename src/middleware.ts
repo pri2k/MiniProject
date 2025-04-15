@@ -1,26 +1,22 @@
-import { NextResponse } from 'next/server'
-import { NextRequest } from 'next/server'
+// middleware.js
+import { NextResponse } from 'next/server';
 
-export function middleware(request: NextRequest) {
+export function middleware(request: any) {
     const path = request.nextUrl.pathname;
-
-    console.log("path", request.nextUrl);
-
-    const isPublicPath = path === '/login' || path === '/signup' || path === '/verifyemail';
-
     const token = request.cookies.get('token')?.value || '';
 
+    const isPublicPath = ['/login', '/signup', '/verifyemail'].includes(path);
+    const isProtectedVolunteerRoute = path.startsWith('/volunteer');
+
     if (isPublicPath && token) {
-        return NextResponse.redirect(new URL('/', request.nextUrl));
+        return NextResponse.redirect(new URL('/', request.url));
+    }
+
+    if (isProtectedVolunteerRoute && !token) {
+        return NextResponse.redirect(new URL('/login', request.url));
     }
 }
 
 export const config = {
-    matcher: [
-        '/',
-        '/profile',
-        '/login',
-        '/signup',
-        '/verifyemail'
-    ]
-}
+    matcher: ['/', '/login', '/signup', '/verifyemail', '/volunteer/:path*'],
+};

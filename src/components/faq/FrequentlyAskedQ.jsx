@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import FAQItem from './FAQItem';
+import FadeInOnScroll from "@/components/FadeInOnScroll";
 
 const FrequentlyAskedQ = () => {
   const [showAll, setShowAll] = useState(false);
@@ -39,21 +40,23 @@ const FrequentlyAskedQ = () => {
   const displayedFaqs = showAll ? faqs : faqs.slice(0, 4);
 
   return (
-    <div id='faqs' className='wrapper'>
-        <div className="faq-header">
-            <h2>Frequently Asked Questions</h2>
-        </div>
-        <div className="faq-container">
-        {displayedFaqs.map((faq, index) => (
-          <FAQItem key={index} question={faq.question} answer={faq.answer} />
-        ))}
-        <div className="toggle-questions-btn">
-          <button onClick={() => setShowAll(!showAll)}>
-            {showAll ? 'Show Less Questions' : 'More Questions +'}
-          </button>
+    <FadeInOnScroll>
+      <div id='faqs' className='wrapper'>
+          <div className="faq-header">
+              <h2>Frequently Asked Questions</h2>
+          </div>
+          <div className="faq-container">
+          {displayedFaqs.map((faq, index) => (
+            <FAQItem key={index} question={faq.question} answer={faq.answer} />
+          ))}
+          <div className="toggle-questions-btn">
+            <button onClick={() => setShowAll(!showAll)}>
+              {showAll ? 'Show Less Questions' : 'More Questions +'}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </FadeInOnScroll>
   );
 };
 

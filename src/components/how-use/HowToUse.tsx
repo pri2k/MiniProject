@@ -1,7 +1,9 @@
 import FeatureItem from "./FeatureItem";
+import FadeInOnScroll from "@/components/FadeInOnScroll";
 
 export default function HowToUse() {
   return (
+    <FadeInOnScroll>
     <div className="howToUseContainer">
       <h2 className="faq-header">Little step to feeling whole again <span className="HowToUseLogo"></span>  </h2>
       <div className="howToUseFeatures">
@@ -27,5 +29,6 @@ Need a safe space to talk—without judgment, without fear?"
 
       </div>
     </div>
+    </FadeInOnScroll>
   );
 }

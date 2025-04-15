@@ -28,7 +28,7 @@ export async function POST(req) {
         });
 
         const emailContent = (receiverName, partnerName) => `
-<<<<<<< HEAD
+
         Hi ${receiverName},
 
         Your video call with ${partnerName} has been scheduled.
@@ -39,18 +39,6 @@ export async function POST(req) {
 
         Please be ready on time. Click the link above to join the call when it starts.
         `;
-=======
-Hi ${receiverName},
-
-Your video call with ${partnerName} has been scheduled.
-
-🕒 Time: ${new Date(time).toLocaleString()}
-⏱ Duration: ${duration} minutes
-🔗 Join Link: ${roomUrl}
-
-Please be ready on time. Click the link above to join the call when it starts.
-`;
->>>>>>> 9b6f8a2a75baa3932c6131fe4d724102c36346d8
 
         await transporter.sendMail({
             from: process.env.EMAIL_USER,
