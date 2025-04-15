@@ -11,6 +11,7 @@
   "type": "module",
   "dependencies": {
     "@100mslive/hms-video-react": "^0.7.4",
+    "@100mslive/react-sdk": "^0.10.33",
     "@100mslive/roomkit-react": "^0.3.33",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",

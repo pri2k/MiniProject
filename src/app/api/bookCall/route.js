@@ -61,7 +61,8 @@ export async function POST(req) {
                 userId,
                 volunteerId,
                 time: startTime,
-                duration
+                duration,
+                roomUrl
             })
         });
 
