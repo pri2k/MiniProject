@@ -4,14 +4,13 @@ import nodemailer from "nodemailer";
 import Call from "@/models/Call";
 import User from "@/models/User";
 import Volunteer from "@/models/Volunteer";
-import { createRoom } from "@/utils/createHMSRoom";  // 🔁 now using 100ms
 
 connect();
 
 export async function POST(req) {
     try {
         const r = await req.json();
-        const { userId, volunteerId, time, duration } = r;
+        const { userId, volunteerId, time, duration, roomUrl } = r;
 
         const user = await User.findById(userId);
         const volunteer = await Volunteer.findById(volunteerId);
@@ -19,18 +18,6 @@ export async function POST(req) {
         if (!user || !volunteer) {
             return NextResponse.json({ success: false, message: "User or volunteer not found" }, { status: 404 });
         }
-
-        // 🔁 Generate 100ms room URL
-        const roomUrl = await createRoom();
-        console.log("room url in register", roomUrl);
-
-        const newCall = await Call.create({
-            userId,
-            volunteerId,
-            time,
-            duration,
-            roomUrl,
-        });
 
         const transporter = nodemailer.createTransport({
             service: "gmail",
@@ -40,21 +27,33 @@ export async function POST(req) {
             },
         });
 
+        const emailContent = (receiverName, partnerName) => `
+Hi ${receiverName},
+
+Your video call with ${partnerName} has been scheduled.
+
+🕒 Time: ${new Date(time).toLocaleString()}
+⏱ Duration: ${duration} minutes
+🔗 Join Link: ${roomUrl}
+
+Please be ready on time. Click the link above to join the call when it starts.
+`;
+
         await transporter.sendMail({
             from: process.env.EMAIL_USER,
             to: user.email,
             subject: "Call Booked Successfully",
-            text: `Hi ${user.username}, your call has been booked with ${volunteer.name} at ${time} for ${duration} minutes. Join here: ${roomUrl}`,
+            text: emailContent(user.username, volunteer.name),
         });
 
         await transporter.sendMail({
             from: process.env.EMAIL_USER,
             to: volunteer.email,
             subject: "You Have a New Call Booking",
-            text: `Hi ${volunteer.name}, you have been booked by ${user.username} at ${time} for ${duration} minutes. Join here: ${roomUrl}`,
+            text: emailContent(volunteer.name, user.username),
         });
 
-        return NextResponse.json({ success: true, message: "Call registered and notifications sent", roomUrl });
+        return NextResponse.json({ success: true, message: "Call registered and notifications sent" });
     } catch (error) {
         console.error("Call registration error:", error);
         return NextResponse.json({ success: false, message: "Failed to register call" }, { status: 500 });
