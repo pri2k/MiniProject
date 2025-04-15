@@ -234,6 +234,11 @@ body {
   width: 25vmin;
 }
 
+.feature_img:hover{
+  scale: 1.05;
+  transition-duration: .2s;
+}
+
 
 /* FAQs */
 .wrapper {
