@@ -99,7 +99,7 @@
       ]
     },
 
-"Relationships": {
+"Relationship": {
     "multiplier": 1,
     "ranges": [
       { "min": 0, "max": 6, "label": "Unhealthy Relationship", "description": "The relationship may be struggling. It might be helpful to address the issues and consider open communication." },
