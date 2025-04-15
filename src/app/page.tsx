@@ -8,8 +8,8 @@ export default function Home() {
   return (
     <div className="">
       <LandingPage />
-      <HowToUse />
       <Questionnaire/>
+      <HowToUse />
       <VolunteerCall/>
       <FrequentlyAskedQ />
     </div>
