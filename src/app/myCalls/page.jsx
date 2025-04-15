@@ -43,6 +43,7 @@ export default function MyCallsPage() {
             const data = await res.json();
             roomUrl = data.url;
         }
+        console.log("roomUrl", roomUrl);
         window.open(roomUrl, '_blank', 'width=800,height=600');
     }
 
