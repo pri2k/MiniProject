@@ -107,7 +107,7 @@ export default function Page() {
     case "divideBy12":
         finalScore /= 12;
         break;
-        case "divideBy15":
+    case "divideBy15":
         finalScore /= 15;
         break;
     }
