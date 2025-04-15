@@ -21,7 +21,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
 
 // Connect to MongoDB
-const client = new MongoClient(process.env.MONGO_CHATBOT_URI!);
+const client = new MongoClient(process.env.MONGO_URI!);
 const db = client.db('test');
 const collection = db.collection<Section>('sections'); // typed collection
 
@@ -90,7 +90,8 @@ export async function POST(req: Request) {
     // Create the prompt to send to Gemini
     const prompt = `
     You are a compassionate mental health first-aid assistant for Indian users.
-    Reply in a warm, empathetic, and calming tone using simple Hinglish.
+    Reply in a warm, empathetic, and calming tone using simple language that the user converses in. 
+    Try to use latin letters only while conversing. Don't use Devanagri script.
     Keep your replies short (2-4 sentences max) and to the point.
     Avoid deep psychological advice. Just acknowledge the user's feelings and offer a small helpful tip or reassurance.
     

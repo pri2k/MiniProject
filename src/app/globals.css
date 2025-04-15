@@ -232,11 +232,11 @@ body {
   border-radius: 10%;
   height: 25vmin;
   width: 25vmin;
+  transition: transform 0.9s ease-in-out; 
 }
 
-.feature_img:hover{
-  scale: 1.05;
-  transition-duration: .2s;
+.feature_img:hover {
+  transform: scale(1.05); 
 }
 
 
