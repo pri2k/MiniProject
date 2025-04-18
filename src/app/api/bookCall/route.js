@@ -1,7 +1,7 @@
 import { connect } from "@/dbConfig/dbConfig";
 import Call from "@/models/Call";
 import { NextResponse } from "next/server";
-import { createRoom } from "@/utils/createHMSRoom";  // 🔁 now using 100ms
+import { createRoom } from "@/utils/createHMSRoom";
 
 export async function POST(req) {
     try {
@@ -9,23 +9,12 @@ export async function POST(req) {
 
         const r = await req.json();
         const { userId, volunteerId, time, duration } = r;
+        console.log("Request data:", r);
 
         const startTime = new Date(time);
         const endTime = new Date(startTime.getTime() + duration * 60000);
 
-        // Create a fixed 100ms room URL
-        const roomUrl = await createRoom();
-
-        console.log("roomUrl", roomUrl);
-
-        if (!roomUrl) {
-            return NextResponse.json({
-                success: false,
-                message: "Failed to create room URL"
-            }, { status: 500 });
-        }
-
-        // Check for overlapping calls
+        // Check if the volunteer is already booked during the desired time
         const overlappingCall = await Call.findOne({
             volunteerId,
             time: { $lt: endTime },
@@ -41,8 +30,18 @@ export async function POST(req) {
         if (overlappingCall) {
             return NextResponse.json({
                 success: false,
-                message: "Volunteer is already booked at this time. Please choose another time or volunteer."
+                message: "Volunteer is already booked at this time. Please choose another time."
             }, { status: 409 });
+        }
+
+        // ✅ Only now create the room
+        const roomUrl = await createRoom();
+
+        if (!roomUrl) {
+            return NextResponse.json({
+                success: false,
+                message: "Failed to create room URL"
+            }, { status: 500 });
         }
 
         const newCall = await Call.create({
@@ -53,7 +52,7 @@ export async function POST(req) {
             roomUrl
         });
 
-        // Optional: trigger a call notification or side-effect
+        // 🔁 Trigger mail/send notifications
         await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/registerCall`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },

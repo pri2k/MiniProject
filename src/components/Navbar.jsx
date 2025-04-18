@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import MenuIcon from "@mui/icons-material/Menu";
+import { Menu } from 'lucide-react';
 import { useContext } from "react";
 import { UserContext } from "@/context/UserContext";
 
@@ -11,6 +11,7 @@ export default function Navbar() {
   const { user, setUser } = useContext(UserContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
+  
 
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
@@ -67,13 +68,15 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+
+  
   return (
     <nav className="navbar">
       <div className="navbar_div">
         <img src="/images/logo_black.png" className="logo_navbar" alt="logo" />
 
         <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
-          <MenuIcon />
+          <Menu />
         </div>
 
         <div className={`navbar_options ${menuOpen ? "open" : ""}`}>
@@ -87,7 +90,7 @@ export default function Navbar() {
         {user ? (
             <div className="relative" ref={dropdownRef}>
               <img
-                src={user.image || "/default.jpg"}
+                src={user.image || "/images/default.jpg"}
                 alt="Profile"
                 className="w-10 h-10 rounded-full cursor-pointer"
                 onClick={() => setDropdownOpen(!dropdownOpen)}

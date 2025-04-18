@@ -5,13 +5,13 @@ export default function GenderDropdown({ volunteer, setVolunteer }) {
     const genders = ["male", "female", "other"];
 
     return (
-        <div className="w-full relative mb-4">
+        <div className="relative mb-4">
             <label className="block font-semibold mb-1">Gender</label>
             <div
                 className="w-full p-2 border border-gray-300 rounded-lg cursor-pointer"
                 onClick={() => setOpen(!open)}
             >
-                {volunteer.gender || "Select gender"}
+                {volunteer?.gender || "Select gender"}
             </div>
             {open && (
                 <ul className="absolute z-10 bg-white border border-gray-300 rounded-lg w-full shadow-md mt-1">

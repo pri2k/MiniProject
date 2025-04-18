@@ -1,4 +1,5 @@
 import { Schema, models, model } from "mongoose";
+import Volunteer from "@/models/Volunteer"; // Assuming Volunteer model is in the same directory
 
 const userSchema = new Schema({
     username: { 
@@ -18,6 +19,17 @@ const userSchema = new Schema({
         type: String  
     },
 }, { timestamps: true });
+
+// Delete the associated volunteer when a user is deleted
+userSchema.pre("findOneAndDelete", async function (next) {
+    const user = await this.model.findOne(this.getFilter());
+    if (user) {
+        const Volunteer = (await import("./Volunteer.js")).default;
+        await Volunteer.findOneAndDelete({ userId: user._id });
+        // The volunteer hook will take care of deleting related Calls
+    }
+    next();
+});
 
 const User = models.User || model("User", userSchema);
 export default User;

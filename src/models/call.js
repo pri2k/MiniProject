@@ -28,10 +28,13 @@ const callSchema = new Schema({
         type: String,
         required: false,
     },
+    reason: {
+        type: String,
+        required: false,
+    }
 }, { timestamps: true });
+
+callSchema.index({ volunteerId: 1, time: 1 });
 
 const Call = models.Call || model("Call", callSchema);
 export default Call;
-
-
-// add the reason for which the call is booked

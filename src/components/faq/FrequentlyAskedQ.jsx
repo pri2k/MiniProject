@@ -49,7 +49,7 @@ const FrequentlyAskedQ = () => {
           {displayedFaqs.map((faq, index) => (
             <FAQItem key={index} question={faq.question} answer={faq.answer} />
           ))}
-          <div className="toggle-questions-btn">
+          <div className="toggle-questions-btn mb-20">
             <button onClick={() => setShowAll(!showAll)}>
               {showAll ? 'Show Less Questions' : 'More Questions +'}
             </button>

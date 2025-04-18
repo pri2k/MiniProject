@@ -6,10 +6,12 @@ import Card from '@/components/Card'
 import problemCategories from '../../../data/groups'
 import { useContext } from 'react'
 import { UserContext } from '@/context/UserContext'
+import PopupModal from '@/components/PopupModal'  // Assuming the PopupModal component is in this path
+import SubmitButton from '@/components/SubmitButton' // Assuming the SubmitButton component is in this path
 // MUI Time Picker Imports
 import { LocalizationProvider, TimePicker } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 export default function VolunteersPage() {
     const { slug } = useParams()
@@ -18,6 +20,10 @@ export default function VolunteersPage() {
     const [date, setDate] = useState('')
     const [time, setTime] = useState(null)
     const [duration, setDuration] = useState('30')
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [modalMessage, setModalMessage] = useState('')
+    const [modalSuccess, setModalSuccess] = useState(false)
+    const [loading, setLoading] = useState(false)  // Loading state for booking call
 
     const matchedCategory = problemCategories.find(cat => cat.slug === slug)
     const problemTitle = matchedCategory?.title || slug.replace(/-/g, ' ')
@@ -26,44 +32,69 @@ export default function VolunteersPage() {
 
     useEffect(() => {
         async function fetchVolunteers() {
-            const res = await fetch(`/api/volunteer/${slug}`)
-            const data = await res.json()
+            const url = user 
+                ? `/api/volunteer/${slug}?userId=${user?.id}` 
+                : `/api/volunteer/${slug}`;
+            
+            const res = await fetch(url);
+            const data = await res.json();
+    
             if (data.success) {
-                setVolunteers(data.volunteers)
+                setVolunteers(data.volunteers);
             }
         }
-        fetchVolunteers()
-    }, [slug])
-
-    async function handleBookCall() {
-        if (!date || !time) return alert('Please select both date and time.')
-        if (!user) return alert('Please log in to book a call.')
     
+        fetchVolunteers();
+    }, [slug, user]);
+    
+    async function handleBookCall() {
+        if (!date || !time) {
+            setModalMessage('Please select both date and time.')
+            setModalSuccess(false)
+            setIsModalOpen(true)
+            return
+        }
+
+        if (!user) {
+            setModalMessage('Please log in to book a call.')
+            setModalSuccess(false)
+            setIsModalOpen(true)
+            return
+        }
+    
+        setLoading(true);  // Start loading when user clicks the button
+
         const selectedDateTime = new Date(`${date}T${time.format('HH:mm')}`)
     
         const res = await fetch('/api/bookCall', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                userId: user.id,
-                volunteerId: selectedVolunteer._id,
+                userId: user?.id,
+                volunteerId: selectedVolunteer?.userId?._id, // ✅ actual user ID of volunteer
                 time: selectedDateTime,
                 duration: parseInt(duration),
             }),
         })
     
-        const data = await res.json()
-        if (data.success) {
-            alert('Booking successful!')
+        const data = await res.json();
+        setLoading(false);  // End loading when the response is received
+        
+        if (res.ok && data.success) {
+            setModalMessage('Booking successful!')
+            setModalSuccess(true)
+            setIsModalOpen(true)
             setSelectedVolunteer(null)
             setDate('')
             setTime(null)
             setDuration('30')
         } else {
-            alert('Booking failed: ' + data.message)
+            setModalMessage('Booking failed: ' + data.message)
+            setModalSuccess(false) // 🛠️ ensure it's false!
+            setIsModalOpen(true)
         }
+        
     }
-    
 
     return (
         <div className="max-w-4xl mx-auto px-4 py-6 mt-[10em] text-center">
@@ -76,16 +107,16 @@ export default function VolunteersPage() {
                 <div className="grid gap-5 sm:grid-cols-2">
                     {volunteers.map((v) => (
                         <Card key={v._id} onClick={() => setSelectedVolunteer(v)} className="cursor-pointer">
-                            <div className="p-4 flex gap-4 items-start">
+                            <div className="p-4 flex flex-col items-center gap-4">
                                 <img
-                                    src={v.image}
-                                    alt={v.name}
-                                    width={80}
-                                    height={80}
+                                    src={v.userId?.image}
+                                    alt={v.userId?.username}
+                                    width={100}
+                                    height={100}
                                     className="rounded-full object-cover"
                                 />
                                 <div>
-                                    <h2 className="text-xl font-semibold">{v.name}</h2>
+                                    <h2 className="text-xl font-semibold">{v.userId?.username}</h2>
                                     <p className="text-sm text-gray-600 mb-2">{v.description}</p>
                                     <p className="text-sm text-gray-500">
                                         <strong>Age:</strong> {v.age} | <strong>Chats:</strong> {v.chatCnt}
@@ -104,13 +135,13 @@ export default function VolunteersPage() {
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 mt-[8%]">
                     <div className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-md">
                         <h2 className="text-xl font-bold mb-4 text-center">
-                            Book Call with {selectedVolunteer.name}
+                            Book Call with {selectedVolunteer.userId?.username}
                         </h2>
 
                         <div className="mb-4 text-center">
                             <img
-                                src={selectedVolunteer.image}
-                                alt={selectedVolunteer.name}
+                                src={selectedVolunteer.userId?.image}
+                                alt={selectedVolunteer.userId?.username}
                                 className="w-32 h-32 rounded-full object-cover mx-auto"
                             />
                         </div>
@@ -142,7 +173,6 @@ export default function VolunteersPage() {
                             </LocalizationProvider>
                         </label>
 
-
                         <label className="block mb-4 text-left">
                             Duration (minutes):
                             <select
@@ -156,13 +186,13 @@ export default function VolunteersPage() {
                             </select>
                         </label>
 
-                        <div className="flex justify-between mt-4">
-                            <button
-                                className="bg-[#D7A529] text-white px-4 py-2 rounded hover:text-black"
+                        <div className="justify-between mt-4">
+                            <SubmitButton
                                 onClick={handleBookCall}
+                                loading={loading}  // Pass loading state to SubmitButton
                             >
                                 Confirm Booking
-                            </button>
+                            </SubmitButton>
                             <button
                                 className="text-gray-500 hover:text-black"
                                 onClick={() => setSelectedVolunteer(null)}
@@ -172,6 +202,15 @@ export default function VolunteersPage() {
                         </div>
                     </div>
                 </div>
+            )}
+
+            {/* Popup Modal for displaying success/error messages */}
+            {isModalOpen && (
+                <PopupModal
+                    message={modalMessage}
+                    type={modalSuccess ? "success" : "error"} // ✅ Correct prop
+                    onClose={() => setIsModalOpen(false)}
+                />
             )}
         </div>
     )

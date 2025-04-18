@@ -1,48 +1,77 @@
 "use client";
 import { useState } from "react";
 import axios from "axios";
+import SubmitButton from "@/components/SubmitButton";
+import PopupModal from "@/components/PopupModal"; // Adjust path if needed
 
 export default function EmailVerification({ email, setEmail, onVerified }) {
     const [codeSent, setCodeSent] = useState(false);
     const [emailVerified, setEmailVerified] = useState(false);
     const [verificationCode, setVerificationCode] = useState("");
+    const [sending, setSending] = useState(false);
+    const [verifying, setVerifying] = useState(false);
+    const [popup, setPopup] = useState({ show: false, message: "", type: "success" });
+
+    const showPopup = (message, type = "success") => {
+        setPopup({ show: true, message, type });
+    };
+
+    const closePopup = () => {
+        setPopup({ show: false, message: "", type: "success" });
+    };
 
     const sendVerification = async () => {
         if (!email) {
-            alert("Please enter an email first");
+            showPopup("Please enter an email first", "error");
             return;
         }
+
         try {
+            setSending(true);
             await axios.post("/api/verifyEmail/sendCode", { email });
             setCodeSent(true);
-            alert("Verification code sent!");
+            showPopup("Verification code sent!", "success");
         } catch (err) {
             console.error(err);
-            alert("Failed to send code");
+            showPopup("Failed to send code", "error");
+        } finally {
+            setSending(false);
         }
     };
 
     const validateCode = async () => {
         try {
+            setVerifying(true);
             const res = await axios.post("/api/verifyEmail/validateCode", {
                 email,
                 code: verificationCode,
             });
+
             if (res.data.verified) {
                 setEmailVerified(true);
                 onVerified(true);
-                alert("Email verified!");
+                showPopup("Email verified!", "success");
             } else {
-                alert("Invalid code");
+                showPopup("Invalid code", "error");
             }
         } catch (err) {
             console.error(err);
-            alert("Verification failed");
+            showPopup("Verification failed", "error");
+        } finally {
+            setVerifying(false);
         }
     };
 
     return (
         <>
+            {popup.show && (
+                <PopupModal
+                    message={popup.message}
+                    type={popup.type}
+                    onClose={closePopup}
+                />
+            )}
+
             <div className="w-full">
                 <label htmlFor="email" className="block font-semibold mb-1">Email</label>
                 <input
@@ -51,17 +80,13 @@ export default function EmailVerification({ email, setEmail, onVerified }) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter email"
-                    className="w-full p-2 border border-gray-300 rounded-lg mb-2 focus:outline-none focus:border-gray-600"
+                    className="w-full p-2 border border-gray-300 rounded-lg mb-2 focus:outline-none focus:border-gray-600 text-black"
                 />
             </div>
 
-            <button
-                type="button"
-                onClick={sendVerification}
-                className="p-2 bg-blue-500 text-white rounded mb-2"
-            >
+            <SubmitButton loading={sending} onClick={sendVerification} disabled={emailVerified || !email}>
                 Send Verification Code
-            </button>
+            </SubmitButton>
 
             {codeSent && !emailVerified && (
                 <div className="mb-4">
@@ -70,15 +95,12 @@ export default function EmailVerification({ email, setEmail, onVerified }) {
                         placeholder="Enter verification code"
                         value={verificationCode}
                         onChange={(e) => setVerificationCode(e.target.value)}
-                        className="w-full p-2 border border-gray-300 rounded-lg mb-2"
+                        className="w-full p-2 border border-gray-300 rounded-lg mb-2 text-black"
                     />
-                    <button
-                        type="button"
-                        onClick={validateCode}
-                        className="p-2 bg-green-500 text-white rounded"
-                    >
+
+                    <SubmitButton loading={verifying} onClick={validateCode} disabled={!verificationCode}>
                         Verify Code
-                    </button>
+                    </SubmitButton>
                 </div>
             )}
         </>

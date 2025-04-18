@@ -7,7 +7,6 @@ export default function ProblemsPage() {
     const router = useRouter()
 
     const handleClick = (slug) => {
-        console.log("slug", slug);
         router.push(`/problems/${slug}`)
     }
 

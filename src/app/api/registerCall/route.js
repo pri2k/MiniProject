@@ -13,7 +13,7 @@ export async function POST(req) {
         const { userId, volunteerId, time, duration, roomUrl } = r;
 
         const user = await User.findById(userId);
-        const volunteer = await Volunteer.findById(volunteerId);
+        const volunteer = await Volunteer.findById(volunteerId).populate('userId'); // Populate userId in Volunteer model
 
         if (!user || !volunteer) {
             return NextResponse.json({ success: false, message: "User or volunteer not found" }, { status: 404 });
@@ -28,30 +28,35 @@ export async function POST(req) {
         });
 
         const emailContent = (receiverName, partnerName) => `
-
         Hi ${receiverName},
-
+        
         Your video call with ${partnerName} has been scheduled.
-
+        
         🕒 Time: ${new Date(time).toLocaleString()}
         ⏱ Duration: ${duration} minutes
         🔗 Join Link: ${roomUrl}
-
+        
         Please be ready on time. Click the link above to join the call when it starts.
         `;
 
+        // Log the email details before sending the emails
+        console.log("Sending email to the user:", user.email);
+        console.log("Sending email to the volunteer:", volunteer.userId.email); // Access email from the populated userId
+
+        // Send email to the user
         await transporter.sendMail({
             from: process.env.EMAIL_USER,
             to: user.email,
             subject: "Call Booked Successfully",
-            text: emailContent(user.username, volunteer.name),
+            text: emailContent(user.username, volunteer.userId.username),
         });
 
+        // Send email to the volunteer (using the email from the populated userId)
         await transporter.sendMail({
             from: process.env.EMAIL_USER,
-            to: volunteer.email,
+            to: volunteer.userId.email, // Use the volunteer's email from the populated userId
             subject: "You Have a New Call Booking",
-            text: emailContent(volunteer.name, user.username),
+            text: emailContent(volunteer.userId.username, user.username),
         });
 
         return NextResponse.json({ success: true, message: "Call registered and notifications sent" });

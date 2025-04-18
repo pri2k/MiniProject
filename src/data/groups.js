@@ -4,7 +4,7 @@ const problemCategories = [
       description: "Connect with people who have faced financial difficulties, debt management, or job loss and learn from their experiences.",
       link: "/problems/financial-issues",
       slug: "financial-issues",
-      image: "https://i.pinimg.com/736x/fc/68/00/fc68009c7e9eb34ff3e5251c88b3df0e.jpg"
+      image: "https://i.pinimg.com/736x/81/25/ed/8125edc00276db3e58e46304691a67a2.jpg"
     },
     {
       title: "Family & Friends",
