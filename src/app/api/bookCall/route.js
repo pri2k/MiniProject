@@ -1,5 +1,5 @@
 import { connect } from "@/dbConfig/dbConfig";
-import Call from "@/models/Call";
+import Call from "@/models/call"
 import { NextResponse } from "next/server";
 import { createRoom } from "@/utils/createHMSRoom";
 
@@ -9,7 +9,7 @@ export async function POST(req) {
 
         const r = await req.json();
         const { userId, volunteerId, time, duration } = r;
-        console.log("Request data:", r);
+        // console.log("Request data:", r);
 
         const startTime = new Date(time);
         const endTime = new Date(startTime.getTime() + duration * 60000);

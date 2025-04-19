@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import QuestionCard from "@/components/QuestionCard";
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
@@ -17,27 +17,25 @@ export default function Page() {
     const [answers, setAnswers] = useState<number[]>([]);
     const [showResult, setShowResult] = useState(false);
 
-
-    const questions = selectedTopic
-        ? questionData[selectedTopic as keyof typeof questionData]
-        : [];
+    const questions = useMemo(() => {
+        return selectedTopic ? questionData[selectedTopic as keyof typeof questionData] : [];
+    }, [selectedTopic]);
 
     useEffect(() => {
         if (questions.length > 0 && currentQuestion >= questions.length) {
-        const timer = setTimeout(() => {
-            setShowResult(true);
-        }, 2000);
-        return () => clearTimeout(timer);
+            const timer = setTimeout(() => {
+                setShowResult(true);
+            }, 2000);
+            return () => clearTimeout(timer);
         }
     }, [currentQuestion, questions]);
 
     const handleOptionClick = (point: number) => {
         setAnswers([...answers, point]);
         setTimeout(() => {
-        setCurrentQuestion((prev) => prev + 1);
+            setCurrentQuestion((prev) => prev + 1);
         }, 300);
     };
-
 
     if (!selectedTopic) {
         return (
@@ -145,7 +143,7 @@ export default function Page() {
         </>
         ) : (
         <p className="text-base text-gray-500 mb-6">
-            We couldn't determine your result.
+            We couldn&rsquo;t determine your result.
         </p>
         )}
 
@@ -188,11 +186,6 @@ export default function Page() {
         
         );
     }
-
-    const current = questions[currentQuestion];
-
-    const totalQuestions = questions.length;
-    const progress = ((currentQuestion + 1) / totalQuestions) * 100;
 
     return (
         <div className="h-screen flex flex-col items-center justify-center bg-gray-100 backdrop-blur-md px-4 text-center"> 

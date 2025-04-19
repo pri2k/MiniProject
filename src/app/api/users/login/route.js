@@ -1,12 +1,12 @@
 import { connect } from "@/dbConfig/dbConfig";
 import User from "@/models/User";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 connect();
 
-export async function POST(req: NextRequest) {
+export async function POST(req) {
     try {
       const reqBody = await req.json();
       const { email, password } = reqBody;
@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
   
       const token = jwt.sign(
         { id: user._id, email: user.email },
-        process.env.TOKEN_SECRET!,
+        process.env.TOKEN_SECRET,
         { expiresIn: "1d" }
       );
   
@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
       });
   
       return response;
-    } catch (error: any) {
+    } catch (error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
   }

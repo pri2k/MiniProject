@@ -52,6 +52,7 @@ export default function TalkToChatbot() {
         scrollToBottom();
       }, estimatedTime);
     } catch (error) {
+      console.error('Chatbot error:', error);
       setMessages((prev) => [
         ...prev,
         { sender: 'bot', text: 'Oops! Something went wrong 🥺' },

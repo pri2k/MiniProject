@@ -1,5 +1,6 @@
 import Link from "next/link";
 import problemCategories from "@/data/groups";
+import Image from "next/image";
 
 export default function TalkToVolunteer() {
     return (
@@ -13,11 +14,19 @@ export default function TalkToVolunteer() {
                 className="p-2 border rounded-lg bg-[#D7A529] transition-all duration-300 hover:-translate-y-2"
               >
                 <div className="bg-white">
-                    <img 
+                    {/* <img 
                       src={problem.image} 
                       alt={problem.title} 
                       className="w-full h-40 object-cover rounded-md p-2"
+                    /> */}
+                    <Image 
+                      src={problem.image}
+                      alt={problem.title}
+                      width={500}
+                      height={160}
+                      className="w-full h-40 object-cover rounded-md p-2"
                     />
+
                     <h3 className="text-xl font-bold p-2">{problem.title}</h3>
                     <p className="text-gray-600 p-2">{problem.description}</p>
                 </div>

@@ -24,6 +24,7 @@ export default function VolunteersPage() {
     const [modalMessage, setModalMessage] = useState('')
     const [modalSuccess, setModalSuccess] = useState(false)
     const [loading, setLoading] = useState(false)  // Loading state for booking call
+    const [volunteersLoading, setVolunteersLoading] = useState(true) // Loading state for volunteers
 
     const matchedCategory = problemCategories.find(cat => cat.slug === slug)
     const problemTitle = matchedCategory?.title || slug.replace(/-/g, ' ')
@@ -36,17 +37,19 @@ export default function VolunteersPage() {
                 ? `/api/volunteer/${slug}?userId=${user?.id}` 
                 : `/api/volunteer/${slug}`;
             
+            setVolunteersLoading(true); // Start loading before fetching
             const res = await fetch(url);
             const data = await res.json();
     
             if (data.success) {
                 setVolunteers(data.volunteers);
             }
+            setVolunteersLoading(false); // End loading after fetching
         }
     
         fetchVolunteers();
     }, [slug, user]);
-    
+
     async function handleBookCall() {
         if (!date || !time) {
             setModalMessage('Please select both date and time.')
@@ -93,7 +96,6 @@ export default function VolunteersPage() {
             setModalSuccess(false) // 🛠️ ensure it's false!
             setIsModalOpen(true)
         }
-        
     }
 
     return (
@@ -101,7 +103,11 @@ export default function VolunteersPage() {
             <h1 className="text-2xl font-bold mb-6 capitalize">
                 Volunteers for: {problemTitle}
             </h1>
-            {volunteers.length === 0 ? (
+            
+            {/* Show loading message if volunteers are still being fetched */}
+            {volunteersLoading ? (
+                <p>Loading volunteers...</p>
+            ) : volunteers.length === 0 ? (
                 <p>No volunteers found for this issue.</p>
             ) : (
                 <div className="grid gap-5 sm:grid-cols-2">

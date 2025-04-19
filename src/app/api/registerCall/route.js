@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
 import { connect } from "@/dbConfig/dbConfig";
 import nodemailer from "nodemailer";
-import Call from "@/models/Call";
 import User from "@/models/User";
-import Volunteer from "@/models/Volunteer";
+import Volunteer from "@/models/volunteer";
 
 connect();
 

@@ -1,11 +1,11 @@
 import { getDataFromToken } from "@/helpers/getDataFromToken";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { connect } from "@/dbConfig/dbConfig";
 import User from "@/models/User";
 
 connect();
 
-export async function GET(request: NextRequest) {
+export async function GET(request) {
     try {
       const userId = await getDataFromToken(request);
       const user = await User.findById(userId).select("-password");
@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
           image: user.image || "",
         },
       });
-    } catch (error: any) {
+    } catch (error) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
 }

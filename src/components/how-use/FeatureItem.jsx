@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function FeatureItem({ icon, alt, title, description }: any) {
+export default function FeatureItem({ icon, alt, title, description }) {
     return (
       <div className="featureItemBlock">
         <div className="feature_img">

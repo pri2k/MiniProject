@@ -29,7 +29,7 @@ const volunteerSchema = new Schema({
 volunteerSchema.pre("findOneAndDelete", async function (next) {
     const volunteer = await this.model.findOne(this.getFilter());
     if (volunteer) {
-        const Call = (await import("./Call.js")).default;
+        const Call = (await import("./call.js")).default;
         await Call.deleteMany({ volunteerId: volunteer._id });
     }
     next();

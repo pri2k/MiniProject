@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import Volunteer from "@/models/Volunteer";
+import Volunteer from "@/models/volunteer";
 import { connect } from "@/dbConfig/dbConfig";
 import { apiErrorResponse } from "@/lib/apiErrorResponse";
 
