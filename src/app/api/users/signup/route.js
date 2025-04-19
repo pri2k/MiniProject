@@ -1,5 +1,5 @@
-import { connect } from "@/dbConfig/dbConfig";
-import User from "@/models/User";
+import { connect } from "../../../../dbConfig/dbConfig";
+import User from "../../../../models/User";
 import { NextResponse } from "next/server";
 import bcryptjs from 'bcryptjs';
 import { apiErrorResponse } from "@/lib/apiErrorResponse";

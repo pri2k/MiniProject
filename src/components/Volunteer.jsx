@@ -1,4 +1,4 @@
-import Card from "@/components/Card";
+import Card from "../components/Card";
 
 export default function VolunteerList({ volunteers }) {
     if (volunteers.length === 0) {

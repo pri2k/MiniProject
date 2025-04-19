@@ -2,10 +2,10 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import ProblemSelect from "@/components/ProblemSelect";
-import { UserContext } from '@/context/UserContext';
-import PopupModal from "@/components/PopupModal";
-import SubmitButton from "@/components/SubmitButton"; // Make sure path is correct
+import ProblemSelect from "../../components/ProblemSelect";
+import { UserContext } from '../../context/UserContext';
+import PopupModal from "../../components/PopupModal";
+import SubmitButton from "../../components/SubmitButton"; // Make sure path is correct
 
 export default function VolunteerRegisterPage() {
     const { user } = useContext(UserContext);
@@ -62,8 +62,8 @@ export default function VolunteerRegisterPage() {
     };
 
     return (
-        <div className="w-full max-w-5xl mx-auto flex flex-col items-center justify-center mt-[12em]">
-            <div className="flex flex-col items-center justify-center w-[70%] max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
+        <div className="w-full max-w-5xl mx-auto flex flex-col items-center justify-center mttwelve">
+            <div className="flex flex-col items-center justify-center widthSeventy max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
                 <h1 className="text-3xl font-bold text-center mb-6">Volunteer Registration</h1>
                 <hr className="w-full border-gray-300 mb-4" />
 

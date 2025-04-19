@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import Volunteer from "@/models/volunteer";
-import { connect } from "@/dbConfig/dbConfig";
-import { apiErrorResponse } from "@/lib/apiErrorResponse";
+import Volunteer from "../../../../models/volunteer";
+import { connect } from "../../../../dbConfig/dbConfig";
+import { apiErrorResponse } from "../../../../lib/apiErrorResponse";
 
 connect();
 

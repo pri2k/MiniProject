@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { Menu } from 'lucide-react';
 import { useContext } from "react";
-import { UserContext } from "@/context/UserContext";
+import { UserContext } from "../context/UserContext";
 
 export default function Navbar() {
   const { user, setUser } = useContext(UserContext);

@@ -48,7 +48,7 @@ export default function ProblemSelect({ volunteer, setVolunteer }) {
                 {volunteer.problem.length > 0 ? (
                     <div className="flex flex-wrap gap-2">
                         {volunteer.problem.map((item) => (
-                            <div key={item} className="flex items-center bg-[#daac3a] px-3 py-1 rounded-full text-sm">
+                            <div key={item} className="flex items-center bgDiff px-3 py-1 rounded-full text-sm">
                                 {item}
                                 <button 
                                     className="ml-2 text-red-800"

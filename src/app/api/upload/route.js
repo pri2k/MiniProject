@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import cloudinary from "@/utils/cloudinary";
+import cloudinary from "../../../utils/cloudinary";
 
 export async function POST(req) {
     try {

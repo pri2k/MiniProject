@@ -1,5 +1,5 @@
 import FeatureItem from "./FeatureItem";
-import FadeInOnScroll from "@/components/FadeInOnScroll";
+import FadeInOnScroll from "../../components/FadeInOnScroll";
 
 export default function HowToUse() {
   return (

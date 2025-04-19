@@ -1,5 +1,5 @@
 import Link from "next/link";
-import problemCategories from "@/data/groups";
+import problemCategories from "../../data/groups";
 import Image from "next/image";
 
 export default function TalkToVolunteer() {
@@ -11,7 +11,7 @@ export default function TalkToVolunteer() {
               <Link 
                 key={problem.slug} 
                 href={problem.link} 
-                className="p-2 border rounded-lg bg-[#D7A529] transition-all duration-300 hover:-translate-y-2"
+                className="p-2 border rounded-lg bgMain transition-all duration-300 hover:-translate-y-2"
               >
                 <div className="bg-white">
                     {/* <img 

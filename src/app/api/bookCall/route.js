@@ -1,7 +1,7 @@
-import { connect } from "@/dbConfig/dbConfig";
-import Call from "@/models/call"
+import { connect } from "../../../dbConfig/dbConfig";
+import Call from "../../../models/call";
 import { NextResponse } from "next/server";
-import { createRoom } from "@/utils/createHMSRoom";
+import { createRoom } from "../../../utils/createHMSRoom";
 
 export async function POST(req) {
     try {

@@ -1,7 +1,7 @@
 'use client'
 import { useRouter } from 'next/navigation'
-import problemCategories from '@/data/groups'
-import Card from '@/components/Card'
+import problemCategories from '../../data/groups'
+import Card from '../../components/Card'
 
 export default function ProblemsPage() {
     const router = useRouter()

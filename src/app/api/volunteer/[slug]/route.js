@@ -1,8 +1,8 @@
-import { connect } from "@/dbConfig/dbConfig";
-import Volunteer from "@/models/volunteer";
+import { connect } from "../../../../dbConfig/dbConfig";
+import Volunteer from "../../../../models/volunteer";
 import { NextResponse } from "next/server";
 import problemCategories from "../../../../data/groups";
-import "@/models/User"
+import "../../../../models/User"
 
 export const dynamic = "force-dynamic";
 

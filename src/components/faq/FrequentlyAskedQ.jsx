@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import FAQItem from './FAQItem';
-import FadeInOnScroll from "@/components/FadeInOnScroll";
+import FadeInOnScroll from "../../components/FadeInOnScroll";
 
 const FrequentlyAskedQ = () => {
   const [showAll, setShowAll] = useState(false);

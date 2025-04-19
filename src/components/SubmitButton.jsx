@@ -5,7 +5,7 @@ export default function SubmitButton({ loading, onClick, disabled, children }) {
         <button
             onClick={onClick}
             disabled={disabled || loading}
-            className={`w-full p-2 border rounded-lg mb-4 text-black font-bold bg-[#D7A529] 
+            className={`w-full p-2 border rounded-lg mb-4 text-black font-bold bgMain 
                 ${disabled || loading ? "cursor-not-allowed" : "hover:-translate-y-2"} 
                 transition-all duration-300`}
         >

@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import axios from "axios";
-import SubmitButton from "@/components/SubmitButton";
-import PopupModal from "@/components/PopupModal"; // Adjust path if needed
+import SubmitButton from "../components/SubmitButton";
+import PopupModal from "../components/PopupModal"; // Adjust path if needed
 
 export default function EmailVerification({ email, setEmail, onVerified }) {
     const [codeSent, setCodeSent] = useState(false);

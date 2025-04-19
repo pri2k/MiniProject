@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState, useContext } from 'react';
-import { UserContext } from '@/context/UserContext';
-import Card from '@/components/Card';
+import { UserContext } from '../../context/UserContext';
+import Card from '../../components/Card';
 
 export default function MyCallsPage() {
     const { user } = useContext(UserContext);
@@ -75,7 +75,7 @@ export default function MyCallsPage() {
     }
 
     return (
-        <div className="mt-[10em] px-4">
+        <div className="marginCall px-4">
             <h1 className="text-2xl font-bold mb-6">Your Scheduled Calls</h1>
 
             {loading ? (

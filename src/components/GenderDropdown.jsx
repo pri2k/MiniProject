@@ -22,7 +22,7 @@ export default function GenderDropdown({ volunteer, setVolunteer }) {
                                 setVolunteer({ ...volunteer, gender });
                                 setOpen(false);
                             }}
-                            className="p-2 hover:bg-[#D7A529] hover:text-white cursor-pointer rounded"
+                            className="p-2 hover:bgMain hover:text-white cursor-pointer rounded"
                         >
                             {gender.charAt(0).toUpperCase() + gender.slice(1)}
                         </li>

@@ -384,4 +384,67 @@ body {
   margin-top: 16px;
 }
 
-
+.crossword {
+  padding-top: 11em;
+}
+.widthLogin {
+  width: 24em;
+}
+.marginCall {
+  margin-top: 10em;
+}
+.marginSlug {
+  margin-top: 8%;
+}
+.roundedTwenty {
+  border-radius: 20px;
+}
+.roundedEighteen {
+  border-radius: 18px;
+}
+.marginy {
+  margin-top: 10em;
+  margin-bottom: 10em;
+}
+.bgfffbea {
+  background-color: #fffbea;
+}
+.ptop {
+  padding-top: 155px;
+}
+.maxw {
+  max-width: 42%;
+}
+.maxwo {
+  max-width: 900px;
+}
+.bgMain {
+  background-color: #D7A529;
+}
+.mttwelve {
+  margin-top: 12em;
+}
+.widthSeventy {
+  width: 70%;
+}
+.bgDiff {
+  background-color: #daac3a;
+}
+.maxh {
+  max-height: 60vh;
+}
+.wfifty {
+  width: 50%;
+}
+.borderC {
+  border-color: #D7A529;
+}
+.maxWidth {
+  max-width: 350px;
+}
+.topSeventy {
+  top: 70px;
+}
+.topMinus {
+  top: -50px;
+}

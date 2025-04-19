@@ -1,6 +1,6 @@
 import Link from "next/link";
-import FadeInOnScroll from "@/components/FadeInOnScroll";
-import SubmitButton from "@/components/SubmitButton"; // import the SubmitButton component
+import FadeInOnScroll from "../components/FadeInOnScroll";
+import SubmitButton from "../components/SubmitButton"; // import the SubmitButton component
 
 export default function VolunteerCall() {
   return (
@@ -14,7 +14,7 @@ export default function VolunteerCall() {
             Every day, countless people struggle with loneliness, stress, and emotional pain, feeling like they have no one to turn to. As a volunteer, you have the power to change that. By offering your time, compassion, and a listening ear, you can make a real difference in someone's life. You don't need to be an expert—just someone willing to care, support, and share hope. Join us in creating a world where no one has to face their struggles alone.
           </p>
           <Link href="/volunteer-register">
-             <div className="w-[50%] flex justify-center mx-auto lg:mx-0">
+             <div className="wfifty flex justify-center mx-auto lg:mx-0">
                 <SubmitButton 
                     loading={false} 
                     disabled={false}
@@ -25,7 +25,7 @@ export default function VolunteerCall() {
 
           </Link>
         </div>
-        <div className="mt-8 lg:mt-0 lg:ml-12 border-4 border-[#D7A529] p-2 rounded-lg max-w-[350px]">
+        <div className="mt-8 lg:mt-0 lg:ml-12 border-4 borderC p-2 rounded-lg maxWidth">
           <img
             src="https://i.pinimg.com/736x/70/56/86/705686e9f3c0a31dc3e77eb5ef6f8c25.jpg"
             alt="Volunteer Support"

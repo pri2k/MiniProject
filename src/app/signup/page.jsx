@@ -3,11 +3,11 @@
 import axios from "axios";
 import Link from "next/link";
 import { useState } from "react";
-import ImageUpload from "@/components/ImageUpload";
-import EmailVerification from "@/components/EmailVerification";
-import GenderDropdown from "@/components/GenderDropdown";
-import SubmitButton from "@/components/SubmitButton"; // 👈
-import PopupModal from "@/components/PopupModal";
+import ImageUpload from "../../components/ImageUpload";
+import EmailVerification from "../../components/EmailVerification";
+import GenderDropdown from "../../components/GenderDropdown";
+import SubmitButton from "../../components/SubmitButton"; // 👈
+import PopupModal from "../../components/PopupModal";
 
 export default function SignupPage() {
     const [loading, setLoading] = useState(false);
@@ -57,7 +57,7 @@ export default function SignupPage() {
     
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen py-2 px-4 my-[10em]">
+        <div className="flex flex-col items-center justify-center min-h-screen py-2 px-4 marginy">
             <div className="max-w-md w-full">
                 <h1 className="text-3xl font-bold mb-6 text-center">Sign up</h1>
 

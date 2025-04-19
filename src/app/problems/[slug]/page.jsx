@@ -2,16 +2,16 @@
 
 import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
-import Card from '@/components/Card'
+import Card from '../../../components/Card'
 import problemCategories from '../../../data/groups'
 import { useContext } from 'react'
-import { UserContext } from '@/context/UserContext'
-import PopupModal from '@/components/PopupModal'  // Assuming the PopupModal component is in this path
-import SubmitButton from '@/components/SubmitButton' // Assuming the SubmitButton component is in this path
+import { UserContext } from '../../../context/UserContext'
+import PopupModal from '../../../components/PopupModal'  // Assuming the PopupModal component is in this path
+import SubmitButton from '../../../components/SubmitButton' // Assuming the SubmitButton component is in this path
 // MUI Time Picker Imports
 import { LocalizationProvider, TimePicker } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import dayjs from 'dayjs';
+import 'dayjs';
 
 export default function VolunteersPage() {
     const { slug } = useParams()
@@ -99,7 +99,7 @@ export default function VolunteersPage() {
     }
 
     return (
-        <div className="max-w-4xl mx-auto px-4 py-6 mt-[10em] text-center">
+        <div className="max-w-4xl mx-auto px-4 py-6 marginCall text-center">
             <h1 className="text-2xl font-bold mb-6 capitalize">
                 Volunteers for: {problemTitle}
             </h1>
@@ -138,7 +138,7 @@ export default function VolunteersPage() {
             )}
 
             {selectedVolunteer && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 mt-[8%]">
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 marginSlug">
                     <div className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-md">
                         <h2 className="text-xl font-bold mb-4 text-center">
                             Book Call with {selectedVolunteer.userId?.username}

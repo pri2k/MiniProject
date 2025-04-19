@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { connect } from "@/dbConfig/dbConfig";
-import EmailVerification from "@/models/EmailVerification";
+import { connect } from "../../../../dbConfig/dbConfig";
+import EmailVerification from "../../../../models/EmailVerification";
 import nodemailer from "nodemailer";
 
 connect();

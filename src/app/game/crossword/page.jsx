@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { getRandomWords } from "@/utils/words";
-import CrosswordGrid from "@/components/crossword/CrosswordGrid";
-import WordList from "@/components/crossword/WordList";
-import GameControls from "@/components/crossword/GameControls";
+import { getRandomWords } from "../../../utils/words";
+import CrosswordGrid from "../../../components/crossword/CrosswordGrid";
+import WordList from "../../../components/crossword/WordList";
+import GameControls from "../../../components/crossword/GameControls";
 
 const GRID_SIZE = 12;
 
@@ -152,7 +152,7 @@ export default function CrosswordGame() {
     };
 
     return (
-        <div className="pt-[11em] w-full min-h-screen py-10 px-6 flex flex-col lg:flex-row justify-center gap-20">
+        <div className="crossword w-full min-h-screen py-10 px-6 flex flex-col lg:flex-row justify-center gap-20">
         <div className="">
             <h1 className="text-3xl font-bold mb-4 text-center ">Crossword Puzzle</h1>
             <CrosswordGrid

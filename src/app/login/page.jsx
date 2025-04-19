@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import SubmitButton from '@/components/SubmitButton';
+import SubmitButton from '../../components/SubmitButton';
 
 export default function LoginPage() {
     const router = useRouter();
@@ -68,7 +68,7 @@ export default function LoginPage() {
                 </button>
             </div>
 
-            <div className='w-[24em]'>
+            <div className='widthLogin'>
                 <SubmitButton onClick={onLogin} loading={loading}>
                     Login
                 </SubmitButton>

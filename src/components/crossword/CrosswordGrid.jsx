@@ -21,7 +21,7 @@ export default function CrosswordGrid({
                         key={cIdx}
                         className={`w-8 h-8 border text-center font-bold text-lg
                         ${isSelected(rIdx, cIdx) ? "bg-yellow-300" : ""}
-                        ${isFound(rIdx, cIdx) ? "bg-[#D7A529] text-white" : ""}
+                        ${isFound(rIdx, cIdx) ? "bgMain text-white" : ""}
                         `}
                         onMouseDown={() => !gameOver && onMouseDown(rIdx, cIdx)}
                         onMouseEnter={() => onMouseEnter(rIdx, cIdx)}

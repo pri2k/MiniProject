@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { connect } from "@/dbConfig/dbConfig";
-import Call from '@/models/call';
+import { connect } from "../../../dbConfig/dbConfig";
+import Call from '../../../models/call';
 
 connect();
 
