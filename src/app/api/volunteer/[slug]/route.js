@@ -34,7 +34,7 @@ export async function GET(req, { params }) {
             query.userId = { $ne: userId };
         }
 
-        const volunteers = await Volunteer.find(query).populate("userId", "username image");
+        const volunteers = await Volunteer.find(query).populate("userId", "name image age");
 
         return NextResponse.json({ success: true, volunteers });
     } catch (error) {

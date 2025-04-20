@@ -95,7 +95,7 @@ export default function EmailVerification({ email, setEmail, onVerified }) {
                         placeholder="Enter verification code"
                         value={verificationCode}
                         onChange={(e) => setVerificationCode(e.target.value)}
-                        className="w-full p-2 border border-gray-300 rounded-lg mb-2 text-black"
+                        className="w-full p-2 border border-gray-300 rounded-lg mb-2 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-black"
                     />
 
                     <SubmitButton loading={verifying} onClick={validateCode} disabled={!verificationCode}>

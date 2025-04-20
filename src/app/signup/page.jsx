@@ -14,7 +14,7 @@ export default function SignupPage() {
     const [user, setUser] = useState({
         email: "",
         password: "",
-        username: "",
+        name: "",
         image: "" ,
         gender: "",
         age: "",
@@ -60,13 +60,13 @@ export default function SignupPage() {
             <div className="bg-white p-8 rounded-2xl shadow-lg max-w-md w-full text-center z-10">
                 <h2 className="text-2xl font-bold text-yellow-600 mb-6">Sign up to Brighter Beyond</h2>
 
-                <label htmlFor="username" className="block font-semibold mb-1">Username</label>
+                <label htmlFor="name" className="block font-semibold mb-1">name</label>
                 <input 
-                    id="username"
+                    id="name"
                     type="text" 
-                    value={user.username}
-                    onChange={(e) => setUser({...user, username: e.target.value})}
-                    placeholder="Username"
+                    value={user.name}
+                    onChange={(e) => setUser({...user, name: e.target.value})}
+                    placeholder="name"
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 mb-4"
                 />
 

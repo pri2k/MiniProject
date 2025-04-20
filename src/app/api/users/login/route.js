@@ -31,7 +31,7 @@ export async function POST(req) {
         message: "Login Successful",
         user: {
           id: user._id,
-          username: user.username,
+          name: user.name,
           email: user.email,
           image: user.image || ""
         },

@@ -14,7 +14,7 @@ export async function GET(request) {
         message: "User found",
         data: {
           id: user._id,
-          username: user.username,
+          name: user.name,
           email: user.email,
           image: user.image || "",
         },

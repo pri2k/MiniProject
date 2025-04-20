@@ -9,7 +9,7 @@ connect();
 export async function POST(request) {
     try {
         const reqBody = await request.json();
-        const { username, email, password, image, age, gender } = reqBody;
+        const { name, email, password, image, age, gender } = reqBody;
   
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -19,7 +19,7 @@ export async function POST(request) {
         const hashedPassword = await bcryptjs.hash(password, 10);
   
         const newUser = new User({
-            username,
+            name,
             email,
             password: hashedPassword,
             image,

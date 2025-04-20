@@ -67,7 +67,7 @@ export default function MyCallsPage() {
                     className="rounded-full"
                 />
                 <div>
-                    <p><strong>{roleLabel}:</strong> {otherPerson?.username || 'N/A'}</p>
+                    <p><strong>{roleLabel}:</strong> {otherPerson?.name || 'N/A'}</p>
                     <p><strong>Time:</strong> {new Date(call.time).toLocaleString()}</p>
                     <p><strong>Duration:</strong> {call.duration} mins</p>
                     {isCallOver(call) ? (

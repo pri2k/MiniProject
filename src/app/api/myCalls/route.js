@@ -22,12 +22,12 @@ export async function GET(req) {
         .populate({
             path: 'userId',
             model: 'User',
-            select: 'username image'
+            select: 'name image'
         })
         .populate({
             path: 'volunteerId',
             model: 'User',
-            select: 'username image'
+            select: 'name image'
         });
 
         console.log('All Calls:', allCalls);

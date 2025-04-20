@@ -98,6 +98,8 @@ export default function VolunteersPage() {
         }
     }
 
+    console.log("volunteers", volunteers);
+
     return (
         <div className="max-w-4xl mx-auto px-4 py-6 marginCall text-center">
             <h1 className="text-2xl font-bold mb-6 capitalize">
@@ -116,16 +118,16 @@ export default function VolunteersPage() {
                             <div className="p-4 flex flex-col items-center gap-4">
                                 <img
                                     src={v.userId?.image || '/images/default.jpg'} // Fallback image if userId is not available
-                                    alt={v.userId?.username}
+                                    alt={v.userId?.name}
                                     width={100}
                                     height={100}
                                     className="rounded-full object-cover"
                                 />
                                 <div>
-                                    <h2 className="text-xl font-semibold">{v.userId?.username}</h2>
+                                    <h2 className="text-xl font-semibold">{v.userId?.name}</h2>
                                     <p className="text-sm text-gray-600 mb-2">{v.description}</p>
                                     <p className="text-sm text-gray-500">
-                                        <strong>Age:</strong> {v.age} | <strong>Chats:</strong> {v.chatCnt}
+                                        <strong>Age:</strong> {v.userId?.age} | <strong>Chats:</strong> {v.chatCnt}
                                     </p>
                                     <p className="text-sm text-gray-500 mt-1">
                                         <strong>Problems:</strong> {v.problem.join(', ')}
@@ -141,13 +143,13 @@ export default function VolunteersPage() {
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 marginSlug">
                     <div className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-md">
                         <h2 className="text-xl font-bold mb-4 text-center">
-                            Book Call with {selectedVolunteer.userId?.username}
+                            Book Call with {selectedVolunteer.userId?.name}
                         </h2>
 
                         <div className="mb-4 text-center">
                             <img
                                 src={selectedVolunteer.userId?.image || '/images/default.jpg'} // Fallback image if userId is not available
-                                alt={selectedVolunteer.userId?.username}
+                                alt={selectedVolunteer.userId?.name}
                                 className="w-32 h-32 rounded-full object-cover mx-auto"
                             />
                         </div>

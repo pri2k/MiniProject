@@ -1,7 +1,7 @@
 import { Schema, models, model } from "mongoose";
 
 const userSchema = new Schema({
-    username: { 
+    name: { 
         type: String, 
         required: true 
     },
@@ -12,11 +12,16 @@ const userSchema = new Schema({
     },
     password: { 
         type: String, 
-        required: true 
+        required: true ,
+        minlength: 8,
     },
     image: { 
         type: String  
     },
+    age: {
+        type: Number,
+        required: true,
+    }
 }, { timestamps: true });
 
 // Delete the associated volunteer when a user is deleted
