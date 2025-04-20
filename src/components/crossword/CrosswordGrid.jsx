@@ -8,6 +8,7 @@ export default function CrosswordGrid({
     onMouseDown,
     onMouseEnter,
     onMouseUp,
+    onTouchEnd,
     gameOver
 }) {
     const handleTouchStart = (e, r, c) => {
@@ -28,14 +29,14 @@ export default function CrosswordGrid({
     };
 
     const handleTouchEnd = () => {
-        onMouseUp();
+        handleMouseUp(); // Same logic as desktop
     };
 
     return (
         <div
             className="overflow-auto max-w-full mt-4"
             onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
+            onTouchEnd={onTouchEnd}
         >
             <table className="border border-black mx-auto select-none" onMouseLeave={onMouseUp}>
                 <tbody>
