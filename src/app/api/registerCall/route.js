@@ -33,7 +33,7 @@ export async function POST(req) {
         
         🕒 Time: ${new Date(time).toLocaleString()}
         ⏱ Duration: ${duration} minutes
-        🔗 Join Link: ${roomUrl}
+        🔗 Join the scheduled call on time directly from the website!
         
         Please be ready on time. Click the link above to join the call when it starts.
         `;
