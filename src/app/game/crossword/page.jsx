@@ -15,54 +15,71 @@ const directions = [
 ];
 
 function generateGrid(words) {
-  const grid = Array(GRID_SIZE).fill(null).map(() => Array(GRID_SIZE).fill(""));
-  const placedWords = [];
+  const maxAttempts = 50;
 
-  for (const word of words) {
-    let placed = false;
-    let attempts = 0;
+  for (let attempt = 0; attempt < maxAttempts; attempt++) {
+    const grid = Array(GRID_SIZE).fill(null).map(() => Array(GRID_SIZE).fill(""));
+    const placedWords = [];
 
-    while (!placed && attempts < 100) {
-      attempts++;
-      const dir = directions[Math.floor(Math.random() * directions.length)];
-      const row = Math.floor(Math.random() * GRID_SIZE);
-      const col = Math.floor(Math.random() * GRID_SIZE);
+    let success = true;
 
-      let fits = true;
-      for (let i = 0; i < word.length; i++) {
-        const r = row + i * dir.dr;
-        const c = col + i * dir.dc;
-        if (
-          r < 0 || r >= GRID_SIZE || c < 0 || c >= GRID_SIZE ||
-          (grid[r][c] && grid[r][c] !== word[i])
-        ) {
-          fits = false;
-          break;
-        }
-      }
+    for (const word of words) {
+      let placed = false;
 
-      if (fits) {
+      for (let tries = 0; tries < 200 && !placed; tries++) {
+        const dir = directions[Math.floor(Math.random() * directions.length)];
+        const row = Math.floor(Math.random() * GRID_SIZE);
+        const col = Math.floor(Math.random() * GRID_SIZE);
+
+        let fits = true;
+
         for (let i = 0; i < word.length; i++) {
           const r = row + i * dir.dr;
           const c = col + i * dir.dc;
-          grid[r][c] = word[i];
+          if (
+            r < 0 || r >= GRID_SIZE ||
+            c < 0 || c >= GRID_SIZE ||
+            (grid[r][c] && grid[r][c] !== word[i])
+          ) {
+            fits = false;
+            break;
+          }
         }
-        placedWords.push({ word, start: [row, col], direction: dir });
-        placed = true;
+
+        if (fits) {
+          for (let i = 0; i < word.length; i++) {
+            const r = row + i * dir.dr;
+            const c = col + i * dir.dc;
+            grid[r][c] = word[i];
+          }
+          placedWords.push({ word, start: [row, col], direction: dir });
+          placed = true;
+        }
       }
+
+      if (!placed) {
+        success = false;
+        break;
+      }
+    }
+
+    if (success && placedWords.length === words.length) {
+      // Fill empty cells with random letters
+      for (let r = 0; r < GRID_SIZE; r++) {
+        for (let c = 0; c < GRID_SIZE; c++) {
+          if (!grid[r][c]) {
+            grid[r][c] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+          }
+        }
+      }
+
+      return { grid, placedWords };
     }
   }
 
-  for (let r = 0; r < GRID_SIZE; r++) {
-    for (let c = 0; c < GRID_SIZE; c++) {
-      if (!grid[r][c]) {
-        grid[r][c] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
-      }
-    }
-  }
-
-  return { grid, placedWords };
+  throw new Error("Failed to generate grid with all words after many attempts");
 }
+
 
 export default function CrosswordGame() {
   const [words, setWords] = useState(getRandomWords());
@@ -71,7 +88,7 @@ export default function CrosswordGame() {
   const [foundWords, setFoundWords] = useState([]);
   const [pointerDown, setPointerDown] = useState(false);
   const [score, setScore] = useState(0);
-  const [secondsLeft, setSecondsLeft] = useState(120);
+  const [secondsLeft, setSecondsLeft] = useState(100);
   const [gameOver, setGameOver] = useState(false);
   const timerRef = useRef(null);
 
@@ -149,7 +166,7 @@ export default function CrosswordGame() {
     setFoundWords([]);
     setSelectedCells([]);
     setScore(0);
-    setSecondsLeft(120);
+    setSecondsLeft(100);
     setGameOver(false);
     startTimer();
   };

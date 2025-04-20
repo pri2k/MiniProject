@@ -115,7 +115,7 @@ export default function VolunteersPage() {
                         <Card key={v._id} onClick={() => setSelectedVolunteer(v)} className="cursor-pointer">
                             <div className="p-4 flex flex-col items-center gap-4">
                                 <img
-                                    src={v.userId?.image}
+                                    src={v.userId?.image || '/images/default.jpg'} // Fallback image if userId is not available
                                     alt={v.userId?.username}
                                     width={100}
                                     height={100}
@@ -146,7 +146,7 @@ export default function VolunteersPage() {
 
                         <div className="mb-4 text-center">
                             <img
-                                src={selectedVolunteer.userId?.image}
+                                src={selectedVolunteer.userId?.image || '/images/default.jpg'} // Fallback image if userId is not available
                                 alt={selectedVolunteer.userId?.username}
                                 className="w-32 h-32 rounded-full object-cover mx-auto"
                             />
