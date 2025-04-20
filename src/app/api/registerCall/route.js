@@ -9,7 +9,7 @@ connect();
 export async function POST(req) {
     try {
         const r = await req.json();
-        const { userId, volunteerId, time, duration, roomUrl } = r;
+        const { userId, volunteerId, time, duration } = r;
 
         const user = await User.findById(userId);
         const volunteer = await Volunteer.findById(volunteerId).populate('userId'); // Populate userId in Volunteer model

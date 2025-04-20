@@ -160,9 +160,8 @@ export default function CrosswordGame() {
                 isFound={isFound}
                 onMouseDown={handleMouseDown}
                 onMouseEnter={handleMouseEnter}
-                onMouseUp={handleMouseUp} // used for mouse
+                onMouseUp={handleMouseUp}
                 gameOver={gameOver}
-                onTouchEnd={handleTouchEnd} // this one is new
             />
 
             <GameControls 
