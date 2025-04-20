@@ -9,10 +9,8 @@ import GameControls from "../../../components/crossword/GameControls";
 const GRID_SIZE = 12;
 
 const directions = [
-    { dr: 0, dc: 1 },
-    { dr: 1, dc: 0 },
-    { dr: 1, dc: 1 },
-    { dr: -1, dc: 1 }
+    { dr: 0, dc: 1 }, // Horizontal
+    { dr: 1, dc: 0 }  // Vertical
 ];
 
 function generateGrid(words) {
@@ -72,23 +70,24 @@ export default function CrosswordGame() {
     const [foundWords, setFoundWords] = useState([]);
     const [mouseDown, setMouseDown] = useState(false);
     const [score, setScore] = useState(0);
-    const [secondsLeft, setSecondsLeft] = useState(60);
+    const [secondsLeft, setSecondsLeft] = useState(120);
     const [gameOver, setGameOver] = useState(false);
     const timerRef = useRef(null);
 
     useEffect(() => {
         timerRef.current = setInterval(() => {
-        setSecondsLeft(prev => {
+          setSecondsLeft(prev => {
             if (prev <= 1) {
-            clearInterval(timerRef.current);
-            setGameOver(true);
-            return 0;
+              clearInterval(timerRef.current);
+              setGameOver(true);
+              return 0;
             }
             return prev - 1;
-        });
+          });
         }, 1000);
         return () => clearInterval(timerRef.current);
-    }, []);
+      }, []);
+      
 
     const handleMouseDown = (r, c) => {
         if (gameOver) return;
