@@ -3,12 +3,20 @@
 import { useEffect, useState, useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
 import Card from '../../components/Card';
+import { useRouter } from 'next/navigation'; 
 
 export default function MyCallsPage() {
     const { user } = useContext(UserContext);
     const [userCalls, setUserCalls] = useState([]);
     const [volunteerCalls, setVolunteerCalls] = useState([]);
     const [loading, setLoading] = useState(true);
+    const router = useRouter();
+
+    useEffect(() => {
+        if (!user?.id) {
+            router.push('/login'); // Redirect to login if no user is found
+        }
+    }, [user, router]);
 
     useEffect(() => {
         async function fetchCalls() {

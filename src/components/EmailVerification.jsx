@@ -80,7 +80,7 @@ export default function EmailVerification({ email, setEmail, onVerified }) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter email"
-                    className="w-full p-2 border border-gray-300 rounded-lg mb-2 focus:outline-none focus:border-gray-600 text-black"
+                    className="w-full p-2 border border-gray-300 rounded-lg mb-2 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-black"
                 />
             </div>
 

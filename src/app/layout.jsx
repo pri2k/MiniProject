@@ -2,6 +2,7 @@ import "./globals.css";
 import { UserProvider } from "../context/UserContext";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata = {
     title: "Brighter Beyond",
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
                     <Navbar />
                     <main className="flex-grow">
                         {children}
+                        <Analytics />
                     </main>
                     <Footer />
                 </UserProvider>

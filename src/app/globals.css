@@ -448,3 +448,8 @@ body {
 .topMinus {
   top: -50px;
 }
+
+/* Prevent scrolling during touch */
+.crossword {
+  touch-action: none;
+}

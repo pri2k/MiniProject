@@ -54,12 +54,11 @@ export default function SignupPage() {
             setLoading(false);
         }
     };
-    
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen py-2 px-4 marginy">
-            <div className="max-w-md w-full">
-                <h1 className="text-3xl font-bold mb-6 text-center">Sign up</h1>
+        <div className="min-h-screen flex items-center justify-center bg-gray-100 relative px-4 mt-10 pt-20 pb-10">
+            <div className="bg-white p-8 rounded-2xl shadow-lg max-w-md w-full text-center z-10">
+                <h2 className="text-2xl font-bold text-yellow-600 mb-6">Sign up to Brighter Beyond</h2>
 
                 <label htmlFor="username" className="block font-semibold mb-1">Username</label>
                 <input 
@@ -67,8 +66,8 @@ export default function SignupPage() {
                     type="text" 
                     value={user.username}
                     onChange={(e) => setUser({...user, username: e.target.value})}
-                    placeholder="username"
-                    className="w-full p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
+                    placeholder="Username"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 mb-4"
                 />
 
                 <EmailVerification
@@ -84,11 +83,11 @@ export default function SignupPage() {
                         type={showPassword ? "text" : "password"} 
                         value={user.password}
                         onChange={(e) => setUser({...user, password: e.target.value})}
-                        placeholder="password"
-                        className="w-full p-2 pr-10 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
+                        placeholder="Password"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 pr-10 mb-4"
                     />
                     <div 
-                        className="absolute top-3 right-3 cursor-pointer text-gray-600"
+                        className="absolute top-3 right-3 cursor-pointer text-gray-500"
                         onClick={() => setShowPassword(prev => !prev)}
                     >
                         {showPassword ? "👁️" : "🙈"}
@@ -102,7 +101,7 @@ export default function SignupPage() {
                     value={user.age}
                     onChange={(e) => setUser({...user, age: e.target.value})}
                     placeholder="Age"
-                    className="w-full p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 mb-4"
                 />
 
                 <GenderDropdown volunteer={user} setVolunteer={setUser} />
@@ -113,18 +112,35 @@ export default function SignupPage() {
                     Sign up
                 </SubmitButton>
 
-                <p className="text-center">
-                    <Link href="/login" className="text-blue-800">Already have an account? Login</Link>
+                <p className="mt-4 text-sm text-gray-600">
+                    Already have an account?{' '}
+                    <Link href="/login" className="text-yellow-600 font-semibold hover:underline">
+                        Login
+                    </Link>
                 </p>
-
-                {popup && (
-                    <PopupModal
-                        type={popup.type}
-                        message={popup.message}
-                        onClose={() => setPopup(null)}
-                    />
-                )}
             </div>
+
+            {/* SVG Wave */}
+            <svg
+                className="absolute bottom-0 left-0 w-full h-40"
+                viewBox="0 0 1440 320"
+                preserveAspectRatio="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    fill="#D7A529"
+                    d="M0,224L48,197.3C96,171,192,117,288,96C384,75,460,85,570,96C672,107,768,117,864,138.7C960,160,1056,192,1152,176C1248,160,1344,96,1392,64L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+                />
+            </svg>
+
+            {/* Popup Modal */}
+            {popup && (
+                <PopupModal
+                    type={popup.type}
+                    message={popup.message}
+                    onClose={() => setPopup(null)}
+                />
+            )}
         </div>
     );
 }
