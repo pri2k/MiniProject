@@ -2,45 +2,48 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
 import PopupModal from '../../components/PopupModal';
-import SubmitButton from '../../components/SubmitButton'; // Import SubmitButton
+import SubmitButton from '../../components/SubmitButton';
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
   const [modalType, setModalType] = useState('error');
   const [showModal, setShowModal] = useState(false);
-  const [loading, setLoading] = useState(false); // Add loading state
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
-    setLoading(true); // Set loading to true when attempting login
+    setLoading(true);
 
     try {
       if (!email || !password) {
         throw new Error('Please enter email and password');
       }
 
-      // Replace this with your real login logic
-      if (email !== 'user@example.com') {
-        throw new Error('User not found. Please sign up.');
-      }
+      const response = await axios.post('/api/users/login', { email, password });
+      const userData = response.data.user;
 
-      if (password !== '123456') {
-        throw new Error('Incorrect password');
-      }
+      localStorage.setItem('user', JSON.stringify(userData));
 
       setModalMessage('Login successful!');
       setModalType('success');
-    } catch (err) {
-      setModalMessage(err.message);
-      setModalType('error');
-    } finally {
       setShowModal(true);
-      setLoading(false); // Set loading to false when done
+
+      setTimeout(() => {
+        window.location.href = "/";
+    }, 2000);
+    } catch (err) {
+      setModalMessage(err.response?.data?.error || err.message || 'Login failed');
+      setModalType('error');
+      setShowModal(true);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -99,7 +102,7 @@ export default function LoginPage() {
         />
       </svg>
 
-      {/* Popup Modal */}
+      {/* Modal */}
       {showModal && (
         <PopupModal
           type={modalType}
