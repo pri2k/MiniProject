@@ -44,7 +44,7 @@ export default function Page() {
                         <button
                             key={topic}
                             onClick={() => setSelectedTopic(topic)}
-                            className="px-6 py-3 bg-yellow-500 text-black rounded-full hover:bg-yellow-600"
+                            className="px-6 py-3 bg-yellow-500 text-white rounded-full hover:bg-yellow-600"
                         >
                             {topic}
                         </button>

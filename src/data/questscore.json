@@ -41,19 +41,19 @@
         },
         {
           "min": 2.1,
-          "max": 2.9,
+          "max": 3.0,
           "label": "Doing Okay",
           "description": "You're holding up. Consider doing things that make you smile — a walk, a chat, or your favorite hobby."
         },
         {
-          "min": 3.0,
-          "max": 3.9,
+          "min": 3.1,
+          "max": 4.0,
           "label": "Generally Happy",
           "description": "You seem to be in a positive space! Keep embracing the things and people that lift your spirits."
         },
         {
-          "min": 4.0,
-          "max": 5.0,
+          "min": 4.1,
+          "max": 6.5,
           "label": "Feeling Great",
           "description": "That’s wonderful to see! You're radiating good vibes — spread the positivity and keep doing what works for you!"
         }
@@ -110,15 +110,41 @@
   },
 
 "Self-Esteem": {
-    "multiplier": 1,
-    "ranges": [
-      { "min": 10, "max": 20, "label": "Low Self-Esteem", "description": "You may have a negative self-view or feel dissatisfied with yourself. Consider practicing self-compassion and seeking support to boost your self-worth." },
-      { "min": 21, "max": 25, "label": "Below Average Self-Esteem", "description": "You may doubt your abilities at times, but with effort and self-care, you can strengthen your confidence." },
-      { "min": 26, "max": 30, "label": "Average Self-Esteem", "description": "You have a fairly balanced view of yourself, but you might still have some areas to work on. Keep building your confidence!" },
-      { "min": 31, "max": 35, "label": "Healthy Self-Esteem", "description": "You generally feel good about yourself. Keep nurturing your self-worth and focusing on your strengths." },
-      { "min": 36, "max": 40, "label": "High Self-Esteem", "description": "You have a strong sense of self-worth and confidence. Continue embracing your strengths and maintaining a positive outlook on yourself." }
-    ]
-  },
+  "multiplier": 1,
+  "ranges": [
+    {
+      "min": 36,
+      "max": 40,
+      "label": "Low Self-Esteem",
+      "description": "You may have a negative self-view or feel dissatisfied with yourself. Consider practicing self-compassion and seeking support to boost your self-worth."
+    },
+    {
+      "min": 31,
+      "max": 35,
+      "label": "Below Average Self-Esteem",
+      "description": "You may doubt your abilities at times, but with effort and self-care, you can strengthen your confidence."
+    },
+    {
+      "min": 26,
+      "max": 30,
+      "label": "Average Self-Esteem",
+      "description": "You have a fairly balanced view of yourself, but you might still have some areas to work on. Keep building your confidence!"
+    },
+    {
+      "min": 21,
+      "max": 25,
+      "label": "Healthy Self-Esteem",
+      "description": "You generally feel good about yourself. Keep nurturing your self-worth and focusing on your strengths."
+    },
+    {
+      "min": 10,
+      "max": 20,
+      "label": "High Self-Esteem",
+      "description": "You have a strong sense of self-worth and confidence. Continue embracing your strengths and maintaining a positive outlook on yourself."
+    }
+  ]
+},
+
 "Loneliness": {
     "multiplier": 1,
     "postProcess": "divideBy60",
