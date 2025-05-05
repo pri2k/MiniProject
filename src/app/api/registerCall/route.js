@@ -31,7 +31,7 @@ export async function POST(req) {
 
         const formattedTime = new Date(time).toLocaleString();
 
-        const emailContent = (receiverName, partnerName, link) => `
+        const emailContent = (receiverName, partnerName) => `
 Hi ${receiverName},
 
 Your video call with ${partnerName} has been successfully scheduled.

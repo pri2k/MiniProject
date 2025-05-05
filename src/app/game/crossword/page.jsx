@@ -88,7 +88,7 @@ export default function CrosswordGame() {
   const [foundWords, setFoundWords] = useState([]);
   const [pointerDown, setPointerDown] = useState(false);
   const [score, setScore] = useState(0);
-  const [secondsLeft, setSecondsLeft] = useState(100);
+  const [secondsLeft, setSecondsLeft] = useState(60);
   const [gameOver, setGameOver] = useState(false);
   const timerRef = useRef(null);
 
@@ -166,7 +166,7 @@ export default function CrosswordGame() {
     setFoundWords([]);
     setSelectedCells([]);
     setScore(0);
-    setSecondsLeft(100);
+    setSecondsLeft(60);
     setGameOver(false);
     startTimer();
   };

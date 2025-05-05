@@ -1,11 +1,13 @@
 import Link from "next/link";
 import problemCategories from "../../data/groups";
 import Image from "next/image";
+import HelperChatbot from "../../components/HelperChatbot";
 
 export default function TalkToVolunteer() {
     return (
         <div className="p-20 mt-20 pt-20">
-          <h1 className="text-3xl font-bold mb-6 text-center">Support Groups</h1>
+          <h1 className="text-3xl font-bold mb-6 text-center">Find Support That Fits You</h1>
+          <h6 className="text-3xl font-bold mb-6 text-center">Select what you're dealing with — we'll show you who's here to help.</h6>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
             {problemCategories.map((problem) => (
               <Link 
@@ -33,6 +35,7 @@ export default function TalkToVolunteer() {
               </Link>
             ))}
           </div>
+          <HelperChatbot />
         </div>
     );
 }
