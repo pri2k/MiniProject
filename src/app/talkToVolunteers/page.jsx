@@ -16,11 +16,6 @@ export default function TalkToVolunteer() {
                 className="p-2 border rounded-lg bgMain transition-all duration-300 hover:-translate-y-2"
               >
                 <div className="bg-white">
-                    {/* <img 
-                      src={problem.image} 
-                      alt={problem.title} 
-                      className="w-full h-40 object-cover rounded-md p-2"
-                    /> */}
                     <Image 
                       src={problem.image}
                       alt={problem.title}

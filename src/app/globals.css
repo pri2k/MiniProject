@@ -13,6 +13,11 @@ body {
   font-family: "Quicksand", serif;
   font-optical-sizing: auto;
   font-style: normal;
+  /* background: linear-gradient(to bottom, #ffffff, #ebebeb); */
+
+}
+html {
+  scroll-behavior: smooth;
 }
 
 /* Navbar Container */
@@ -34,8 +39,9 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: var(--main-color);
-  padding: 1em; 
+  background-image: url('/images/bg/colorkit4.png');
+  background-size: cover;
+  padding: 1em;
   box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.142);
   backdrop-filter: blur(1px);
   z-index: 1000;
@@ -43,6 +49,7 @@ body {
   font-weight: bold;
   font-size: 1.1em;
 }
+
 
 .navbar_div {
   display: flex;
@@ -138,6 +145,13 @@ body {
 .landing_page_heading {
   font-size: 10vmin;
   font-weight: bold;
+  line-height: 80px;
+}
+.landing_page_heading h6 {
+  font-size: 2.5vmin;
+  font-weight: normal;
+  margin: 1em 4em;
+  line-height: 35px;
 }
 
 .image_container {
@@ -193,8 +207,21 @@ body {
 .howToUseContainer {
   text-align: center;
   margin-bottom: 5em;
-  background-color: rgb(215, 165, 41);
+  position: relative;
+  overflow: hidden;
 }
+.howToUseContainer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/bg/colorkit3.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+  transform: rotateX('10deg');
+  z-index: -1;
+}
+
 .howToUseLogo {
   font-weight: bolder;
   font-size: 2em;

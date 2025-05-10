@@ -9,9 +9,9 @@ export default {
       extend: {
         colors: {
           mainColour: '#D7A529',
+          cream: '#fdf6ec',
         },
       },
     },
     plugins: [],
 }
-  
