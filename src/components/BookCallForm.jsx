@@ -8,6 +8,7 @@ import PopupModal from '../components/PopupModal'
 import SubmitButton from '../components/SubmitButton'
 
 export default function BookCallForm({ selectedVolunteer, setSelectedVolunteer, handleBackToChat }) {
+    // console.log("selectedVolunteer in BookCallForm", selectedVolunteer)
     const { user } = useContext(UserContext)
     const [date, setDate] = useState('')
     const [time, setTime] = useState(null)
@@ -16,8 +17,11 @@ export default function BookCallForm({ selectedVolunteer, setSelectedVolunteer, 
     const [modalMessage, setModalMessage] = useState('')
     const [modalSuccess, setModalSuccess] = useState(false)
     const [loading, setLoading] = useState(false)
-
-    if (!selectedVolunteer) return null // If there's no selectedVolunteer, return nothing
+    if (!selectedVolunteer) {
+        console.log("❌ No volunteer passed to BookCallForm");
+        return null;
+    }
+    console.log("✅ Volunteer passed to BookCallForm:", selectedVolunteer);
 
     async function handleBookCall() {
         if (!date || !time) {
@@ -43,7 +47,7 @@ export default function BookCallForm({ selectedVolunteer, setSelectedVolunteer, 
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 userId: user?.id,
-                volunteerId: selectedVolunteer?.userId?._id,
+                volunteerId: selectedVolunteer?._id,
                 time: selectedDateTime,
                 duration: parseInt(duration),
             }),
@@ -56,7 +60,6 @@ export default function BookCallForm({ selectedVolunteer, setSelectedVolunteer, 
             setModalMessage('Booking successful!')
             setModalSuccess(true)
             setIsModalOpen(true)
-            setSelectedVolunteer(null)
             setDate('')
             setTime(null)
             setDuration('30')
@@ -68,16 +71,16 @@ export default function BookCallForm({ selectedVolunteer, setSelectedVolunteer, 
     }
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 mt-20">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 m-10">
             <div className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-md">
                 <h2 className="text-xl font-bold mb-4 text-center">
-                    Book Call with {selectedVolunteer?.userId?.name}
+                    Book Call with {selectedVolunteer?.name}
                 </h2>
 
                 <div className="mb-4 text-center">
                     <img
-                        src={selectedVolunteer?.userId?.image || '/images/default.jpg'}
-                        alt={selectedVolunteer?.userId?.name}
+                        src={selectedVolunteer?.image || '/images/default.jpg'}
+                        alt={selectedVolunteer?.name}
                         className="w-32 h-32 rounded-full object-cover mx-auto"
                     />
                 </div>
@@ -131,10 +134,7 @@ export default function BookCallForm({ selectedVolunteer, setSelectedVolunteer, 
                     </SubmitButton>
                     <button
                         className="text-gray-500 hover:text-black"
-                        onClick={() => {
-                            setSelectedVolunteer(null)
-                            handleBackToChat()
-                        }}
+                        onClick={handleBackToChat}
                     >
                         Cancel
                     </button>

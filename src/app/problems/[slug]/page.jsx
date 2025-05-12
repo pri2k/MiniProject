@@ -1,28 +1,27 @@
 'use client'
 
 import { useState, useEffect, useContext } from 'react'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import Card from '../../../components/Card'
 import problemCategories from '../../../data/groups'
 import { UserContext } from '../../../context/UserContext'
-import VolunteerChatBox from '../../../components/VolunteerChatBox'
 
 export default function VolunteersPage() {
     const { slug } = useParams()
+    const router = useRouter()
     const [volunteers, setVolunteers] = useState([])
-    const [selectedVolunteer, setSelectedVolunteer] = useState(null)
     const [volunteersLoading, setVolunteersLoading] = useState(true)
+    const { user } = useContext(UserContext)
 
     const matchedCategory = problemCategories.find(cat => cat.slug === slug)
     const problemTitle = matchedCategory?.title || slug.replace(/-/g, ' ')
-    const { user } = useContext(UserContext)
 
     useEffect(() => {
         async function fetchVolunteers() {
-            const url = user 
-                ? `/api/volunteer/${slug}?userId=${user?.id}` 
+            const url = user
+                ? `/api/volunteer/${slug}?userId=${user?.id}`
                 : `/api/volunteer/${slug}`;
-            
+
             setVolunteersLoading(true)
             const res = await fetch(url)
             const data = await res.json()
@@ -32,7 +31,6 @@ export default function VolunteersPage() {
 
         fetchVolunteers()
     }, [slug, user])
-
 
     return (
         <div className="max-w-4xl mx-auto px-4 py-6 marginCall text-center">
@@ -48,7 +46,7 @@ export default function VolunteersPage() {
                 <div className="grid gap-5 sm:grid-cols-2">
                     {volunteers.map((v) => (
                         <Card key={v._id} onClick={() => {
-                            setSelectedVolunteer(v)
+                            router.push(`/history/${v.userId?._id}`)
                         }} className="cursor-pointer">
                             <div className="p-4 flex flex-col items-center gap-4">
                                 <img
@@ -69,14 +67,6 @@ export default function VolunteersPage() {
                         </Card>
                     ))}
                 </div>
-            )}
-
-            {/* ✅ Moved outside the grid */}
-            {selectedVolunteer && (
-                <VolunteerChatBox
-                    volunteer={selectedVolunteer}
-                    onClose={() => setSelectedVolunteer(null)}
-                />
             )}
         </div>
     )
