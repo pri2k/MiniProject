@@ -1,7 +1,12 @@
 import { Schema, models, model } from "mongoose";
 
 const messageSchema = new Schema({
-    sender: {
+    senderId: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+    },
+    receiverId: {
         type: Schema.Types.ObjectId,
         ref: "User",
         required: true,
@@ -14,17 +19,7 @@ const messageSchema = new Schema({
         type: Date,
         default: Date.now,
     }
-}, { _id: false });
-
-const chatSchema = new Schema({
-    participants: {
-        type: [Schema.Types.ObjectId],
-        ref: "User",
-    },
-    messages: [messageSchema]
 }, { timestamps: true });
 
-chatSchema.index({ participants: 1 }, { unique: true });
-
-const Chat = models.Chat || model("Chat", chatSchema);
-export default Chat;
+const Message = models.Message || model("Message", messageSchema);
+export default Message;
