@@ -45,9 +45,9 @@ export default function VolunteersPage() {
             ) : (
                 <div className="grid gap-5 sm:grid-cols-2">
                     {volunteers.map((v) => (
-                        <Card key={v._id} onClick={() => {
-                            router.push(`/history/${v.userId?._id}`)
-                        }} className="cursor-pointer">
+                        <Card 
+                            key={v._id} 
+                        >
                             <div className="p-4 flex flex-col items-center gap-4">
                                 <img
                                     src={v.userId?.image || '/images/default.jpg'}
@@ -60,9 +60,17 @@ export default function VolunteersPage() {
                                     <h2 className="text-xl font-semibold">{v.userId?.name}</h2>
                                     <p className="text-sm text-gray-600 mb-2">{v.description}</p>
                                     <p className="text-sm text-gray-500">
-                                        <strong>Age:</strong> {v.userId?.age} | <strong>Chats:</strong> {v.chatCnt}
+                                        <strong>Age:</strong> {v.userId?.age} | <strong>Helped:</strong> {v.chatCnt} people
                                     </p>
                                 </div>
+                                <button 
+                                    className="bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition-all duration-300"
+                                    onClick={() => {
+                                        router.push(`/history/${v.userId?._id}`)
+                                    }}
+                                >
+                                    Chat or Video call
+                                </button>
                             </div>
                         </Card>
                     ))}

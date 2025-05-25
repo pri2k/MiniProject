@@ -42,14 +42,20 @@ export default function ChatBox({ person, onClose }) {
   }, [user, person]);
 
   useEffect(() => {
-
     socket = io({
-        path: '/api/socket',
+      path: '/api/socket',
     });
 
     socket.on('receiveMessage', (newMsg) => {
       if (newMsg.senderId === person._id && newMsg.receiverId === user.id) {
         setMessages((prev) => [...prev, { sender: person.name, text: newMsg.text }]);
+
+        // Show browser notification
+        if (Notification.permission === 'granted') {
+          new Notification(`New message from ${person.name}`, {
+            body: newMsg.text,
+          });
+        }
       }
     });
 
@@ -57,6 +63,27 @@ export default function ChatBox({ person, onClose }) {
       if (socket) socket.disconnect();
     };
   }, [person, user]);
+
+  useEffect(() => {
+    if (Notification.permission !== 'granted') {
+      Notification.requestPermission();
+    }
+  }, []);
+
+    useEffect(() => {
+    const fetchQuota = async () => {
+        try {
+        const res = await fetch(`/api/messageQuota?senderId=${user.id}&receiverId=${person._id}`);
+        const data = await res.json();
+        if (data.success) setRemainingMessages(data.remainingMessages);
+        } catch (err) {
+            console.error('Failed to fetch message quota:', err);
+        }
+    };
+
+    if (user && person) fetchQuota();
+    }, [user, person]);
+
 
   const handleMessageSend = async () => {
     if (!userMessage.trim() || remainingMessages <= 0) return;
@@ -96,8 +123,17 @@ export default function ChatBox({ person, onClose }) {
           receiverId: person._id,
         }),
       });
+
+      await fetch('/api/messageQuota', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({ 
+            senderId: user.id,
+            receiverId: person._id
+        })
+      })
     } catch (err) {
-      console.error('❌ Failed to send message or update chats:', err);
+      console.error('❌ Failed to send message or update chats or update quota:', err);
     }
   };
 
@@ -107,6 +143,12 @@ export default function ChatBox({ person, onClose }) {
         chatContainer.scrollTop = chatContainer.scrollHeight;
     }
   }, [messages]);
+
+  useEffect(() => {
+    if (user?.id) {
+      socket.emit('join', user.id);
+    }
+  }, [user]);
 
 
   const handleInputChange = (e) => {

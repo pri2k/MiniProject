@@ -3,44 +3,56 @@ import { Server } from 'socket.io';
 let io;
 
 export function setupSocket(server) {
-    if (process.env.NODE_ENV === 'development') {
-        if (!global.io) {
-        global.io = new Server(server, {
-            path: '/api/socket',
+  if (process.env.NODE_ENV === 'development') {
+    if (!global.io) {
+      global.io = new Server(server, {
+        path: '/api/socket',
+      });
+
+      global.io.on('connection', (socket) => {
+        console.log('🟢 [dev] New client connected:', socket.id);
+
+        // Join room for this user
+        socket.on('join', (userId) => {
+          socket.join(userId);
+          console.log(`👥 [dev] User ${userId} joined room`);
         });
 
-        global.io.on('connection', (socket) => {
-            console.log('🟢 [dev] New client connected:', socket.id);
-
-            socket.on('sendMessage', (msg) => {
-            socket.broadcast.emit('receiveMessage', msg);
-            });
-
-            socket.on('disconnect', () => {
-            console.log('🔌 [dev] Client disconnected:', socket.id);
-            });
-        });
-        }
-        io = global.io;
-    } else {
-        if (!io) {
-        io = new Server(server, {
-            path: '/api/socket',
+        // Send message to specific user
+        socket.on('sendMessage', (msg) => {
+          global.io.to(msg.receiverId).emit('receiveMessage', msg);
         });
 
-        io.on('connection', (socket) => {
-            console.log('🟢 New client connected:', socket.id);
-
-            socket.on('sendMessage', (msg) => {
-            socket.broadcast.emit('receiveMessage', msg);
-            });
-
-            socket.on('disconnect', () => {
-            console.log('🔌 Client disconnected:', socket.id);
-            });
+        socket.on('disconnect', () => {
+          console.log('🔌 [dev] Client disconnected:', socket.id);
         });
-        }
+      });
     }
+    io = global.io;
+  } else {
+    if (!io) {
+      io = new Server(server, {
+        path: '/api/socket',
+      });
 
-    return io;
+      io.on('connection', (socket) => {
+        console.log('🟢 New client connected:', socket.id);
+
+        socket.on('join', (userId) => {
+          socket.join(userId);
+          console.log(`👥 User ${userId} joined room`);
+        });
+
+        socket.on('sendMessage', (msg) => {
+          io.to(msg.receiverId).emit('receiveMessage', msg);
+        });
+
+        socket.on('disconnect', () => {
+          console.log('🔌 Client disconnected:', socket.id);
+        });
+      });
+    }
+  }
+
+  return io;
 }
