@@ -39,7 +39,7 @@ html {
   top: 0;
   left: 0;
   width: 100%;
-  background-image: url('/images/bg/colorkit4.png');
+  background-image: url('/images/bg/sun.svg');
   background-size: cover;
   padding: 1em;
   box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.142);
@@ -104,7 +104,7 @@ html {
 /* Landing Page */
 .landing_page {
   position: relative;
-  background-image: url('/images/bg_main.jpg');
+  background-image: url('/images/bg/ls.svg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -116,7 +116,7 @@ html {
   overflow: hidden;
 }
 
-.landing_page::before {
+/* .landing_page::before {
   content: "";
   position: absolute;
   top: 0;
@@ -125,7 +125,7 @@ html {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
-}
+} */
 
 .landing_page_bg {
   position: relative;
@@ -214,7 +214,7 @@ html {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('/images/bg/colorkit3.png');
+  background-image: url('/images/bg/sun.svg');
   background-size: cover;
   background-position: center;
   background-repeat: repeat;
@@ -479,4 +479,36 @@ html {
 /* Prevent scrolling during touch */
 .crossword {
   touch-action: none;
+}
+
+
+/* styles/globals.css or any imported CSS file */
+@keyframes spinSlow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-slow {
+  animation: spinSlow 10s linear infinite;
+}
+
+.breath-text {
+  font-size: 1.25rem; 
+  font-weight: 600;
+  color: #1D4ED8;
+  transition: all 0.5s ease;
+}
+
+.breath-text.animate {
+  transform: scale(1.2);
+  opacity: 0.6;
+}
+
+.breath-text.normal {
+  transform: scale(1);
+  opacity: 1;
 }

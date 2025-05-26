@@ -1,57 +1,61 @@
-'use client'
+'use client';
+
+import FadeInOnScroll from "./FadeInOnScroll";
+import ActionBox from "./ActionBox";
 
 export default function RoadToHappiness() {
-  const steps = [
-    { text: 'Take the questionnaire', top: 150, left: 20 },
-    { text: 'Talk to chatbot', top: 330, right: 20 },
-    { text: 'Talk to volunteer', top: 500, left: 20 },
-    { text: 'Take the professional helper', top: 670, right: 20 },
-    { text: 'I am happy', top: 520, left: 20 },
-  ]
+  const options = [
+    {
+      title: 'Take the questionnaire',
+      subtext: 'Discover what’s going on inside',
+      href: '/Questionnaire',
+    },
+    {
+      title: 'Talk to chatbot',
+      subtext: 'Speak your mind in private',
+      href: '/chatbot',
+    },
+    {
+      title: 'Talk to volunteer',
+      subtext: 'Real people, real care',
+      href: '/volunteers',
+    },
+    {
+      title: 'Take the professional helper',
+      subtext: 'Expert support, one step away',
+      href: '/professionals',
+    },
+    {
+      title: 'I am happy',
+      subtext: 'That’s beautiful — keep shining',
+      href: '/happy',
+    },
+  ];
 
   return (
-    <div className="relative px-4 py-10 min-h-screen bg-white flex flex-col items-center">
-      <h1 className="text-2xl font-bold">road to happiness starts here</h1>
+    <FadeInOnScroll>
+      <div className="flex justify-center bg-yellow-50 py-12 px-4">
+        <div className="bg-yellow-100 p-8 rounded-2xl shadow-xl w-full max-w-4xl">
+          <h2 className="text-3xl font-bold text-yellow-800 text-center mb-10">
+            Road to Happiness Starts Here
+          </h2>
 
-      <div className="relative w-full max-w-4xl h-[700px]">
-
-        {/* Zigzag Line */}
-        <svg
-          className="realtive top-0 left-1/2 -translate-x-1/2 h-full w-full"
-          viewBox="0 0 400 700"
-          preserveAspectRatio="none"
-        >
-          <polyline
-            fill="none"
-            stroke="black"
-            strokeWidth="1"
-            strokeDasharray="1,1"
-            points="
-                200,50
-                50,100
-                350,150
-                50,200
-                350,250
-                200,300
-            "
-          />
-        </svg>
-
-        {/* Boxes with Manual Positions */}
-        {steps.map((step, index) => (
-          <div
-            key={index}
-            className="absolute z-10 bg-[#fdf6ec] border border-gray-300 px-6 py-4 rounded-md shadow-md w-64 text-center"
-            style={{
-              top: step.top,
-              left: step.left !== undefined ? `${step.left}px` : undefined,
-              right: step.right !== undefined ? `${step.right}px` : undefined,
-            }}
-          >
-            {step.text}
+          <div className="flex space-between flex-col md:flex-row md:space-x-8">
+            <div className="space-y-8">
+                {options.map((option, index) => (
+                <div key={index} className={index % 2 !== 0 ? "md:flex-row-reverse" : ""}>
+                    <ActionBox {...option} />
+                </div>
+                ))}
+            </div>
+            <div className="space-y-8">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem libero expedita placeat dicta neque impedit, illo, magni adipisci officiis doloribus distinctio, molestiae iste repellat? Exercitationem.</p>
+            </div>
           </div>
-        ))}
+
+
+        </div>
       </div>
-    </div>
-  )
+    </FadeInOnScroll>
+  );
 }

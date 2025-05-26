@@ -6,6 +6,7 @@ import ProblemSelect from "../../components/ProblemSelect";
 import { UserContext } from '../../context/UserContext';
 import PopupModal from "../../components/PopupModal";
 import SubmitButton from "../../components/SubmitButton"; // Make sure path is correct
+import TermsPopup from "../../components/TermsPopup"; // Make sure path is correct
 
 export default function VolunteerRegisterPage() {
     const { user } = useContext(UserContext);
@@ -16,6 +17,8 @@ export default function VolunteerRegisterPage() {
     const [showLoginPrompt, setShowLoginPrompt] = useState(true);
     const [popup, setPopup] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [acceptedTerms, setAcceptedTerms] = useState(false);
+    const [showTermsPopup, setShowTermsPopup] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -29,6 +32,11 @@ export default function VolunteerRegisterPage() {
 
         if (!user?.id) {
             setPopup({ type: "error", message: "You need to log in first!" });
+            return;
+        }
+
+        if (!acceptedTerms) {
+            setPopup({ type: "error", message: "Please accept the Terms and Conditions." });
             return;
         }
 
@@ -82,7 +90,7 @@ export default function VolunteerRegisterPage() {
 
                 <div className="w-full mb-4">
                     <label htmlFor="description" className="block font-semibold mb-1">
-                        Description <span className="text-sm text-gray-500">(max 50 words)</span>
+                        Description <span className="text-sm text-gray-500">(max 30 words)</span>
                     </label>
                     <textarea
                         id="description"
@@ -95,16 +103,36 @@ export default function VolunteerRegisterPage() {
                                 setVolunteer({ ...volunteer, description: inputText });
                             }
                         }}
-                        placeholder="Briefly describe yourself (max 50 words)"
+                        placeholder="Briefly describe yourself (max 30 words)"
                         className="w-full p-2 border border-gray-300 rounded-lg mb-1 focus:outline-none focus:border-gray-600"
                         rows={4}
                     />
                     <p className="text-sm text-gray-500 text-right">
-                        {volunteer.description.trim().split(/\s+/).filter(Boolean).length} / 50 words
+                        {volunteer.description.trim().split(/\s+/).filter(Boolean).length} / 30 words
                     </p>
                 </div>
 
                 <ProblemSelect volunteer={volunteer} setVolunteer={setVolunteer} />
+
+                <div className="flex items-start gap-2 mb-4 w-full">
+                    <input
+                        type="checkbox"
+                        id="terms"
+                        checked={acceptedTerms}
+                        onChange={(e) => setAcceptedTerms(e.target.checked)}
+                        className="mt-1"
+                    />
+                    <label htmlFor="terms" className="text-sm text-gray-700">
+                        I agree to the{" "}
+                        <button
+                            type="button"
+                            className="text-blue-500 underline"
+                            onClick={() => setShowTermsPopup(true)}
+                        >
+                            Terms and Conditions
+                        </button>
+                    </label>
+                </div>
 
                 <SubmitButton
                     onClick={handleSubmit}
@@ -123,6 +151,11 @@ export default function VolunteerRegisterPage() {
                     onClose={() => setPopup(null)}
                 />
             )}
+
+            {showTermsPopup && (
+                <TermsPopup onClose={() => setShowTermsPopup(false)} />
+            )}
+
         </div>
     );
 }

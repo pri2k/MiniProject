@@ -32,18 +32,18 @@ export async function POST(req) {
         const formattedTime = new Date(time).toLocaleString();
 
         const emailContent = (receiverName, partnerName) => `
-Hi ${receiverName},
+            Hi ${receiverName},
 
-Your video call with ${partnerName} has been successfully scheduled.
+            Your video call with ${partnerName} has been successfully scheduled.
 
-🕒 Time: ${formattedTime}
-⏱ Duration: ${duration} minutes
-🔗 Join the scheduled call on time directly from the website!
+            🕒 Time: ${formattedTime}
+            ⏱ Duration: ${duration} minutes
+            🔗 Join the scheduled call on time directly from the website!
 
-Please be on time and click the above link when the call is about to start.
+            Please be on time and click the above link when the call is about to start.
 
-Warm regards,  
-Brighter Beyond Team
+            Warm regards,  
+            Brighter Beyond Team
         `;
 
         console.log("Sending email to the user:", user.email);
