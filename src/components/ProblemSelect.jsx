@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 
-export default function ProblemSelect({ volunteer, setVolunteer }) {
+export default function ProblemSelect({ volunteer, setVolunteer = null }) {
     const problemOptions = [
         "Financial Issues", "Family & Friends", "Social Anxiety & Loneliness", 
         "Relationship Struggles", "Education & Career Challenges", "Mental Health Struggles",
@@ -25,7 +25,9 @@ export default function ProblemSelect({ volunteer, setVolunteer }) {
     }, []);
 
     const handleSelectProblem = (problem) => {
-        if (!volunteer.problem.includes(problem)) {
+        if (!volunteer) return;
+        setDropdownOpen(false);
+        if (!volunteer?.problem?.includes(problem)) {
             setVolunteer({ ...volunteer, problem: [...volunteer.problem, problem] });
         }
     };
@@ -33,7 +35,7 @@ export default function ProblemSelect({ volunteer, setVolunteer }) {
     const handleRemoveProblem = (problem) => {
         setVolunteer({
             ...volunteer,
-            problem: volunteer.problem.filter((p) => p !== problem),
+            problem: volunteer?.problem.filter((p) => p !== problem),
         });
     };
 
@@ -45,9 +47,9 @@ export default function ProblemSelect({ volunteer, setVolunteer }) {
                 className="w-full p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 cursor-pointer"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
             >
-                {volunteer.problem.length > 0 ? (
+                {volunteer?.problem?.length > 0 ? (
                     <div className="flex flex-wrap gap-2">
-                        {volunteer.problem.map((item) => (
+                        {volunteer?.problem.map((item) => (
                             <div key={item} className="flex items-center bgDiff px-3 py-1 rounded-full text-sm">
                                 {item}
                                 <button 

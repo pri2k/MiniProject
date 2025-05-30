@@ -30,6 +30,7 @@ export async function GET(request) {
     });
   } catch (error) {
     // Instead of returning an error, return null user
+    console.error("Error fetching user data:", error);
     return NextResponse.json({ message: "Not logged in", data: null });
   }
 }

@@ -95,7 +95,6 @@ export default function Navbar() {
               className="w-10 h-10 rounded-full cursor-pointer"
               onClick={() => router.push("/profile")}
             />
-            {user?.name}
           </div>
         ) : (
           <Link href="/login" className="login" onClick={() => handleLinkClick("/login")}>
