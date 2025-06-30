@@ -178,7 +178,7 @@ export default function CrosswordGame() {
 
   return (
     <div className="crossword w-full min-h-screen py-10 px-6 flex flex-col lg:flex-row justify-center gap-20">
-      <div className="">
+      <div>
         <h1 className="text-3xl font-bold mb-4 text-center">Crossword Puzzle</h1>
         <CrosswordGrid
           grid={grid}
@@ -195,7 +195,7 @@ export default function CrosswordGame() {
           gameOver={gameOver}
         />
         {gameOver && (
-          <div className="mt-6 text-2xl text-green-600 font-semibold text-center lg:text-left">
+          <div className="mt-6 text-2xl text-red-600 font-semibold text-center lg:text-left">
             {foundWords.length === words.length ? "🎉 You Won!" : "Game Over!"} Final Score: {score}
           </div>
         )}

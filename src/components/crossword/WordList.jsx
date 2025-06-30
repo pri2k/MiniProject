@@ -8,7 +8,7 @@ export default function WordList({ words, foundWords, score, timeLeft }) {
         <h2 className="text-xl font-semibold mb-2">Words to Find</h2>
         <div className="flex flex-wrap gap-2 max-w-xs justify-center">
             {words.map((word, i) => (
-            <span key={i} className={`px-2 py-1 rounded-full border ${foundWords.includes(word) ? "bgMain text-white line-through" : "bg-white"}`}>
+            <span key={i} className={`px-2 py-1 rounded-full border ${foundWords.includes(word) ? "bg-blue-600 text-white line-through" : "bg-white"}`}>
                 {word}
             </span>
             ))}

@@ -11,7 +11,7 @@ export default function TermsPopup({ onClose }) {
           <p>4. You can choose to discontinue your role anytime with notice.</p>
         </div>
         <button
-          className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
+          className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
           onClick={onClose}
         >
           Close

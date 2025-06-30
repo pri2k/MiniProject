@@ -44,7 +44,7 @@ export default function Page() {
                         <button
                             key={topic}
                             onClick={() => setSelectedTopic(topic)}
-                            className="px-6 py-3 bg-yellow-500 text-white rounded-full hover:bg-yellow-600"
+                            className="px-6 py-3 bg-green-500 text-white rounded-full hover:bg-green-600"
                         >
                             {topic}
                         </button>
@@ -101,7 +101,7 @@ export default function Page() {
             <div className="h-screen flex flex-col items-center justify-center bg-gray-100 backdrop-blur-md px-4">
                 {!showResult ? (
                     <div className="flex flex-col items-center">
-                        <div className="w-12 h-12 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin mb-4"></div>
+                        <div className="w-12 h-12 border-4 border-green-300 border-t-transparent rounded-full animate-spin mb-4"></div>
                         <p className="text-lg text-gray-700 font-semibold">Calculating your result...</p>
                     </div>
                 ) : (
@@ -109,13 +109,13 @@ export default function Page() {
                         initial={{ scale: 0.9, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ duration: 0.4 }}
-                        className="relative p-1 roundedTwenty bg-gradient-to-br from-yellow-400 via-yellow-300 to-yellow-500 shadow-lg"
+                        className="relative p-1 roundedTwenty bg-gradient-to-br from-green-300 via-green-300 to-green-500 shadow-lg"
                     >
                         <div className="bg-white roundedEighteen p-6 text-center relative z-10 shadow-xl">
-                            <h2 className="text-2xl font-bold text-yellow-700 mb-4">Your Result</h2>
+                            <h2 className="text-2xl font-bold text-green-700 mb-4">Your Result</h2>
                             {matchedRange ? (
                                 <>
-                                    <h2 className="text-2xl font-bold text-yellow-700 mb-2">
+                                    <h2 className="text-2xl font-bold text-green-700 mb-2">
                                         {matchedRange.label}
                                     </h2>
                                     <p className="text-base text-gray-700 mb-6">
@@ -130,7 +130,7 @@ export default function Page() {
 
                             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
                                 <Link href="/">
-                                    <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-6 rounded-full transition">
+                                    <button className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-6 rounded-full transition">
                                         Go back to Home
                                     </button>
                                 </Link>
@@ -141,7 +141,7 @@ export default function Page() {
                                         setAnswers([]);
                                         setShowResult(false);
                                     }}
-                                    className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-6 rounded-full transition"
+                                    className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-6 rounded-full transition"
                                 >
                                     Take Another Quiz
                                 </button>
@@ -170,7 +170,7 @@ export default function Page() {
         <div className="h-screen flex flex-col items-center justify-center bg-gray-100 backdrop-blur-md px-4 text-center">
             {/* Progress Bar */}
             <div
-                className="w-full h-2 bg-yellow-500 mb-4"
+                className="w-full h-2 bg-green-500 mb-4"
                 style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%`, transition: 'width 0.3s ease' }}
             ></div>
 

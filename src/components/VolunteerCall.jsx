@@ -5,7 +5,7 @@ import SubmitButton from "../components/SubmitButton"; // import the SubmitButto
 export default function VolunteerCall() {
   return (
     <FadeInOnScroll>
-      <div className="flex flex-col lg:flex-row items-center justify-center p-10 bg-yellow-100 my-20">
+      <div className="flex flex-col lg:flex-row items-center justify-center p-10 bg-[rgb(207, 255, 253)] my-20">
         <div className="max-w-lg text-center lg:text-left">
           <h1 className="text-3xl font-bold text-gray-800 mb-8">
             Become a Volunteer - Be the Light in Someone's Darkest Moments
@@ -25,7 +25,7 @@ export default function VolunteerCall() {
 
           </Link>
         </div>
-        <div className="mt-8 lg:mt-0 lg:ml-12 border-4 borderC p-2 rounded-lg maxWidth">
+        <div className="mt-8 lg:mt-0 lg:ml-12 rounded-lg maxWidth shadow-lg border border-orange-200">
           <img
             src="https://i.pinimg.com/736x/70/56/86/705686e9f3c0a31dc3e77eb5ef6f8c25.jpg"
             alt="Volunteer Support"

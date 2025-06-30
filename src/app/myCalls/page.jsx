@@ -58,7 +58,7 @@ export default function MyCallsPage() {
 
     function renderCallCard(call, otherPerson, roleLabel) {
         return (
-            <Card key={call._id} className="p-4 mb-4 cursor-pointer hover:bg-gray-100 flex gap-4 items-center">
+            <Card key={call._id} className="p-4 mb-4 cursor-pointer hover:bg-gray-100 flex gap-4 items-center border border-gray-200">
                 <img
                     src={otherPerson?.image || '/images/default.jpg'}
                     alt={roleLabel}
@@ -84,14 +84,14 @@ export default function MyCallsPage() {
 
     return (
         <div className="marginCall px-4">
-            <h1 className="text-2xl font-bold mb-6">Your Scheduled Calls</h1>
-
+            <h1 className="text-2xl font-bold mb-6 text-center mb-10">Your Scheduled Calls</h1>
             {loading ? (
                 <p className="text-center text-gray-600">Fetching your calls...</p>
             ) : (
-                <>
-                    <div>
+                <div className='flex px-20'>
+                    <div className="mt-8 pr-10">
                         <h2 className="text-xl font-semibold mb-4">As User</h2>
+                        <div className='grid grid-cols-2 gap-4'>
                         {userCalls.length === 0 ? (
                             <p>No calls where you're the user.</p>
                         ) : (
@@ -100,10 +100,12 @@ export default function MyCallsPage() {
                                 return renderCallCard(call, volunteerInfo, "Volunteer");
                             })
                         )}
+                        </div>
                     </div>
 
-                    <div className="mt-8">
+                    <div className="mt-8 pl-10">
                         <h2 className="text-xl font-semibold mb-4">As Volunteer</h2>
+                        <div className='grid grid-cols-2 gap-4'>
                         {volunteerCalls.length === 0 ? (
                             <p>No calls where you're a volunteer.</p>
                         ) : (
@@ -112,8 +114,9 @@ export default function MyCallsPage() {
                                 return renderCallCard(call, userInfo, "User");
                             })
                         )}
+                        </div>
                     </div>
-                </>
+                </div>
             )}
         </div>
     );

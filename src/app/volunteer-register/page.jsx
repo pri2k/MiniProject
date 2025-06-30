@@ -138,7 +138,7 @@ export default function VolunteerRegisterPage() {
                     onClick={handleSubmit}
                     loading={loading}
                     disabled={loading}
-                    className="w-full p-3 bg-yellow-500 text-white font-semibold rounded-lg hover:bg-yellow-600"
+                    className="w-full p-3 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600"
                 >
                     Register as Volunteer
                 </SubmitButton>

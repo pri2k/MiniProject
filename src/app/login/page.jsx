@@ -50,14 +50,14 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 relative px-4">
       <div className="bg-white p-8 rounded-2xl shadow-lg max-w-md w-full text-center z-10">
-        <h2 className="text-2xl font-bold text-yellow-600 mb-6">Login to Brighter Beyond</h2>
+        <h2 className="text-2xl font-bold text-green-600 mb-6">Login to Brighter Beyond</h2>
         <form onSubmit={handleLogin} className="space-y-4">
           <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-300"
             required
           />
           <div className="relative">
@@ -66,7 +66,7 @@ export default function LoginPage() {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 pr-10"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-300 pr-10"
               required
             />
             <button
@@ -83,7 +83,7 @@ export default function LoginPage() {
         </form>
         <p className="mt-4 text-sm text-gray-600">
           Don’t have an account?{' '}
-          <Link href="/signup" className="text-yellow-600 font-semibold hover:underline">
+          <Link href="/signup" className="text-green-600 font-semibold hover:underline">
             Sign up
           </Link>
         </p>

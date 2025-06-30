@@ -11,7 +11,7 @@ export default function GameStartPage() {
     const nextStep = () => setStep(prev => prev + 1);
 
     return (
-        <div className="h-screen flex flex-col items-center justify-center bg-gray-900 text-white relative">
+      <div className="h-screen flex flex-col items-center justify-center bg-gray-900 text-white relative">
 
             {/* Glitter Background Effect */}
       <div className="absolute inset-0 pointer-events-none z-0">

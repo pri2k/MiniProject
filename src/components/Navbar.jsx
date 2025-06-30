@@ -82,8 +82,8 @@ export default function Navbar() {
         <div className={`navbar_options ${menuOpen ? "open" : ""}`}>
           <Link href="/" onClick={() => handleLinkClick("/")}>Home</Link>
           <Link href="/myCalls" onClick={() => handleLinkClick("/myCalls")}>My Calls</Link>
-          <Link href="/talkToVolunteers" onClick={() => handleLinkClick("/talkToVolunteers")}>Groups</Link>
-          <Link href="/talkToChatbot" onClick={() => handleLinkClick("/talkToChatbot")}>Bot</Link>
+          <Link href="/volunteers" onClick={() => handleLinkClick("volunteers")}>Find a Listener</Link>
+          <Link href="/chatbot" onClick={() => handleLinkClick("/talkToChatbot")}>Bot</Link>
           <Link href="/game" onClick={() => handleLinkClick("/game")}>Game</Link>
         </div>
 

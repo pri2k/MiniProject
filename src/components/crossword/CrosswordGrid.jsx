@@ -22,8 +22,8 @@ export default function CrosswordGrid({
                 <td
                   key={cIdx}
                   className={`w-8 h-8 border text-center font-bold text-lg 
-                    ${isSelected(rIdx, cIdx) ? "bg-yellow-300" : ""}
-                    ${isFound(rIdx, cIdx) ? "bgMain text-white" : ""}
+                    ${isSelected(rIdx, cIdx) ? "bg-blue-400" : ""}
+                    ${isFound(rIdx, cIdx) ? "bg-blue-300 text-white" : ""}
                   `}
                   onPointerDown={() => onPointerDown(rIdx, cIdx)}
                   onPointerEnter={() => onPointerEnter(rIdx, cIdx)}

@@ -58,7 +58,7 @@ export default function SignupPage() {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 relative px-4 mt-10 pt-20 pb-10">
             <div className="bg-white p-8 rounded-2xl shadow-lg max-w-md w-full text-center z-10">
-                <h2 className="text-2xl font-bold text-yellow-600 mb-6">Sign up to Brighter Beyond</h2>
+                <h2 className="text-2xl font-bold text-green-600 mb-6">Sign up to Brighter Beyond</h2>
 
                 <label htmlFor="name" className="block font-semibold mb-1">name</label>
                 <input 
@@ -67,7 +67,7 @@ export default function SignupPage() {
                     value={user.name}
                     onChange={(e) => setUser({...user, name: e.target.value})}
                     placeholder="name"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 mb-4"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-300 mb-4"
                 />
 
                 <EmailVerification
@@ -84,7 +84,7 @@ export default function SignupPage() {
                         value={user.password}
                         onChange={(e) => setUser({...user, password: e.target.value})}
                         placeholder="Password"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 pr-10 mb-4"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-300 pr-10 mb-4"
                     />
                     <div 
                         className="absolute top-3 right-3 cursor-pointer text-gray-500"
@@ -101,7 +101,7 @@ export default function SignupPage() {
                     value={user.age}
                     onChange={(e) => setUser({...user, age: e.target.value})}
                     placeholder="Age"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 mb-4"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-300 mb-4"
                 />
 
                 <GenderDropdown volunteer={user} setVolunteer={setUser} />
@@ -114,7 +114,7 @@ export default function SignupPage() {
 
                 <p className="mt-4 text-sm text-gray-600">
                     Already have an account?{' '}
-                    <Link href="/login" className="text-yellow-600 font-semibold hover:underline">
+                    <Link href="/login" className="text-green-600 font-semibold hover:underline">
                         Login
                     </Link>
                 </p>

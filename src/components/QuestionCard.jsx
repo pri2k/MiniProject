@@ -15,7 +15,7 @@ export default function QuestionCard({ question, options, onSelect }) {
           <button
             key={idx}
             onClick={() => onSelect(idx)}
-            className="block w-full bg-yellow-100 hover:bg-yellow-200 px-4 py-3 rounded-xl transition-all duration-200"
+            className="block w-full bg-green-100 hover:bg-green-200 px-4 py-3 rounded-xl transition-all duration-200"
           >
             {option}
           </button>
